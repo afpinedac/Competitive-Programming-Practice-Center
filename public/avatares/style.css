@@ -1,0 +1,136 @@
+
+#container{
+	width:800px;
+	height:600px;
+	position:relative;
+	background-color:#75A1F0;
+}
+
+#avatar_canvas{
+	position:absolute;
+	/*background:#e9e9e9;*/
+}
+
+#panel {
+	width:205px;
+	height:600px;
+	position:absolute;
+	right:0;
+	padding:7px;
+	/*background:#FFF;
+	border: 3px solid #00A1E3;
+	-moz-border-radius: 10px;
+	border-radius: 10px;*/
+}
+
+#panel_buttons{
+	display:none;
+}
+
+#panel_colors {
+	height:45px;
+	overflow-x:auto;
+	overflow-y:hidden;
+	padding:0px 2.5px;
+}
+#panel_colors>div{
+	position:absolute;
+	right:30px;
+}
+#back_btn{
+	position:absolute;
+	top:532px;
+	width: 48px;
+	height: 48px;
+	background-image:url('images/icons/back.png');
+	background-repeat:no-repeat;
+	background-position:center;
+	margin:10px;
+	margin-left:60px;
+}
+
+#categories, #items{
+	display:none;
+}
+#categories {
+	margin-top:130px;
+}
+
+#items{
+	height:480px;
+	overflow:auto;
+}
+
+#save_btn  {
+	display:none;
+	position:absolute;
+	z-index:10;
+	width: 48px;
+	height: 48px;
+	background-image:url('images/icons/save.png');
+	background-repeat:no-repeat;
+	background-position:center;
+	margin:10px;
+}
+#save_btn:hover, #back_btn:hover {
+	background-size:90%;
+}
+
+#loading{
+	position:absolute;
+	right:0;
+	left:0;
+	top:0;
+	bottom:0;
+	margin:auto;
+	text-align:center;
+	width:100px;
+	height:20px;
+	color:#FFF;
+	font-size:24px;
+	font-family:Calibri,arial;
+}
+
+.category_btn, .item_btn{
+	display:inline-block;
+	width:80px;
+	height:80px;
+	border:3px solid #FFF;
+	margin:3px;
+	cursor:pointer;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	background:#FFF;
+	background-size:50% auto;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+.item_btn:hover, .item_btn[selected]{
+	border-color:#66C7EE;
+	/*background-color:#77BCFF;*/
+}
+.category_btn:hover {
+	border-color:#FFF;
+}
+.category_btn {
+	background:#66C7EE;
+	border-color:#66C7EE;
+}
+#items[category="background"] .item_btn {
+	background-size:auto 100%;
+}
+
+.panel_btn {
+	cursor:pointer;
+}
+
+.color_btn{
+	display:inline-block;
+	width:30px;
+	height:30px;
+	margin:0 2.5px;
+	cursor:pointer;
+	border:3px solid #FFF;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}

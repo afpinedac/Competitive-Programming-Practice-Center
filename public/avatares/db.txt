@@ -1,0 +1,2 @@
+{"background":"5 (53)","body":"61","clothes":"71","head":"06","eyes":"16","nose":"212","mouth":"39","hair":"42","headColor":"ffcc9a","clothesColor":"384496","eyesColor":"7B4B2A","hairColor":"7b4b2a"}
+{"background":"5 (45)","body":"62","clothes":"72","head":"020","eyes":"117","nose":"22","mouth":"311","hair":"420","headColor":"ffcc9a","clothesColor":"262626","eyesColor":"7B4B2A","hairColor":"cd641b"}
