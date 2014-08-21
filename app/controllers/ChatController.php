@@ -92,7 +92,7 @@ EOD;
         }
 
         $sql = "update lms_chat set recd = 1 where lms_chat.to = '" . mysqli_real_escape_string($this->dblink,$_SESSION['username']) . "' and recd = 0";
-        $query = mysqli_query_query($this->dblink,$sql);
+        $query = mysqli_query($this->dblink,$sql);
 
         if ($items != '') {
             $items = substr($items, 0, -1);
