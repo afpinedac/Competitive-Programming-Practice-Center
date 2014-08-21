@@ -7,8 +7,9 @@ define('DBNAME', Config::get('database.connections.mysql.database'));
 class ChatController extends LMSController {
 
     function __construct() {
-        $dbh = mysql_connect(DBPATH, DBUSER, DBPASS);
-        mysql_selectdb(DBNAME, $dbh);
+        $dbh = mysqli_connect(DBPATH, DBUSER, DBPASS);        
+        mysqli_select_db($dbh,DBNAME);
+        mysqli_autocommit($dbh, true);
         $_SESSION['username'] = Auth::user()->id;
     }
 
