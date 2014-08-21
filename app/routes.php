@@ -1,29 +1,47 @@
 <?php
+
 //rutas para agregar
 Route::get('/', function() {
-  
+
     if (Auth::check()) {
         return Redirect::to("curso/all");
     } else {
-        
-        $videos = array(            
-            1 =>'nKIu9yen5nc',
+
+        $videos = array(
+            1 => 'nKIu9yen5nc',
             2 => 'Y1HHBXDL9bg',
             3 => 'a1OhqQVZ-54',
             4 => 'DHV8_vM-Juk',
             5 => '1OJf3OV-3BQ',
             6 => 'FNZjWlVQGS8',
             7 => 'BxBwqqZBfCc'
-        );             
-        
+        );
+
         return View::make('inicio.login')
                         ->with('background', mt_rand(1, 1))
-                         ->with('videorand',$videos[mt_rand(1, count($videos))])
-                            ->with('back', mt_rand(1, 2));
+                        ->with('videorand', $videos[mt_rand(1, count($videos))])
+                        ->with('back', mt_rand(1, 2));
     }
 });
 
 
+
+Route::get('/db-fix', function() {
+
+    $envios = envio::where('curso', 6)->orderBy('id')->get();
+
+    foreach ($envios as $envio) {
+        //echo "{$envio->resultado}<br/>";
+        if ($envio->resultado == 'accepted') {
+            DB::table('envio')
+                    ->where('usuario', $envio->usuario)
+                    ->where('ejercicio', $envio->ejercicio)
+                    ->where('id', '>', $envio->id)
+                    ->delete();
+        }
+    }
+    echo "fixed";
+});
 
 
 Route::get('/about', function() {
@@ -145,8 +163,8 @@ Route::post('/loguear', function() {
 
 Route::group(array('before' => 'auth'), function() {
 
-    
-    
+
+
     Route::controller('usuario', 'UsuarioController');
     Route::controller('curso', 'CursoController');
     Route::controller('taller', 'TallerController');
@@ -164,42 +182,37 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('api', 'ApiController');
     Route::controller('poli', 'PoliController');
     Route::controller('lms', 'LMSController');
-    
 });
 
 
-Route::get('/tt',function(){
+Route::get('/tt', function() {
     session_start();
-$_SESSION['rr']='xx';
-    
-    
- return Redirect::to('/ttt');
+    $_SESSION['rr'] = 'xx';
+
+
+    return Redirect::to('/ttt');
 });
 
-Route::get('/ttt',function(){
-    
+Route::get('/ttt', function() {
+
     session_start();
     session_name();
-    
-    
+
+
     echo "<pre>";
     var_dump(Request::getSession());
     echo "</pre>";
-    
-    
-  
 });
 
 
-Route::get('/t',function(){
-   
+Route::get('/t', function() {
+
     $usuario = usuario::find(1);
-    
+
     echo "<pre>";
     var_dump(curso::find(6)->get_programador_de_la_semana());
-    
+
     echo "</pre>";
-    
 });
 
 

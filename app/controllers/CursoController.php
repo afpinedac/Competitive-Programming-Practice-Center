@@ -20,6 +20,9 @@ class CursoController extends LMSController {
         return Redirect::to('curso/all');
     }
 
+    
+    
+    
     #se inscribe cuando el curso es privado
 
     public function postInscribir() {
@@ -677,6 +680,7 @@ class CursoController extends LMSController {
 
 
                             if ($value2 == null) { #todos los estudiantes
+                                                                
                                 return View::make('profesor.monitorear.talleres.estudiantes')
                                                 ->with('curso', $curso)
                                                 ->with('modulos', $curso->get_modulos())
@@ -727,6 +731,7 @@ class CursoController extends LMSController {
                             $sortby = Input::get('sortby');
                         }
 
+                        
                         $estudiantes = $curso->get_estudiantes_sort('taller', $sortby, $value1);
 
                         return View::make('profesor.monitorear.talleres.estudiantes')

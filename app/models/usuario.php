@@ -373,7 +373,7 @@ class Usuario extends Eloquent {
         $solucionados = $this->get_numero_ejercicios_resultos_en_taller($taller);
 
         if ($numero_ejercicios == 0) {
-            return "-";
+            return 0;
         } else {
             return (float) (($solucionados / $numero_ejercicios) * 100.0);
         }
@@ -401,7 +401,7 @@ class Usuario extends Eloquent {
                 ->groupBy('ejercicio')
                 ->get();
 
-
+      
         return count($x);
     }
 
@@ -637,11 +637,12 @@ class Usuario extends Eloquent {
                 ->where('ejercicio', $ejercicio)
                 ->where('test', 1)
                 ->where('visto', 0)
+                ->where('usuario',$this->id)
                 ->first();
         if ($envio) {
-
-
-            DB::table('envio')->where('id', $envio->id)->update(array('visto' => 1));
+            DB::table('envio')
+             ->where('id', $envio->id)
+             ->update(array('visto' => 1));
         }
         return $envio;
     }

@@ -26,7 +26,7 @@ public abstract class Language {
         this.file_execute = "run";
         this.datos = datos;
         process = null;
-        this.reexecute = 4;
+        this.reexecute = 3;
         int solution = 1;
 
         this.set_commands(Main.so); // 0 for linux, 1 for windows

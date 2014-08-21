@@ -237,10 +237,8 @@ class Curso extends Eloquent {
         $estud_sort = array();
         if ($tipo == 'taller') {
 
-
-
-
             foreach ($estudiantes as $estudiante) {
+                
                 $arr = array(
                     'id' => $estudiante->id,
                     'nombres' => $estudiante->nombres,
@@ -253,15 +251,13 @@ class Curso extends Eloquent {
             }
 
 
-            usort($estud_sort, function($a, $b) use($sortby) {
+            /*usort($estud_sort, function($a, $b) use($sortby) {
                 if (is_string($a[$sortby])) {
                     return strtolower($a[$sortby]) > strtolower($b[$sortby]);
                 }
                 return ($a[$sortby]) < ($b[$sortby]);
-            });
+            });*/
         } else if ($tipo == 'estudiantes') {
-
-
 
             foreach ($estudiantes as $estudiante) {
                 $arr = array(
