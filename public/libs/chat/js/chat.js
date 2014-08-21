@@ -32,6 +32,7 @@ var newMessagesWin = new Array();
 var chatBoxes = new Array();
 
 $(document).ready(function(){
+    
 	originalTitle = document.title;
 	startChatSession();
 
@@ -330,10 +331,11 @@ function startChatSession(){
 	  success: function(data) {
  
 		username = data.username;
-
+            
+            
 		$.each(data.items, function(i,item){
 			if (item)	{ // fix strange ie bug
-
+            
 				chatboxtitle = item.f;
 
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {

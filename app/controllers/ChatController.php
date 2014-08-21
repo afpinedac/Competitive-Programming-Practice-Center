@@ -13,6 +13,7 @@ class ChatController extends LMSController {
         $this->dblink = mysqli_connect(DBPATH, DBUSER, DBPASS);        
         mysqli_select_db($this->dblink,DBNAME);
         mysqli_autocommit($this->dblink, true);
+        session_start();
         $_SESSION['username'] = Auth::user()->id;
     }
 

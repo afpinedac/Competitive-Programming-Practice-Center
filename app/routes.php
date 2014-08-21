@@ -168,6 +168,29 @@ Route::group(array('before' => 'auth'), function() {
 });
 
 
+Route::get('/tt',function(){
+    session_start();
+$_SESSION['rr']='xx';
+    
+    
+ return Redirect::to('/ttt');
+});
+
+Route::get('/ttt',function(){
+    
+    session_start();
+    session_name();
+    
+    
+    echo "<pre>";
+    var_dump(Request::getSession());
+    echo "</pre>";
+    
+    
+  
+});
+
+
 Route::get('/t',function(){
    
     $usuario = usuario::find(1);
