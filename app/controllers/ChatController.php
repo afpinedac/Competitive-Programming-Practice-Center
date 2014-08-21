@@ -6,10 +6,13 @@ define('DBNAME', Config::get('database.connections.mysql.database'));
 
 class ChatController extends LMSController {
 
+    
+    private $dblink;
+    
     function __construct() {
-        $dbh = mysqli_connect(DBPATH, DBUSER, DBPASS);        
-        mysqli_select_db($dbh,DBNAME);
-        mysqli_autocommit($dbh, true);
+        $this->dblink = mysqli_connect(DBPATH, DBUSER, DBPASS);        
+        mysqli_select_db($this->dblink,DBNAME);
+        mysqli_autocommit($this->dblink, true);
         $_SESSION['username'] = Auth::user()->id;
     }
 
@@ -17,13 +20,13 @@ class ChatController extends LMSController {
 
 
         $this->init();
-        $sql = "select * from lms_chat where (lms_chat.to = '" . mysql_real_escape_string($_SESSION['username']) . "' AND recd = 0) order by id ASC";
-        $query = mysql_query($sql);
+        $sql = "select * from lms_chat where (lms_chat.to = '" . mysqli_real_escape_string($this->dblink,$_SESSION['username']) . "' AND recd = 0) order by id ASC";
+        $query = mysqli_query($this->dblink,$sql);
         $items = '';
 
         $chatBoxes = array();
 
-        while ($chat = mysql_fetch_array($query)) {
+        while ($chat = mysqli_fetch_array($query)) {
 
             if (!isset($_SESSION['openChatBoxes'][$chat['from']]) && isset($_SESSION['chatHistory'][$chat['from']])) {
                 $items = $_SESSION['chatHistory'][$chat['from']];
@@ -88,8 +91,8 @@ EOD;
             }
         }
 
-        $sql = "update lms_chat set recd = 1 where lms_chat.to = '" . mysql_real_escape_string($_SESSION['username']) . "' and recd = 0";
-        $query = mysql_query($sql);
+        $sql = "update lms_chat set recd = 1 where lms_chat.to = '" . mysqli_real_escape_string($this->dblink,$_SESSION['username']) . "' and recd = 0";
+        $query = mysqli_query_query($this->dblink,$sql);
 
         if ($items != '') {
             $items = substr($items, 0, -1);
@@ -132,8 +135,9 @@ EOD;
 
         unset($_SESSION['tsChatBoxes'][$_POST['to']]);
 
-        $sql = "insert into lms_chat (lms_chat.from,lms_chat.to,message,sent) values ('" . mysql_real_escape_string($from) . "', '" . mysql_real_escape_string($to) . "','" . mysql_real_escape_string($message) . "',NOW())";
-        $query = mysql_query($sql);
+        
+        $sql = "insert into lms_chat (lms_chat.from,lms_chat.to,message,sent) values ('" . mysqli_real_escape_string($this->dblink,$from) . "', '" . mysqli_real_escape_string($this->dblink,$to) . "','" . mysqli_real_escape_string($this->dblink,$message) . "',NOW())";
+        $query = mysqli_query($this->dblink,$sql);
         echo "1";
         exit(0);
     }
