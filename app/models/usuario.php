@@ -401,7 +401,7 @@ class Usuario extends Eloquent {
                 ->groupBy('ejercicio')
                 ->get();
 
-      
+
         return count($x);
     }
 
@@ -570,9 +570,9 @@ class Usuario extends Eloquent {
             $puntos = DB::table('envio')
                     ->where('usuario', $this->id)
                     ->where('curso', $curso)
-                    ->where('created_at','>=',  date('Y-m-d H:i:s', time()-(60*60*24*$dias_antes)))
+                    ->where('created_at', '>=', date('Y-m-d H:i:s', time() - (60 * 60 * 24 * $dias_antes)))
                     ->sum('puntos_obtenidos');
-                    
+
             return $puntos ? $puntos : 0;
         } else {
             $puntos = DB::table('envio')
@@ -637,12 +637,12 @@ class Usuario extends Eloquent {
                 ->where('ejercicio', $ejercicio)
                 ->where('test', 1)
                 ->where('visto', 0)
-                ->where('usuario',$this->id)
+                ->where('usuario', $this->id)
                 ->first();
         if ($envio) {
             DB::table('envio')
-             ->where('id', $envio->id)
-             ->update(array('visto' => 1));
+                    ->where('id', $envio->id)
+                    ->update(array('visto' => 1));
         }
         return $envio;
     }
@@ -778,6 +778,13 @@ class Usuario extends Eloquent {
                 imagesetpixel($image, $x, $y, $newcol);
             }
         }
+    }
+
+    public function get_cursos_inscritos() {
+
+        return DB::table('curso_x_usuario')
+                        ->where('usuario_id', $this->id)
+                        ->get();
     }
 
 }

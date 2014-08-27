@@ -43,19 +43,20 @@
 
         <script>
             
+            
             link = {
                 avatar : '{URL::to('usuario/avatar')}',
                 avatarxml : '{URL::to('avatares/avatar.xml')}',
                 avatarimages : '{URL::to('avatares/images/')}',
                 avataruserimages : '{URL::to('avatares/userimages/')}',
-                publicpath : '{public_path()}'
+              //  publicpath : "{public_path()}"
               
             } 
-   // window.console.log(link);
+    
         </script>
         
         
-{HTML::script('avatares/scripts.js')}   
+{HTML::script('avatares/scripts.js')}  
 
 
 </html>

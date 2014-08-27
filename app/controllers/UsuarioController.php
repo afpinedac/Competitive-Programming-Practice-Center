@@ -149,7 +149,7 @@ class UsuarioController extends LMSController implements CRUD {
                 'puntos' => $usuario->get_puntos_en_curso($curso),
                 'posicion' => $usuario->get_posicion_en_ranking($curso),
                 'tiempo_logueado' => LMSController::formatear_tiempo($usuario->get_tiempo_logueado($curso), 's'),
-                'id'=> $usuario->id
+                'id' => $usuario->id
             );
 
 
@@ -181,7 +181,6 @@ class UsuarioController extends LMSController implements CRUD {
 
                 echo "{\"sex\":{$user->genero},\"current\":" . $user->avatar . ",\"unlocked\":" . $user->avatar_accesorios . "}";
             } else if ($task == "saveUserData") {
-
                 $avatar = Input::get('userdata');
 
                 DB::table('usuario')
@@ -189,6 +188,7 @@ class UsuarioController extends LMSController implements CRUD {
                         ->update(array('avatar' => $avatar));
 
                 usuario::saveImage($avatar, Auth::user()->id);
+                Logros::check403(Auth::user()->id); // se le da el logro del avatar
             }
         }
     }

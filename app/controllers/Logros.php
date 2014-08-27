@@ -71,12 +71,16 @@ class Logros extends LMSController {
         static::check400($amigo, $curso);
         static::check401($usuario, $curso);
         static::check402($usuario, $curso);
+        //static::check403($usuario, $curso);  --cambiar el avatar
     }
 
     ###-------------------------------------------------------------------------------------------###
     ##################### TALLERES ########################
     #codigo 100  valida realizar el primer ejercicio de un curso
     #lista :)
+    ###################################
+    # codigo 403 - cambiar el avatar
+    #logro cuando cambia el avatar
 
     private static function check100($usuario, $curso) {
         $usuario = usuario::find($usuario);
@@ -101,7 +105,7 @@ class Logros extends LMSController {
             $corte = ceil($curso->get_numero_ejercicios() * 0.25);
             if ($usuario->numero_de_ejercicios_resueltos_curso($curso->id) >= $corte) {
                 #se crea el logro
-                $code = static::crear_logro(101, $usuario->id, $curso->id,1);
+                $code = static::crear_logro(101, $usuario->id, $curso->id, 1);
 
                 #se crea la notificación
                 static::crear_notificacion($usuario->id, $curso->id, 1, $code);
@@ -213,7 +217,7 @@ class Logros extends LMSController {
 
         $usuario = usuario::find($usuario);
         $curso = curso::find($curso);
-        
+
         if ($usuario && $curso && !$usuario->tiene_logro($curso->id, 400)) {
             $n_estudiantes = $curso->numero_de_estudiantes();
             $corte = floor(static::$logros['4']['a'] * log($n_estudiantes));
@@ -265,6 +269,23 @@ class Logros extends LMSController {
 
                 #se crea la notificacion
                 static::crear_notificacion($usuario->id, $curso->id, 4, $code);
+            }
+        }
+    }
+
+#logro que se obtiene cuando se cambiar el avatar
+
+    public static function check403($usuario) {
+
+        $usuario = usuario::find($usuario);
+        if ($usuario) {
+            $cursos = $usuario->get_cursos_inscritos();
+
+            foreach ($cursos as $curso) {
+                if (!$usuario->tiene_logro($curso->curso_id, 403)) {
+                    $code = static::crear_logro(403, $usuario->id, $curso->curso_id, 4);
+                    static::crear_notificacion($usuario->id, $curso->curso_id, 1, $code);
+                }
             }
         }
     }
