@@ -374,7 +374,7 @@ class CursoController extends LMSController {
                     return View::make("curso.$tab.$tab")
                                     ->with('curso', $curso)
                                     ->with('amigos', $usuario->get_amigos($curso->id))
-                                    //   ->with('logros', $usuario->get_logros_obtenidos(Auth::user()->id, $curso->id))
+                                    //  ->with('logros', $usuario->get_logros_obtenidos(Auth::user()->id, $curso->id))
                                     ->with('logro', $usuario->get_logro_redes_sociales($curso->id))
                                     ->with('notificaciones', $curso->get_notificaciones());
                 } else if ($tab == "contenido") {

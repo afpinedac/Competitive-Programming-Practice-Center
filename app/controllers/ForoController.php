@@ -56,6 +56,7 @@ class ForoController extends LMSController {
 
     public function postResponder($tema) {
 
+   
         $usuario = usuario::find(Auth::user()->id);
         $curso = curso::find(Session::get('curso.estudiante'));
         $tema = temaforo::find($tema);
@@ -71,8 +72,6 @@ class ForoController extends LMSController {
 
         $participantes = $tema->get_participantes();
 
-
-
         foreach ($participantes as $participante) {
             if ($participante->usuario != $usuario->id && $participante->usuario != $tema->usuario) {
 
@@ -85,8 +84,8 @@ class ForoController extends LMSController {
         if ($tema->usuario != $usuario->id)
             alerta::crear($tema->usuario, $usuario->id, url("curso/ver/{$curso->id}/foro/{$tema->id}"), 4, $usuario->nombres . " ha respondido en un tema que creaste");
 
-
-
+        Logros::check250(Auth::user()->id, $curso->id);  // verificamos si comenta 10 veces en el foro
+               
         Session::flash("valid", "HAS RESPONDIDO EN ESTE TEMA");
 
         return Redirect::to("curso/ver/{$curso->id}/foro/{$tema->id}");

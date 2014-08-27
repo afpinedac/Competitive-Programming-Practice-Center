@@ -97,7 +97,7 @@ class NotificacionController extends LMSController {
                 if ($comentador->id != $notificacion->usuario) {
                     alerta::crear($notificacion->usuario, $comentador->id, url("curso/ver/{$notificacion->curso}/inicio#c{$notificacion->id}"), 2, $comentador->nombres . " ha comentado tu publicación");
                 }
-
+                Logros::check251(Auth::user()->id, $notificacion->curso); //chequeamos el logro para ver si gana por comentar
                 return Response::json($info);
             } else {
                 return "0";

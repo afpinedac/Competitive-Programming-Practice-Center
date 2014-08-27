@@ -787,4 +787,46 @@ class Usuario extends Eloquent {
                         ->get();
     }
 
+    public function subir_nivel_en_curso($curso) {
+        if (!$this->tiene_inscrito($curso))
+            return;
+        $data = DB::table('curso_x_usuario')
+                ->where('curso_id', $curso)
+                ->where('usuario_id', $this->id)
+                ->first();
+
+        DB::table('curso_x_usuario')
+                ->where('curso_id', $curso)
+                ->where('usuario_id', $this->id)
+                ->update(array('nivel' => $data->nivel + 1));
+    }
+
+    public function get_nivel_en_curso($curso) {
+
+        $data = DB::table('curso_x_usuario')
+                ->where('usuario_id', $this->id)
+                ->where('curso_id', $curso)
+                ->first();
+
+        return $data->nivel;
+    }
+
+    public function get_numero_comentarios_en_notificaciones($curso) {
+
+        return DB::table('notificacion')
+                        ->where('tipo', 5)
+                        ->where('usuario', $this->id)
+                        ->where('curso', $curso)
+                        ->count();
+    }
+
+    public function get_numero_de_participaciones_en_foro($curso) {
+
+        return DB::table('respuesta_foro')
+                        ->join('tema_foro', 'tema_foro.id', '=', 'respuesta_foro.tema_foro')
+                        ->where('respuesta_foro.usuario', $this->id)
+                        ->where('curso', $curso)
+                        ->count();
+    }
+
 }

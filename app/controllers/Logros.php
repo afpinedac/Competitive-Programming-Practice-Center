@@ -18,6 +18,11 @@ class Logros extends LMSController {
         4 => array(
             'a' => 20, #parametro de la formula 20log(#estudiantes) a = 20  
             'num_publicaciones' => 5 //(10) #publicaciones que debe publicar para darle el premio
+        ),
+        250 => array(
+            'numero_participaciones_en_foro' => 10,
+            'numero_de_comentarios_en_notificaciones' => 1,
+            'tiempo_logueo_en_minutos' => 1440
         )
     );
 
@@ -46,6 +51,44 @@ class Logros extends LMSController {
         static::check108($usuario, $curso);
     }
 
+    ###################  OTROS LOGROS ########################
+    #start in 250 otro tipo de logros
+    #250 - Comentar en el foro
+    #251 - Comentar en las notificaciones
+    #252 - Logueo
+    #funcion que le da un logro en caso que el usuario comente 10 veces en el foro
+
+    public static function check250($usuario, $curso) {
+        $usuario = usuario::find($usuario);
+
+        if ($usuario && !$usuario->tiene_logro($curso, 250)) {
+
+            $ncomentarios = $usuario->get_numero_de_participaciones_en_foro($curso);
+
+            if ($ncomentarios >= static::$logros['250']['numero_participaciones_en_foro']) {
+                $code = static::crear_logro(250, $usuario->id, $curso, 4);
+                #se crea la notificación
+                static::crear_notificacion($usuario->id, $curso, 4, $code);
+            }
+        }
+    }
+
+    #funcion que le da un logro en caso que el usuario comente 10 notificaciones
+
+    public static function check251($usuario, $curso) {
+        $usuario = usuario::find($usuario);
+        if ($usuario && !$usuario->tiene_logro($curso, 251)) {
+            $ncomentarios = $usuario->get_numero_comentarios_en_notificaciones($curso);
+
+            if ($ncomentarios >= static::$logros['250']['numero_de_comentarios_en_notificaciones']) {
+                $code = static::crear_logro(251, $usuario->id, $curso, 4);
+                #se crea la notificación
+                static::crear_notificacion($usuario->id, $curso, 4, $code);
+            }
+        }
+    }
+
+    ############# FIN DE OTROS LOGROS #######################3
     ######### EVALUACION ###############
     #300 - Ganar una evaluación
     #301 - Ganar todas las evaluaciones
@@ -66,6 +109,8 @@ class Logros extends LMSController {
     #400- obtener alogbx likes en un curso
     #401- compartir N publicaciones en facebook
     #402- compartir N publicaciones en twitter
+    #403- Cambiar el avatar (publica)
+    #404- Comentar publicaciones (publica)
 
     public static function redes_sociales($usuario, $curso, $amigo = null) {
         static::check400($amigo, $curso);

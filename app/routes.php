@@ -1,6 +1,11 @@
 <?php
 
-//rutas para agregar
+#rutas de testeo
+Route::get('/xy', function() {
+    echo usuario::find(1)->get_numero_de_participaciones_en_foro(6);
+});
+
+
 Route::get('/', function() {
 
     if (Auth::check()) {
@@ -23,7 +28,6 @@ Route::get('/', function() {
                         ->with('back', mt_rand(1, 2));
     }
 });
-
 
 
 Route::get('/db-fix', function() {
