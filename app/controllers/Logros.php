@@ -21,7 +21,7 @@ class Logros extends LMSController {
         ),
         250 => array(
             'numero_participaciones_en_foro' => 10,
-            'numero_de_comentarios_en_notificaciones' => 1,
+            'numero_de_comentarios_en_notificaciones' => 10,
             'tiempo_logueo_en_minutos' => 1440
         )
     );
