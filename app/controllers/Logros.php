@@ -23,6 +23,11 @@ class Logros extends LMSController {
             'numero_participaciones_en_foro' => 10,
             'numero_de_comentarios_en_notificaciones' => 10,
             'tiempo_logueo_en_minutos' => 1440
+        ), //logros de tiempo
+        'tiempo' => array(
+            '1' => 600, //300
+            '2' => 1200, //600
+            '3' => 2400, //1200
         )
     );
 
@@ -55,7 +60,7 @@ class Logros extends LMSController {
     #start in 250 otro tipo de logros
     #250 - Comentar en el foro
     #251 - Comentar en las notificaciones
-    #252 - Logueo
+    #25234 - Logueo(time)
     #funcion que le da un logro en caso que el usuario comente 10 veces en el foro
 
     public static function check250($usuario, $curso) {
@@ -86,6 +91,33 @@ class Logros extends LMSController {
                 static::crear_notificacion($usuario->id, $curso, 4, $code);
             }
         }
+    }
+
+    #2 = 5 horas
+    #3 = 10 horas
+    #4 = 20 horas
+
+    public static function check25234($usuario, $curso) {
+        $usuario = usuario::find($usuario);
+        if ($usuario) {
+            $tiempologueado = $usuario->get_tiempo_logueado($curso) / 60;
+            if (!$usuario->tiene_logro($curso, 252) && $tiempologueado >= self::$logros['tiempo']['1']) {
+                $code = static::crear_logro(252, $usuario->id, $curso, 4);
+                #se crea la notificación
+                static::crear_notificacion($usuario->id, $curso, 4, $code);
+            }
+            if (!$usuario->tiene_logro($curso, 253) && $tiempologueado >= self::$logros['tiempo']['2']) {
+                $code = static::crear_logro(253, $usuario->id, $curso, 4);
+                #se crea la notificación
+                static::crear_notificacion($usuario->id, $curso, 4, $code);
+            }
+            if (!$usuario->tiene_logro($curso, 254) && $tiempologueado >= self::$logros['tiempo']['3']) {
+                $code = static::crear_logro(254, $usuario->id, $curso, 4);
+                #se crea la notificación
+                static::crear_notificacion($usuario->id, $curso, 4, $code);
+            }
+        }
+        // exit;
     }
 
     ############# FIN DE OTROS LOGROS #######################3

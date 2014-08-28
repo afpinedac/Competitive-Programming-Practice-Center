@@ -2,7 +2,13 @@
 
 #rutas de testeo
 Route::get('/xy', function() {
-    echo usuario::find(1)->get_numero_de_participaciones_en_foro(6);
+    
+   $time = usuario::find(1)->get_tiempo_logueado(4);
+   
+   echo "<pre>";
+   var_dump($time);
+   echo "</pre>";
+   
 });
 
 
@@ -30,22 +36,6 @@ Route::get('/', function() {
 });
 
 
-Route::get('/db-fix', function() {
-
-    $envios = envio::where('curso', 6)->orderBy('id')->get();
-
-    foreach ($envios as $envio) {
-        //echo "{$envio->resultado}<br/>";
-        if ($envio->resultado == 'accepted') {
-            DB::table('envio')
-                    ->where('usuario', $envio->usuario)
-                    ->where('ejercicio', $envio->ejercicio)
-                    ->where('id', '>', $envio->id)
-                    ->delete();
-        }
-    }
-    echo "fixed";
-});
 
 
 Route::get('/about', function() {

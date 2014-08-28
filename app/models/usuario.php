@@ -332,9 +332,8 @@ class Usuario extends Eloquent {
                 ->select(DB::raw("SUM(TIME_TO_SEC(TIMEDIFF(fecha_salida,fecha_ingreso))) as tiempo"))
                 ->where('usuario', $this->id)
                 ->where('curso', $curso)
+                ->where('fecha_salida','<>','0000-00-00 00:00:00')
                 ->first();
-
-
         return $time_in_secs->tiempo;
     }
 
