@@ -23,11 +23,15 @@ class BackUp {
     }
 
     public function generate() {
-        $this->ssh->exec("mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_file_path()}");
+        $this->ssh->exec("mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_file_path()}");  
+        $this->list_files();
     }
 
     private function list_files() {
-        return $this->ssh->exec("ls {$this->get_full_folder_path()}");
+        $files =  $this->ssh->exec("ls {$this->get_full_folder_path()}");
+        echo "<pre>";
+        var_dump($files);
+        echo "</pre>";
         
     }
 
@@ -56,7 +60,7 @@ class BackUp {
 
     private function get_file_name() {
         $id = $this->get_last_id_file() + 1;
-        return $id . $this->prefix . date('Y-m-d H:i:s') . $this->extension;
+        return $id . $this->prefix . date('Y-m-d') . $this->extension;
     }
 
 
