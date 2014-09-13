@@ -13,4 +13,4 @@
 
 
 
-Artisan::add(new backupdb);
+Artisan::add(new Backupdb);
