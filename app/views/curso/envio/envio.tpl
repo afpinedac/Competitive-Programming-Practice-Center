@@ -64,8 +64,7 @@
                 data: {                    
                    time : last_update                    
                 },
-                success: function(data) {
-                                         
+                success: function(data) {                                        
                         
                         $.each(data,function(idx,value){
                                  //   console.log(value);
