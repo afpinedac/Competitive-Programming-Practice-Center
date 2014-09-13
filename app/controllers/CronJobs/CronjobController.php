@@ -18,10 +18,10 @@ class CronjobController extends BaseController {
     }
     
     
-    public function getTest(){
+    public function getTest($id){
         
-        $backup = new BackUp();
-        $backup->test();
+        $backup = new BackUp($id);
+        $backup->test($id);
     }
 
 }
