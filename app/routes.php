@@ -2,13 +2,12 @@
 
 #rutas de testeo
 Route::get('/xy', function() {
-    
-   $time = usuario::find(1)->get_tiempo_logueado(4);
-   
-   echo "<pre>";
-   var_dump($time);
-   echo "</pre>";
-   
+
+    $time = usuario::find(1)->get_tiempo_logueado(4);
+
+    echo "<pre>";
+    var_dump($time);
+    echo "</pre>";
 });
 
 
@@ -178,6 +177,8 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('lms', 'LMSController');
 });
 
+#ruta para los cron jobs
+Route::controller('cronjob', 'CronjobController');
 
 Route::get('/tt', function() {
     session_start();

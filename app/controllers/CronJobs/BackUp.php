@@ -2,7 +2,7 @@
 
 class BackUp {
 
-    protected $path = "./backups/bd";
+    protected $path = "/backups/bd/";
     protected $prefix = "-cpp-bk-";
     protected $nbackups = 7;
     protected $extension = '.sql.zip';
@@ -17,7 +17,13 @@ class BackUp {
     );
 
     public function test() {
-        shell_exec("mysqldump -u root -pqwe123admin lms | zip > /var/www/cpp2/bk/lms_$(date '+%Y-%m-%d_%H-%M-%S').sql.zip");
+        echo $this->get_full_path();
+        
+        $var = shell_exec("mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_path()}");
+        
+        echo "<pre>";
+        var_dump($var);
+        echo "</pre>";
     }
 
     public function generate() {
@@ -47,6 +53,10 @@ class BackUp {
 
     private function save() {
         
+    }
+
+    private function get_full_path() {
+        return public_path().  $this->path . $this->get_file_name();
     }
 
     private function get_file_name() {
