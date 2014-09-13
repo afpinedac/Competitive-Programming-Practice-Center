@@ -18,8 +18,8 @@ class BackUp {
             exit('Login Failed in ssh');
         }
 
-        $this->list_files();
-        exit;
+        
+      
     }
 
     public function generate() {
