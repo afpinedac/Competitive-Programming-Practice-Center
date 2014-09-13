@@ -21,7 +21,7 @@ class CronjobController extends BaseController {
     public function getTest(){
         
         $backup = new BackUp();
-     //   $backup->test();
+       $backup->generate();
     }
 
 }

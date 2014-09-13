@@ -13,7 +13,7 @@ class BackUp {
 
     function __construct() {
 
-        $this->ssh = new Net_SSH2('168.176.125.196');
+        $this->ssh = new Net_SSH2('localhost');
         if (!$this->ssh->login('root', 'qwe123admin')) {
             exit('Login Failed in ssh');
         }
@@ -27,11 +27,8 @@ class BackUp {
     }
 
     private function list_files() {
-         $files =  $this->ssh->exec("ls {$this->get_full_folder_path()}");
-        //$files = $this->ssh->exec("ls");
-        echo "<pre>";
-        var_dump($files);
-        echo "</pre>";
+        return $this->ssh->exec("ls {$this->get_full_folder_path()}");
+        
     }
 
     private function remove($file) {
@@ -59,7 +56,7 @@ class BackUp {
 
     private function get_file_name() {
         $id = $this->get_last_id_file() + 1;
-        return $id . $this->prefix . date('Y-m-d') . $this->extension;
+        return $id . $this->prefix . date('Y-m-d H:i:s') . $this->extension;
     }
 
 
