@@ -1,7 +1,6 @@
 <?php
 
 
-
 class BackUp {
 
     protected $folder = "/backups/bd/";
@@ -11,8 +10,7 @@ class BackUp {
     protected $ssh;
 
     function __construct() {
-        echo "xd";
-        exit;
+        
         $this->ssh = new Net_SSH2('localhost');
         if (!$this->ssh->login('root', 'qwe123admin')) {
             exit('Login Failed in ssh');
