@@ -24,11 +24,21 @@ class BackUp {
     public function test() {
         echo "mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_path()}";
 
-      $var =  shell_exec("mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_path()}");
+        if ($this->id == 1) {
+            echo "se ejecuto 1 <br>";
+            $var = shell_exec("mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_path()}");
 
-        echo "<pre>";
-        var_dump($var);
-        echo "</pre>";
+            echo "<pre>";
+            var_dump($var);
+            echo "</pre>";
+        } else {
+            echo "se ejecuto 2 <br>";
+            $var = shell_exec("sudo mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_path()}");
+
+            echo "<pre>";
+            var_dump($var);
+            echo "</pre>";
+        }
     }
 
     public function generate() {
@@ -61,8 +71,8 @@ class BackUp {
     }
 
     private function get_full_path() {
-       return public_path() . $this->path . $this->get_file_name();
-    //   return  $this->get_file_name();
+        return public_path() . $this->path . $this->get_file_name();
+        //   return  $this->get_file_name();
     }
 
     private function get_file_name() {
