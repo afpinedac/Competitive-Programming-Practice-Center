@@ -61,7 +61,8 @@ class BackUp {
     }
 
     private function get_full_path() {
-        return public_path() . $this->path . $this->get_file_name();
+      //  return public_path() . $this->path . $this->get_file_name();
+       return  $this->get_file_name();
     }
 
     private function get_file_name() {
