@@ -21,7 +21,30 @@ class BackUp {
         $this->id = $id;
     }
 
+    public function test2() {
+
+        require '../public/libs/phpseclib/Net/SSH2.php';
+
+
+        $ssh = new Net_SSH2('localhost');
+        if (!$ssh->login('root', 'qwe123admin')) {
+            exit('Login Failed');
+        }
+        
+        $data = $ssh->exec('ls');
+        
+        echo "<pre>";
+        var_dump($data);
+        echo "</pre>";
+        
+        
+    }
+
     public function test() {
+        $this->test2();
+        exit;
+
+
         echo "mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_path()}";
 
         if ($this->id == 1) {
@@ -33,6 +56,7 @@ class BackUp {
             echo "</pre>";
         } else {
             echo "se ejecuto 2 <br>";
+            ##problema ejecutando mysqldump con shell_exec
             $var = shell_exec("sudo mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_path()}");
 
             echo "<pre>";
