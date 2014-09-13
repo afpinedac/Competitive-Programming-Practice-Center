@@ -38,7 +38,7 @@ class Backupdb extends Command {
 	public function fire()
 	{
             
-            require '../public/libs/phpseclib/Net/SSH2.php';
+            require '../../public/libs/phpseclib/Net/SSH2.php';
 		$backup = new BackUp();
                 $backup->generate();
                 
