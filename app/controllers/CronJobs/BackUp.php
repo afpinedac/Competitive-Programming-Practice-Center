@@ -6,19 +6,16 @@ class BackUp {
 
     protected $folder = "/backups/bd/";
     protected $prefix = "-cpp-bk-";
-    protected $nbackups = 7;
+    protected $nbackups = 10;
     protected $extension = '.sql.zip';
-    protected $so = 'windows'; #1 -> windows , 0 -> linux
     protected $ssh;
 
     function __construct() {
 
-        $this->ssh = new Net_SSH2('168.176.125.196');
+        $this->ssh = new Net_SSH2('localhost');
         if (!$this->ssh->login('root', 'qwe123admin')) {
             exit('Login Failed in ssh');
         }
-       // $this->clean();
-        //exit;
     }
 
     public function generate() {
@@ -28,26 +25,27 @@ class BackUp {
 
     private function list_files() {
         $files = $this->ssh->exec("ls {$this->get_full_folder_path()}");
-        $files = str_replace("\r\n", "\n", $files);
+        $files = str_replace("\r\n", "\n", trim($files));
         return explode("\n", $files);
     }
 
     private function clean() {
-        if ($this->get_number_of_backups() >= 0) {            
-            $cmd = "rm {$this->create_path_to_file($this->get_file_name_id($this->get_last_id_file()))}";
-            echo $cmd;            
+        if ($this->get_number_of_backups() >= $this->nbackups) {
+            $cmd = "rm {$this->create_path_to_file($this->get_file_name_id($this->get_last_id_file('min')))}";
+            $this->ssh->exec($cmd);
         }
-       
     }
 
-    private function get_last_id_file() {
+    private function get_last_id_file($type) {
         $files = $this->list_files();
-        $min = 100000;
+        $value = $type == 'min' ? 50000 : 0;
         foreach ($files as $file) {
+            echo "$file <br>";
             $f = explode("-", trim($file));
-            $min = min($min, $f[0]);
+            $value = ($type == 'min') ? min($value, (int) $f[0]) : max($value, (int) $f[0]);
         }
-        return $min;
+
+        return $value;
     }
 
     private function get_file_name_id($id) {
@@ -72,7 +70,7 @@ class BackUp {
     }
 
     private function get_file_name() {
-        $id = $this->get_last_id_file() + 1;
+        $id = $this->get_last_id_file('max') + 1; 
         return $id . $this->prefix . date('Y-m-d') . $this->extension;
     }
 
