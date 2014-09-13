@@ -36,7 +36,7 @@ class BackUp {
     }
 
     private function get_last_id_file() {
-        return $this->id;
+    //    return $this->id;
     }
 
     private function get_number_of_backups() {
