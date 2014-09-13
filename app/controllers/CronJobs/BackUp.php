@@ -31,7 +31,7 @@ class BackUp {
             exit('Login Failed');
         }
         
-        $data = $ssh->exec('ls');
+        $data = $ssh->exec("mysqldump -u root -pqwe123admin lms | zip > {$this->get_full_path()}");
         
         echo "<pre>";
         var_dump($data);
