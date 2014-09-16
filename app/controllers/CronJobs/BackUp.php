@@ -17,7 +17,7 @@ class BackUp {
     function __construct() {
         $this->folder = public_path() . $this->folder;
         #$this->folder = '/var/www/cpp2/public' . $this->folder;
-        $this->ssh = new Net_SSH2('168.176.125.196');
+        $this->ssh = new Net_SSH2('localhost');
         if (!$this->ssh->login('root', 'qwe123admin')) {
             exit('Login Failed in ssh');
         }
