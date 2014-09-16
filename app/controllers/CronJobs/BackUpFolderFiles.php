@@ -6,7 +6,7 @@ class BackUpFolderFiles extends BackUp {
     protected $destination_folder = '/backups/files/';
 
     function __construct() {
-        parent::__construct('.tar.gz', '-cpp-bk-', 4);
+        parent::__construct('.tar.gz', '-cpp-bk-', 6);
         $public_path = public_path();
         $this->source_folder = $public_path . $this->source_folder;
         $this->destination_folder = $public_path . $this->destination_folder;
