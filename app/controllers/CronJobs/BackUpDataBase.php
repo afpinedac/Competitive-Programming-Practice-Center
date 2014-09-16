@@ -10,7 +10,7 @@ class BackUpDataBase extends BackUp {
     private $db_password = 'qwe123admin';
 
     function __construct() {
-        parent::__construct('.sql.gz', '-cpp-bk-', 5);
+        parent::__construct('.sql.gz', '-cpp-bk-', 10);
         $this->folder = public_path() . $this->folder;
         //$this->folder = '/var/www/cpp2/public' . $this->folder;       
         $this->file_name = $this->create_file_name($this->folder);
