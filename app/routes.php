@@ -3,11 +3,10 @@
 #rutas de testeo
 Route::get('/xy', function() {
 
-    $time = usuario::find(1)->get_tiempo_logueado(4);
-
-    echo "<pre>";
-    var_dump($time);
-    echo "</pre>";
+   $backup = new BackUp();
+   $backup->generate();
+   $backup->clean();
+   
 });
 
 

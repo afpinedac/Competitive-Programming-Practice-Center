@@ -42,6 +42,7 @@ class Backupdb extends Command {
             
 		$backup = new BackUp();
                 $backup->generate();
+                $backup->clean();
                 
 	}
 
