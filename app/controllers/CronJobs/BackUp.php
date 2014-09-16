@@ -23,7 +23,6 @@ class BackUp {
         }
         $this->filename = $this->get_file_name();
         $this->fullpath = $this->folder . $this->filename;
-
       # echo "file generated: " . $this->filename;
     }
 
