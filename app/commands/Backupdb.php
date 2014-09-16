@@ -40,7 +40,7 @@ class Backupdb extends Command {
             
            // require '../../public/libs/phpseclib/Net/SSH2.php';
             
-		$backup = new BackUp();
+		$backup = new BackUpDataBase();
                 $backup->generate();
                 $backup->clean();
                 

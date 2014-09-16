@@ -2,10 +2,8 @@
 
 #rutas de testeo
 Route::get('/xy', function() {
-
-   $backup = new BackUp();
-   $backup->generate();
-   $backup->clean();
+    
+  
    
 });
 
@@ -177,7 +175,7 @@ Route::group(array('before' => 'auth'), function() {
 });
 
 #ruta para los cron jobs
-Route::controller('cronjob', 'CronjobController');
+//Route::controller('cronjob', 'CronjobController');
 
 Route::get('/tt', function() {
     session_start();

@@ -30,8 +30,8 @@ return array(
 
 		'production' => array(
 			'host'      => '',
-			'username'  => '',
-			'password'  => '',
+			'username'  => 'root',
+			'password'  => 'qwe123admin',
 			'key'       => '',
 			'keyphrase' => '',
 			'root'      => '/var/www',
