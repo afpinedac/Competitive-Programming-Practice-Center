@@ -4,7 +4,7 @@ class CronJob {
 
     static $ssh_user = 'root';
     static $ssh_password = 'qwe123admin';
-    static $server = 'localhost';    
+    static $server = '168.176.125.196';    
 
     static function exec($command) {
         

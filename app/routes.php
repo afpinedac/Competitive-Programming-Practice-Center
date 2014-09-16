@@ -3,8 +3,6 @@
 #rutas de testeo
 Route::get('/xy', function() {
     
-  
-   
 });
 
 
