@@ -36,8 +36,9 @@
                 
                {*  {envio::find($envio->id)->get_similares()|var_dump}*}
                   {if $envio->resultado == 'accepted'}  
-                    {if !empty(envio::find($envio->id)->get_similares())}
-                        <i class="icon icon-star"></i> ({envio::find($envio->id)->get_similares()|count})
+                      {assign var=sss value=envio::find($envio->id)->get_similares()}
+                    {if !empty($sss)}
+                        <i class="icon icon-star"></i> ({$sss|count})
                     {/if}
                     
                     {/if}
