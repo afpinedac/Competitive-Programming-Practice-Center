@@ -2,7 +2,22 @@
 
 #rutas de testeo
 Route::get('/xy', function() {
-    
+
+
+
+    $envios = envio::all();
+
+
+    foreach ($envios as $envio) {
+        echo "----> {$envio->id} : {$envio->algoritmo}";
+
+        echo "similares";
+        echo "<pre>";
+        var_dump($envio->get_similares());
+        echo "</pre>";
+    }
+
+    echo "----------------------";
 });
 
 

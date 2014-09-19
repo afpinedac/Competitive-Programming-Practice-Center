@@ -125,6 +125,24 @@ class Envio extends Eloquent {
         return $dates;
     }
 
+    public function get_similares($porcentaje = 90) {
+
+        $envios = envio::where('curso', $this->curso)
+                ->where('id', '<', $this->id)
+                ->where('resultado', 'accepted')
+                ->where('usuario', '<>', $this->usuario)
+                ->get();
+        $similares = array();
+        foreach ($envios as $envio) {
+            similar_text($this->algoritmo, $envio->algoritmo, $similitude);
+            if ($similitude >= $porcentaje) {
+                $similares[] = $envio->id;
+            }
+        }
+        
+        return $similares;
+    }
+
 }
 
 ?>

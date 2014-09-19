@@ -33,9 +33,19 @@
                 
                 {if $tipo_entrada==1}
                 <a href='{url("curso/monitorear/")}/{$curso->id}/talleres/{$taller->id}/envios/{$envio->id}'>{$envio->resultado}</a>
+                
+               {*  {envio::find($envio->id)->get_similares()|var_dump}*}
+                  {if $envio->resultado == 'accepted'}  
+                    {if !empty(envio::find($envio->id)->get_similares())}
+                        <i class="icon icon-star"></i> ({envio::find($envio->id)->get_similares()|count})
+                    {/if}
+                    
+                    {/if}
+                    
                 {else}
                     {$envio->resultado}
                     {/if}
+                   
             </td>
             <td>{$envio->tiempo_de_ejecucion}</td>
         </tr>
