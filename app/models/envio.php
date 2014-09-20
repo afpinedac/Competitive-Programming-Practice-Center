@@ -129,6 +129,7 @@ class Envio extends Eloquent {
 
         $envios = envio::where('curso', $this->curso)
                 ->where('id', '<', $this->id)
+                ->where('ejercicio', $this->ejercicio)
                 ->where('resultado', 'accepted')
                 ->where('usuario', '<>', $this->usuario)
                 ->get();
