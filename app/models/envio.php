@@ -131,6 +131,7 @@ class Envio extends Eloquent {
                 ->where('id', '<', $this->id)
                 ->where('ejercicio', $this->ejercicio)
                 ->where('resultado', 'accepted')
+                ->where('test', 0)
                 ->where('usuario', '<>', $this->usuario)
                 ->get();
         $similares = array();
