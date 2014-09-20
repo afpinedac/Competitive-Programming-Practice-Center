@@ -450,6 +450,7 @@ class Usuario extends Eloquent {
                         ->join('envio', 'ejercicio.id', '=', 'envio.ejercicio')
                         ->where('envio.codigo', $taller)
                         ->where('envio.usuario', $this->id)
+                        ->where('envio.test', 0) #envios que no son de prueba
                         ->where('envio.tipo', 0) //son los tipos talleres
                         ->orderBy('envio.id', 'desc')
                         ->get();
