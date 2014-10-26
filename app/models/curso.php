@@ -89,12 +89,11 @@ class Curso extends Eloquent {
     }
 
     public function get_estudiantes() {
-        $estudiantes = DB::table('usuario')
-                ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'usuario.id')
-                ->where('curso_x_usuario.curso_id', $this->id)
-                ->orderBy('nombres')
-                ->get();
-        return $estudiantes;
+        return DB::table('usuario')
+                        ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'usuario.id')
+                        ->where('curso_x_usuario.curso_id', $this->id)
+                        ->orderBy('nombres')
+                        ->get();
     }
 
     public function numero_de_estudiantes() {
@@ -156,8 +155,6 @@ class Curso extends Eloquent {
                 ->join('curso_x_usuario', 'usuario.id', '=', 'curso_x_usuario.usuario_id')
                 ->where('curso_x_usuario.curso_id', $this->id)
                 ->get();
-
-
         return $this->sort_ranking($ranking, $top);
     }
 
@@ -238,7 +235,7 @@ class Curso extends Eloquent {
         if ($tipo == 'taller') {
 
             foreach ($estudiantes as $estudiante) {
-                
+
                 $arr = array(
                     'id' => $estudiante->id,
                     'nombres' => $estudiante->nombres,
@@ -251,12 +248,12 @@ class Curso extends Eloquent {
             }
 
 
-            /*usort($estud_sort, function($a, $b) use($sortby) {
-                if (is_string($a[$sortby])) {
-                    return strtolower($a[$sortby]) > strtolower($b[$sortby]);
-                }
-                return ($a[$sortby]) < ($b[$sortby]);
-            });*/
+            /* usort($estud_sort, function($a, $b) use($sortby) {
+              if (is_string($a[$sortby])) {
+              return strtolower($a[$sortby]) > strtolower($b[$sortby]);
+              }
+              return ($a[$sortby]) < ($b[$sortby]);
+              }); */
         } else if ($tipo == 'estudiantes') {
 
             foreach ($estudiantes as $estudiante) {
@@ -285,7 +282,7 @@ class Curso extends Eloquent {
                 return ($a[$sortby]) < ($b[$sortby]);
             });
         }
-        //var_dump($estud_sort);
+        
 
         return $estud_sort;
     }
