@@ -99,10 +99,14 @@
                    </div>
                </div>
                                   
-          {*se carga el chat....*}   
-        
-        {HTML::style('libs/chat/css/chat.css')}        
+          {*se carga el chat y angular*}   
+  
+          
+          
+  {HTML::style('libs/chat/css/chat.css')}        
   {HTML::style('libs/chat/css/screen.css')}
+  {HTML::script('libs/angularjs/angular.min.js')}
+  
   
   
  <script>
@@ -111,17 +115,38 @@
        startchatsession : '{url('chat/startchatsession')}',
        chatheartbeat : '{url('chat/chatheartbeat')}',
        closechat : '{url('chat/closechat')}'
-     }
+     };
+     
+     envios = {
+       request_url : '{url('envio/all')}'
+     };
+     
+     
  </script> 
   {HTML::script('libs/chat/js/chat.js')}   
-                                  
+  {HTML::script('js/angular/appEnvios.js')}
+                         
+  
+  
+  
+  <!---- angular-------------->
+  <div class="row-fluid">
+    <div class="span12">
+        {include file='./panel_envios.tpl'}
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
              
         {else if $layout=="estudiante"}
             <br>
             <br>
-   
-                
-            
             <div class="row-fluid">
                 <div class="span12 well well-small">
                     
