@@ -13,19 +13,21 @@ angular.module('Controllers', [])
               });
             }, 3000);
           };
+          
+          $scope.getClass = function(data){
+             if(data.respuesta == 'accepted') return 'success';
+             else if(data.respuesta == 'wrong answer') return 'warning';
+             else if(data.respuesta == 'compilation error') return 'info';
+             else return '';
+          };
 
-          $scope.add = function() {
-            addx = $interval(function() {
-              $scope.n++;
-            }, 1000);
-          }
         });
-        
+
 angular.module('Classes', [])
         .factory('Envio', function($http) {
           return {
             get_lista: function() {
-              return $http.get('http://localhost/lms2/public/envio/all/4'); //<--ojo cambiar
+              return $http.get(envios.request_url); //<--ojo cambiar
             }
           }
         });

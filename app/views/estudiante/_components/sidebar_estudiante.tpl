@@ -118,7 +118,7 @@
      };
      
      envios = {
-       request_url : '{url('envio/all')}'
+       request_url : '{url('envio/all')}/'+ {$curso->id}
      };
      
      
