@@ -11,7 +11,7 @@ class EnvioController extends LMSController {
     $envios = DB::table('envio')
     ->where('created_at', '>', $time)
             ->where('curso', $curso)
-          //  ->where('test', 0)
+           ->where('test', 0)
             ->orderBy('id','desc')
             ->get();
 
