@@ -2,7 +2,7 @@
 <div ng-app='colaEnvios' ng-controller='envioController'>
   <div ng-show="envios.length>0">
 
-    <p class="text-center"><strong>Env. últimos 10 minutos</strong></p>
+    <p class="text-center"><strong>Últimos envios</strong></p>
     <div class=" well">
       <table class="table table-condensed table-hover">
         <thead>
