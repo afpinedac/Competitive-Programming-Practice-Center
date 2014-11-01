@@ -27,7 +27,7 @@
                 <div class="row-fluid" style=''>
                     <div class="span12">
                         {foreach $notificaciones as $notificacion}
-                            {if $notificacion->tipo>0 and $notificacion->tipo<5 and usuario::find($notificacion->propietario)->es_monitor($curso->id)}
+                            {if $notificacion->tipo>0 and $notificacion->tipo<5 and (usuario::find($notificacion->propietario)->es_monitor($curso->id) or usuario::find($notificacion->propietario)->es_propietario($curso->id))}
                                 {continue}
                                 {/if}
                              {assign var=comentarios value=notificacion::find($notificacion->id)->get_comentarios()}
