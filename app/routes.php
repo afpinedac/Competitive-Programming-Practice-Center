@@ -1,14 +1,5 @@
 <?php
 
-#rutas de testeo
-Route::get('/xy', function() {
-
-    $estudiantes = curso::find(6)->get_estudiantes();
-    
-    
-    
-    
-});
 
 
 Route::get('/', function() {
@@ -158,8 +149,6 @@ Route::post('/loguear', function() {
 
 Route::group(array('before' => 'auth'), function() {
 
-
-
     Route::controller('usuario', 'UsuarioController');
     Route::controller('curso', 'CursoController');
     Route::controller('taller', 'TallerController');
@@ -196,6 +185,12 @@ Route::get('/update-avatars/{from}/{to}', function($from, $to) {
     }
     echo "finished...";
 });
+
+
+
+
+
+
 
 
 

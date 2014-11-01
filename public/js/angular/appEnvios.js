@@ -8,7 +8,7 @@ angular.module('Controllers', [])
           $scope.get_envios = function() {
             interval = $interval(function() {
               Envio.get_lista().success(function(data) {
-                window.console.log(data);
+                //window.console.log(data);
                 $scope.envios = data;
               });
             }, 3000);

@@ -23,7 +23,7 @@ public class ConexionDB {
         this.host = "localhost";
         this.port = "3307";
         this.database = "lms";
-        this.user = "DBCPP";
+        this.user = Main.so == 0? "DBCPP" : "root" ;
         
         this.pass =  Main.so == 0 ? "qwe123admin" : "";
         this.envio = envio;

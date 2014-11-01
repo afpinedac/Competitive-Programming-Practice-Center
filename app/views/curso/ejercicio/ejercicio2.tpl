@@ -9,6 +9,18 @@
                     };
             
               </script> 
+              
+              
+                {*Mostrar si hay un logro*}
+        
+            {if $logro!=null}
+                
+                {include file='../modales/logro_obtenido.tpl'} 
+               
+
+            {/if}
+        
+        {*Fin de mostrar si hay un logro*}
     
     {assign var=title value=$ejercicio->nombre} 
     
