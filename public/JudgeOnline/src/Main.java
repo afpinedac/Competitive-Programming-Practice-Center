@@ -1,10 +1,9 @@
-
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Main {
 
-    static int so = 0; // 0 for linux, 1 for windows
+    static int so = 1; // 0 for linux, 1 for windows
 
     public static void main(String[] args) throws Exception {
         ServerSocket ss = new ServerSocket(3029);

@@ -168,6 +168,8 @@ class TallerController extends LMSController {
     } else { # si es de un taller
       if ($test == 1) { //esperamos un poco
         sleep(7);
+      }else{
+        sleep(2); //espermaos un poquito
       }
       return Redirect::to("curso/ver/{$curso}/ejercicio/{$ejercicio}");
     }
