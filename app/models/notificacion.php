@@ -34,9 +34,11 @@ class Notificacion extends Eloquent {
 
     public function get_comentarios() {
         return DB::table('notificacion')
+                         ->join('usuario','usuario.id','=','notificacion.usuario')
                         ->where('tipo', 5) #tipo de los comentarios
                         ->where('codigo', $this->id)                        
                         ->orderBy('id')
+                        ->select(["usuario.nombres" ,"usuario.apellidos" ,'notificacion.id','notificacion.publicacion','usuario.id as comentadorid','notificacion.publicacion'])
                         ->get();
     }
     

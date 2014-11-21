@@ -396,7 +396,7 @@ class CursoController extends LMSController {
                           ->with('modulo', $modulo)
                           ->with('modulos', $curso->get_modulos())
                           ->with('amigos', $usuario->get_amigos($curso->id))
-                      //    ->with('logros', $usuario->get_logros_obtenidos($curso->id))
+                          //    ->with('logros', $usuario->get_logros_obtenidos($curso->id))
                           ->with('logro', $usuario->get_logro_ejercicio($curso->id));
           // ->with('notificaciones', $curso->get_notificaciones())
           // ->with('ranking', $curso->get_ranking());
@@ -1011,6 +1011,35 @@ class CursoController extends LMSController {
   public function missingMethod($parameters = array()) {
     Session::flash("invalid", 'Operación inválida');
     return Redirect::to('curso');
+  }
+
+  public function postJson($tipo) {
+    switch ($tipo) {
+      case 'notificaciones': //retorna las notificaciones del curso
+        $curso = Input::get('curso');
+        $curso = curso::find($curso);
+        return Response::json($curso->get_notificaciones());
+        break;
+
+      case 'envios': //retorna las notificaciones del curso
+        $curso = curso::find($curso);
+        $envios = $curso->get_cola_envios();
+        $data = array();
+        foreach ($envios as $envio) {
+          $sub['id'] = $envio->id;
+          $sub['ejercicio'] = $envio->ejercicio;
+          $sub['estudiante'] = $envio->usuario;
+          $sub['respuesta'] = $envio->resultado;
+          $res = $sub['respuesta'];
+          $sub['color'] = ($res == 'accepted') ? 'info' : ($res == 'wrong answer') ? 'alert' : ($res == 'time limit') ? 'info' : ($res == 'compilation error') ? 'success' : '';
+          $data[] = $sub;
+        }
+        return Response::json($data);
+        break;
+      default:
+        return Response::json(['error' => 'No existe el tipo de request']);
+        break;
+    }
   }
 
 }

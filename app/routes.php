@@ -162,7 +162,6 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('chat', 'ChatController');
     Route::controller('foro', 'ForoController');
     Route::controller('item', 'ItemController');
-    Route::controller('envio', 'EnvioController');
     Route::controller('api', 'ApiController');
     Route::controller('poli', 'PoliController');
     Route::controller('lms', 'LMSController');

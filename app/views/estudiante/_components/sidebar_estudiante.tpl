@@ -105,7 +105,7 @@
           
   {HTML::style('libs/chat/css/chat.css')}        
   {HTML::style('libs/chat/css/screen.css')}
-  {HTML::script('libs/angularjs/angular.min.js')}
+  
   
   
   
@@ -124,9 +124,6 @@
      
  </script> 
   {HTML::script('libs/chat/js/chat.js')}   
-  {HTML::script('js/angular/appEnvios.js')}
-                         
-  
   
   
   <!---- angular-------------->

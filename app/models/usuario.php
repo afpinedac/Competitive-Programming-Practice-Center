@@ -381,7 +381,6 @@ class Usuario extends Eloquent {
     public function get_porcentaje_en_evaluacion($evaluacion) {
         $numero_ejercicios = evaluacion::find($evaluacion)->get_numero_ejercicios();
         $solucionados = $this->get_numero_ejercicios_resultos_en_evaluacion($evaluacion);
-
         if ($numero_ejercicios == 0) {
             return 0;
         } else {
