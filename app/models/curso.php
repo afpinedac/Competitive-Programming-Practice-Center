@@ -22,12 +22,14 @@ class Curso extends Eloquent {
     return $this->soluciones_visibles == 1;
   }
 
-  public function asignar_monitor($estudiante, $rol) {
-    //rol = 1(monitor)
+  public function asignar_monitor($estudiante) {
+    $estudiante = usuario::find($estudiante);
+    $rol = ($estudiante->es_monitor($this->id)) ? 0 : 1;
     DB::table('curso_x_usuario')
             ->where('curso_id', $this->id)
-            ->where('usuario_id', $estudiante)
+            ->where('usuario_id', $estudiante->id)
             ->update(array('rol' => $rol));
+    return $rol;
   }
 
   public function terminado() {
@@ -245,6 +247,26 @@ class Curso extends Eloquent {
       ];
       $estud_sort[] = $arr;
     }
+    return $estud_sort;
+  }
+  
+  
+  public function monitorear_estudiantes() {
+    $estudiantes = $this->get_estudiantes();
+    $estud_sort = [];
+   foreach ($estudiantes as $estudiante) {
+     $usuario = usuario::find($estudiante->id);
+                $arr = array(
+                    'id' => $estudiante->id,
+                    'nombre_completo' => ucfirst($estudiante->nombres) . " " . ucfirst($estudiante->apellidos),
+                    'ultimo_acceso' => $usuario->get_ultimo_acceso($this->id),
+                    'ejercicios_resueltos' => $usuario->numero_de_ejercicios_resueltos_curso($this->id),
+                    'puntos' => $usuario->get_puntos_en_curso($this->id),
+                    'tiempo_logueado' => $usuario->get_tiempo_logueado($this->id),
+                    'es_monitor' => $usuario->es_monitor($this->id)
+                );
+                $estud_sort[] = $arr;
+            }
     return $estud_sort;
   }
 

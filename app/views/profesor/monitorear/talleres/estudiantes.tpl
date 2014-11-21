@@ -1,6 +1,6 @@
 {capture assign='content'}
 
-  <div ng-controller="MonitorearTaller" ng-init="taller_actual={$taller->id}">
+  <div ng-controller="MonitorearTaller" ng-init="(MonitorearTaller({$taller->id}))">
     <div class="row-fluid">
       <div class="span12">
 
@@ -26,33 +26,23 @@
 
     <table class="table table-striped table-condensed table-bordered" ng-init="sortby='nombre_completo'; reverse=false">
       <thead>
-      <th>Estudiante <span class="pull-right"><a href="" ng-click="sortby='nombre_completo'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='nombre_completo'; reverse=false;">&DownArrow;</a></span></th>
+      <th>Estudiante <span class="pull-right"><a href='' ng-click="sortby='nombre_completo'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='nombre_completo'; reverse=false;">&DownArrow;</a></span></th>
      <th>Ejercicios resueltos <span class="pull-right"><a href="" ng-click="sortby='porcentaje'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='porcentaje'; reverse=false;">&DownArrow;</a></span></th>
       <th>Último envio <span class="pull-right"><a href="" ng-click="sortby='ultimo_envio'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='ultimo_envio'; reverse=false;">&DownArrow;</a></span></th>
       <th>Envios <span class="pull-right"><a href="" ng-click="sortby='envios_en_taller'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='envios_en_taller'; reverse=false;">&DownArrow;</a></span></th>
       </thead>
       <tbody>
         <tr ng-repeat="estudiante in estudiantes | orderBy:sortby:reverse">
-          <td><a {* href='{url('curso/monitorear')}/{$curso->id}/talleres/{$taller->id}/estudiantes/{$estudiante['id']}'*}>[[estudiante.nombre_completo]]</a></td>
-          <td>[[estudiante.ejercicios_resueltos]] ([[estudiante.porcentaje]]%)</td>
+          <td><a  href='{url('curso/monitorear')}/{$curso->id}/talleres/{$taller->id}/estudiantes/[[estudiante.id]]'>[[estudiante.nombre_completo]]</a></td>
+          <td>[[estudiante.ejercicios_resueltos]] ([[estudiante.porcentaje | number:2]]%)</td>
           <td>[[estudiante.ultimo_envio]]</td>
           <td> [[estudiante.envios_en_taller]]</td>
         </tr>
 
-        {*
-        {foreach $estudiantes_inscritos as $estudiante}
-        {if not usuario::find($estudiante['id'])->es_monitor($curso->id)}
-        <tr>
-        <td><a href='{url('curso/monitorear')}/{$curso->id}/talleres/{$taller->id}/estudiantes/{$estudiante['id']}'>{$estudiante['nombres']|capitalize} {$estudiante['apellidos']|capitalize}</a></td>
-        <td>{$estudiante['porcentaje']|string_format:"%.2f"}%</td>
-        <td>{$estudiante['ultimo_envio']}</td>
-        <td>{$estudiante['ejercicios_resueltos']} / {usuario::find($estudiante['id'])->get_numero_envios_en_taller($taller->id)}</td>
-        </tr>        
-        {/if}
-        {/foreach}*}
+      
       </tbody>    
     </table>    
-    {$taller->id}
+    
   </div>
 
 {/capture}   

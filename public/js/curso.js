@@ -59,26 +59,7 @@ curso = {
 
 
         }
-        ,
-        set_monitor: function(id,option,curso){
-            $.ajax({
-                type: 'get',
-                url: URL.set_monitor,
-                async : true,
-                data: {
-                   monitor : id  ,
-                   rol : option,
-                   curso : curso
-                },
-                success: function(data) {                    
-                    if(data==1){
-                        alertify.alert('El estudiante ha sido asignado como monitor');                        
-                    }else{
-                        alertify.alert('El estudiante ha dejado de ser monitor');                        
-                    }
-                }
-            });
-        }
+       
 
 
 }
