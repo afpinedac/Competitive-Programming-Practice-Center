@@ -1,6 +1,6 @@
 
 
-<div class="row-fluid">
+<div class="row-fluid" ng-app='EnvioController'>
 
 
   <div class="span12">
@@ -18,11 +18,11 @@
 
 
 
-    <div class="row-fluid">
+    <div class="row-fluid" id='test'>
       <div class="span12">
 
 
-        <div class="span12" style='padding-left: 35px; padding-right: 35px;'>
+        <div class="span10 offset1 contenedor" style='padding-left: 10px; padding-right: 10px;'   >
 
 
 
@@ -109,6 +109,7 @@
 
               <div class="span2">
                 {include file='../estudiante/_components/sidebar_estudiante.tpl'}
+                <judgeonline></judgeonline>
               </div>
 
 

@@ -1,6 +1,6 @@
 //controladores
 angular.module('Controllers', [])
-        .controller('envioController', function($scope, $http, $interval, ajax) {
+        .controller('EnvioController', function($scope, $http, $interval, ajax) {
           $scope.envios = [];
           $scope.notificaciones = [];
           $scope.n = 0;
@@ -28,6 +28,36 @@ angular.module('Controllers', [])
               return '';
           };
 
+        }).directive('judgeonline', function($interval){
+          return {
+            restrict : 'EA',
+            template : "<div ><small class='pull-right' style='cursor: pointer; padding-right:5px;' ng-show='ready' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)'>x</small><p><strong>Envio:</strong> [[envio]]</p><p style='margin-top:-12px;'><strong>Ejercicio:</strong> [[ejercicio]]</p>  <p style='margin-top:-5px;'><strong>Estatus:</strong> <span style='font-size:20px;'>[[status]]</span></p> </div>",
+            link : function($scope){
+              var x=0;
+              $scope.ready=false;
+              $scope.envio = 1234;
+              $scope.ejercicio = 'Carta de amor';
+               interval = $interval(function(){
+                 $scope.id=x++;
+                 if(x<4)$scope.status ='En cola' + point(x);
+                 else if(x<7){ 
+                   $scope.status = 'Ejecutando' + point(x);
+                 }
+                 else if(x<10){
+                   $scope.ready = true;
+                   $scope.status = 'Accepted'
+                 }
+               },800);
+               
+               point = function(n){
+                  n=n%4;
+                  if(n==0) return '';
+                  else if(n==1) return '.';
+                  else if(n==2) return '..';
+                  else return '...'
+               }
+            }
+          }
         }).controller('InicioController', function($scope, ajax) {
   $scope.notificaciones = [];
   $scope.comentarios = []; //guarda la lista de comentarios de cada notifcacion

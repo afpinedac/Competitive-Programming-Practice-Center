@@ -95,6 +95,35 @@ class TallerController extends LMSController {
     return $t;
   }
 
+  //funcion que le envia un envio al servido $envio si es normal, le pasamos un segundo parametro por si es por segunda vez
+  public function getSendToServer($envio, $test, $retry = null) {
+
+    try {
+      #creamos el socket y llamamos al Juez en linea
+      $socket = fsockopen(LMSController::$SOCKET_HOST, LMSController::$SOCKET_PORT);
+    } catch (Exception $e) {
+      Session::flash("invalid", "Ha ocurrido un problema con el juez en línea, Inténtelo mas tarde");
+      return false;
+    }
+    #prueba
+
+    if ($socket) {
+      #creamos el envio
+      if (!$retry)
+        $envio = DB::table('envio')->insertGetId($envio);
+         fwrite($socket, $retry ? $retry : $envio); //si va a reintentar debe ll
+         fclose($socket);
+      if ($test == 0) {
+        Session::flash('valid', "Su envio ha sido recibido correctamente con id {$envio}");
+      } else {
+        Session::flash('valid', "Se ha testeado correctamente su código");
+      }
+    } else {
+      Session::flash("invalid", "Ha ocurrido un problema con su envio");
+      
+    }
+  }
+
   //----------------------------------------------
   //Meta funcion que evalua un ejercicio el cual se escribio el código
   public function postEvaluarEjercicioCodigo() {
@@ -136,40 +165,18 @@ class TallerController extends LMSController {
         'in' => $in,
     );
 
-    //  echo "pasa";
-    //exit;
-
-    try {
-      #creamos el socket y llamamos al Juez en linea
-      $socket = fsockopen(LMSController::$SOCKET_HOST, LMSController::$SOCKET_PORT);
-    } catch (Exception $e) {
-      Session::flash("invalid", "Ha ocurrido un problema con el juez en línea, Inténtelo mas tarde");
+    //le enviamos al servidor el envio
+    if(!$this->getSendToServer($envio, $test)){
       return Redirect::to("curso/ver/{$curso}/ejercicio/{$ejercicio}");
-    }
-    #prueba
-    
-    if ($socket) {
-      #creamos el envio
-      $envio = DB::table('envio')->insertGetId($envio);
-      fwrite($socket, $envio);
-      fclose($socket);
-      if ($test == 0) {
-        Session::flash('valid', "Su envio ha sido recibido correctamente con id {$envio}");
-      } else {
-        Session::flash('valid', "Se ha testeado correctamente su código");
-      }
-    } else {
-      Session::flash("invalid", "Ha ocurrido un problema con su envio");
-      //envio::destroy($envio);
-    }
+    };
 
     if ($tipo == 1) { # si es evaluacion
       return Redirect::to("curso/ver/{$curso}/evaluacion/{$codigo}/{$ejercicio}");
     } else { # si es de un taller
       if ($test == 1) { //esperamos un poco
         sleep(7);
-      }else{
-      //  sleep(2); //espermaos un poquito
+      } else {
+        //  sleep(2); //espermaos un poquito
       }
       return Redirect::to("curso/ver/{$curso}/ejercicio/{$ejercicio}");
     }

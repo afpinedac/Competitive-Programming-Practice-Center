@@ -6,6 +6,39 @@
         Purpose of the stylesheet follows.
 */
 
+#test{
+ background-image: url("http://fc00.deviantart.net/images/i/5/d/c/Binary_Background_1600.png");
+  z-index: -5;
+}
+
+
+judgeonline{
+  
+width: 218px;
+height: 77px;
+
+-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+filter: alpha(opacity=80);
+-moz-opacity: 0.9;
+-khtml-opacity: 0.9;
+opacity: 0.9;
+border: 0px #888888 solid;
+background-color: #a2d59f;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+  padding-top: 4px;
+  padding-left:  4px;
+  position: fixed;
+  bottom: 15px;
+  right: 5px;
+  
+}
+
+.contenedor{
+   background-color: #fff;
+}
+
 th,td{
     vertical-align: middle !important;
     text-align: center !important;

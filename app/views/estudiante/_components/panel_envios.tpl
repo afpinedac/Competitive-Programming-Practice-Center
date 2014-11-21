@@ -1,5 +1,5 @@
 <br>
-<div  ng-controller='envioController'>
+<div >
   <div ng-show="envios.length>0">
 
     <p class="text-center"><strong>Últimos envios</strong></p>

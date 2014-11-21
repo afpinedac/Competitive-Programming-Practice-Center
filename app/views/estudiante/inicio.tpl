@@ -1,9 +1,6 @@
 {capture assign='content'}
 
 
-    este es el home
-    
-
 {/capture}   
 
 

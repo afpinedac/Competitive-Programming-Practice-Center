@@ -1,6 +1,8 @@
 <?php
 
-
+Route::get('/test', function(){
+    return View::make('test');
+});
 
 Route::get('/', function() {
 
