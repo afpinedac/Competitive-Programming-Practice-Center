@@ -143,13 +143,13 @@ class Curso extends Eloquent {
                     ->join('usuario', 'usuario.id', '=', 'notificacion.usuario')
                     ->where('curso', $this->id)
                     ->where('tipo', '<>', 5) //no traiga los comentarios
-                   ->whereNotIn('notificacion.id', array_add(DB::table('notificacion')
-                           ->join('curso_x_usuario','curso_x_usuario.usuario_id','=','notificacion.usuario')
-                           ->whereIn('curso_x_usuario.rol',[1,2]) //rol de monitor y de estudiante
-                           ->where('curso_x_usuario.curso_id', $this->id)
-                           ->whereBetween('curso_x_usuario.curso_id', [1,4])
-                           ->where('notificacion.curso', $this->id)
-                           ->lists('notificacion.id'),-1,-1))
+                    ->whereNotIn('notificacion.id', array_add(DB::table('notificacion')
+                                    ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'notificacion.usuario')
+                                    ->whereIn('curso_x_usuario.rol', [1, 2]) //rol de monitor y de estudiante
+                                    ->where('curso_x_usuario.curso_id', $this->id)
+                                    ->whereBetween('curso_x_usuario.curso_id', [1, 4])
+                                    ->where('notificacion.curso', $this->id)
+                                    ->lists('notificacion.id'), -1, -1))
                     ->orderBy('created_at', 'desc')
                     ->get();
   }
@@ -231,66 +231,20 @@ class Curso extends Eloquent {
   #funciones de monitoreo ordenables
   #s hace referencia al id por ejemplo del taller o de la evaluación
 
-  public function get_estudiantes_sort($tipo, $sortby, $s = null, $t = null) {
-
-
-    $estudiantes = DB::table('usuario')
-            ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'usuario.id')
-            ->where('curso_x_usuario.curso_id', $this->id)
-            ->get();
-    $estud_sort = array();
-    if ($tipo == 'taller') {
-
-      foreach ($estudiantes as $estudiante) {
-
-        $arr = array(
-            'id' => $estudiante->id,
-            'nombres' => $estudiante->nombres,
-            'apellidos' => $estudiante->apellidos,
-            'porcentaje' => usuario::find($estudiante->id)->get_porcentaje_en_taller($s),
-            'ultimo_envio' => usuario::find($estudiante->id)->get_fecha_ultimo_envio_en_taller($s),
-            'ejercicios_resueltos' => usuario::find($estudiante->id)->get_numero_ejercicios_resultos_en_taller($s)
-        );
-        $estud_sort[] = $arr;
-      }
-
-
-      /* usort($estud_sort, function($a, $b) use($sortby) {
-        if (is_string($a[$sortby])) {
-        return strtolower($a[$sortby]) > strtolower($b[$sortby]);
-        }
-        return ($a[$sortby]) < ($b[$sortby]);
-        }); */
-    } else if ($tipo == 'estudiantes') {
-
-      foreach ($estudiantes as $estudiante) {
-        $arr = array(
-            'id' => $estudiante->id,
-            'nombres' => $estudiante->nombres,
-            'apellidos' => $estudiante->apellidos,
-            'ultimo_acceso' => usuario::find($estudiante->id)->get_ultimo_acceso($t),
-            'ejercicios_resueltos' => usuario::find($estudiante->id)->numero_de_ejercicios_resueltos_curso($t),
-            'puntos' => usuario::find($estudiante->id)->get_puntos_en_curso($t),
-            'tiempo_logueado' => usuario::find($estudiante->id)->get_tiempo_logueado($t),
-        );
-        $estud_sort[] = $arr;
-      }
-      //  var_dump($estud_sort);
-
-      usort($estud_sort, function($a, $b) use($sortby) {
-        if ($sortby == 'nombres') {
-          return strtolower($a['nombres']) > strtolower($b['nombres']);
-        }
-
-        if (is_string($a[$sortby])) {
-          return strtolower($a[$sortby]) < strtolower($b[$sortby]);
-        }
-
-        return ($a[$sortby]) < ($b[$sortby]);
-      });
+  public function monitorear_taller($s) {
+    $estudiantes = $this->get_estudiantes();
+    foreach ($estudiantes as $estudiante) {
+      $usuario = usuario::find($estudiante->id);
+      $arr = [
+          'id' => $estudiante->id,
+          'nombre_completo' => ucfirst($estudiante->nombres). " " . ucfirst($estudiante->apellidos),
+          'porcentaje' => $usuario->get_porcentaje_en_taller($s),
+          'ultimo_envio' => $usuario->get_fecha_ultimo_envio_en_taller($s),
+          'ejercicios_resueltos' => $usuario->get_numero_ejercicios_resultos_en_taller($s),
+          'envios_en_taller' => $usuario->get_numero_envios_en_taller($s)
+      ];
+      $estud_sort[] = $arr;
     }
-
-
     return $estud_sort;
   }
 

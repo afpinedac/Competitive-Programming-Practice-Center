@@ -40,7 +40,7 @@ angular.module('Controllers', [])
             $scope.boton_mas = true;
             $scope.loading=false;
             
-              ajax.post(base_url + '/curso/json/notificaciones', {curso: 6}, function(data) {
+              ajax.post(base_url + '/curso/json/notificaciones', {curso:curso_actual}, function(data) {
                 $scope.notificaciones = data;
               });
               
@@ -101,6 +101,13 @@ angular.module('Controllers', [])
                   $scope.nlikes[notificacion] = data2;
                 })
               }
+        }).controller('MonitorearTaller', function($scope, ajax){
+            $scope.estudiantes=[];
+            
+            ajax.post(base_url+'/curso/json/monitorear_taller', {taller: taller_actual}, function(data){
+              $scope.estudiantes = data;
+              window.console.log(data);
+            })
 });
 
 

@@ -128,6 +128,7 @@
 
 
 <script>
+  curso_actual = {$curso->id};
   alerta = {
     ver: function(alerta) {
       $.ajax({

@@ -633,12 +633,10 @@ class CursoController extends LMSController {
 
       #-----------------TALLERES------------------------------
       if ($opcion == "talleres") {
-
-
-
-
+      
         $path[2] = array('nombre' => 'Talleres', 'enlace' => url("curso/monitorear/{$curso->id}/talleres"));
-        if ($value1 == null) { #mostrar todos los talleres                    
+        if ($value1 == null) { #mostrar todos los talleres      
+          
           return View::make('profesor.monitorear.talleres.talleres')
                           ->with('curso', $curso)
                           ->with('modulos', $curso->get_modulos())
@@ -655,10 +653,9 @@ class CursoController extends LMSController {
               #validacion
 
 
-
-
               $path[4] = array('nombre' => 'Ejercicios', "#");
               if ($value2 == null) {
+                
                 return View::make('profesor.monitorear.talleres.ejercicios')
                                 ->with('curso', $curso)
                                 ->with('modulos', $curso->get_modulos())
@@ -682,9 +679,8 @@ class CursoController extends LMSController {
               }
             } else if ($method == 'estudiantes') {
 
-
-
               if ($value2 == null) { #todos los estudiantes
+                
                 return View::make('profesor.monitorear.talleres.estudiantes')
                                 ->with('curso', $curso)
                                 ->with('modulos', $curso->get_modulos())
@@ -729,15 +725,7 @@ class CursoController extends LMSController {
                               ->with('envio', $envio);
             }
           } else { # es la informacion del taller en general   
-            $sortby = 'nombres';
-
-            if (Input::has('sortby') && in_array(Input::get('sortby'), array('nombres', 'porcentaje', 'ejercicios_resueltos', 'ultimo_envio'))) {
-              $sortby = Input::get('sortby');
-            }
-
-
-            $estudiantes = $curso->get_estudiantes_sort('taller', $sortby, $value1);
-
+            $estudiantes = $curso->get_estudiantes();
             return View::make('profesor.monitorear.talleres.estudiantes')
                             ->with('curso', $curso)
                             ->with('modulos', $curso->get_modulos())
@@ -1020,7 +1008,11 @@ class CursoController extends LMSController {
         $curso = curso::find($curso);
         return Response::json($curso->get_notificaciones());
         break;
-
+      case 'monitorear_taller':
+            $taller= Input::get('taller');
+            $curso = curso::find(modulo::find($taller)->curso);
+            return Response::json($curso->monitorear_taller($taller));
+      break;
       case 'envios': //retorna las notificaciones del curso
         $curso = curso::find($curso);
         $envios = $curso->get_cola_envios();

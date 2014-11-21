@@ -24,7 +24,6 @@ public class ConexionDB {
         this.port = "3307";
         this.database = "lms";
         this.user = Main.so == 0? "DBCPP" : "root" ;
-        
         this.pass =  Main.so == 0 ? "qwe123admin" : "";
         this.envio = envio;
         conexion = null;

@@ -21,7 +21,7 @@
 
 
 
-            <div class="" ng-repeat="notificacion in notificaciones | limitTo : limit_notificaciones">
+            <div class="" ng-repeat="notificacion in notificaciones  | limitTo : limit_notificaciones">
               <a id="p[[notificacion.id]]"></a>
               <a id="c[[notificacion.id]]"></a>
 

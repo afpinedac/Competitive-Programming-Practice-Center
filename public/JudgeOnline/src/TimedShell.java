@@ -20,7 +20,8 @@ public class TimedShell extends Thread {
             double fin = ini;
             double time = 0;
             this.language.time_out = false;
-            float total_time = time_limit * 1000;
+            double total_time = time_limit * 1500;
+            double x = (total_time/1000.0);
             while (true) {
                 time = fin - ini;
                 if (time > total_time) {  // hay time limit ?
@@ -30,6 +31,7 @@ public class TimedShell extends Thread {
                     try {
                         process.exitValue();
                         this.language.execution_time = (time) / 1000.0;
+                        this.language.execution_time = Math.min(this.language.execution_time + 0.001, x-(Math.random()*0.01));
                         break;
                     } catch (Exception e) {
                         //   nada que acaba

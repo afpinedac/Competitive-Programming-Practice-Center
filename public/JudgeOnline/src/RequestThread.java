@@ -68,7 +68,7 @@ public class RequestThread extends Thread {
             Runtime rt = Runtime.getRuntime();
             System.out.println("se va a ejecutar el comando ps aux | grep 'java Main'  | awk '{print $2}' | xargs kill -9 ");
             Process p1 = rt.exec("ps aux | grep 'java Main'  | awk '{print $2}' | xargs kill -9"); //elimina por si quedo algo
-            System.out.println(RequestThread.get_string_from_stream(p1.getInputStream()));
+            System.out.println("-->" + RequestThread.get_string_from_stream(p1.getInputStream()));
           }
           
         } else if (l.runtime_error) {
