@@ -4,7 +4,7 @@ import java.util.*;
 import java.net.Socket;
 
 public class RequestThread extends Thread {
-  
+
   public Socket socket;
   public long usuario;
   public float time_limit;
@@ -12,11 +12,11 @@ public class RequestThread extends Thread {
   public File dir;
   ConexionDB conexion;
   public String envio;
-  
+
   public RequestThread(Socket s) {
     this.socket = s;
   }
-  
+
   @Override
   public void run() {
     try {
@@ -39,7 +39,7 @@ public class RequestThread extends Thread {
       //conseguimos toda la informacion del envio 
       HashMap<String, String> datos = conexion.get_info_envio();
       datos.put("path", dir.getAbsolutePath());
-      
+
       Language l = null;
       String language = datos.get("lenguaje");
 
@@ -66,11 +66,25 @@ public class RequestThread extends Thread {
           conexion.set_execution_time(datos.get("time_limit"));
           if (Main.so == 0) {
             Runtime rt = Runtime.getRuntime();
-            System.out.println("se va a ejecutar el comando ps aux | grep 'java Main'  | awk '{print $2}' | xargs kill -9 ");
-            Process p1 = rt.exec("ps aux | grep 'java Main'  | awk '{print $2}' | xargs kill -9"); //elimina por si quedo algo
-            System.out.println("-->" + RequestThread.get_string_from_stream(p1.getInputStream()));
+
+            String[] cmd = {
+              "/bin/sh",
+              "-c",
+              "ps aux | grep 'java Main'  | awk '{print $2}' | xargs kill -9"
+            };
+            String[] cmd2 = {
+              "/bin/sh",
+              "-c",
+              "ps aux | grep './main'  | awk '{print $2}' | xargs kill -9"
+            };
+
+            if (language.equals("java")) {
+              rt.exec(cmd); //elimina por si quedo algo
+            } else if (language.equals("c++")) {
+              rt.exec(cmd2); //elimina por si quedo algo
+            }
           }
-          
+
         } else if (l.runtime_error) {
           conexion.set_veredict("runtime error");
           conexion.set_message(e);
@@ -86,7 +100,7 @@ public class RequestThread extends Thread {
           } else {
             conexion.set_veredict("wrong answer");
           }
-          
+
         } else if (datos.get("test").equals("1")) { //si es un ejercicio de prueba
           String out = RequestThread.read_file(datos.get("path") + "/" + "out" + l.solution + ".txt");
           conexion.set_message(out);
@@ -99,49 +113,48 @@ public class RequestThread extends Thread {
       RequestThread.delete_directory(dir);// esta linea se tiene que descomentar cuando todo este bien
     } catch (Exception ex) {
       ex.printStackTrace();
-      
+
     } finally {
       ExecuterThread.executing = false;
     }
-    
-    
+
   }
 
   //funcion que verifica si el error generado es valido o no
   public boolean has_error(String s) {
-    
+
     if (s.equals("")) {
       return false;
     }
     //problem of -Xlint
     CharSequence cs = "Xlint";
-    
+
     if (s.contains(cs)) {
       return false;
     }
-    
+
     return true;
   }
 
   //comparar outputs
   //retorna si el out y el ouput(usuario) son iguales
   public boolean same_output(String out, String output) {
-    
+
     out = out.trim();
     output = output.trim();
-    
+
     if (out.length() != output.length()) {
       return false;
     }
-    
+
     for (int i = 0; i < out.length(); i++) {
       if (!("" + out.charAt(i)).trim().equals(("" + output.charAt(i)).trim())) {
         return false;
       }
     }
-    
+
     return true;
-    
+
   }
 
   //retorna el string dado a partir de un InputStream
@@ -158,9 +171,9 @@ public class RequestThread extends Thread {
       System.err.println("Error leyendo un stream ...");
       e.printStackTrace();
     }
-    
+
     return sb.toString().trim();
-    
+
   }
 
   //escribe en un archivo un texto()
@@ -173,12 +186,12 @@ public class RequestThread extends Thread {
       System.err.println("Error escribiendo en archivo");
       e.printStackTrace();
     }
-    
+
   }
 
   //lee el contenido de un archivo
   public static String read_file(String path_to_file) {
-    
+
     StringBuilder sb = new StringBuilder("");
     try {
       BufferedReader br = new BufferedReader(new FileReader(new File(path_to_file)));
@@ -191,9 +204,9 @@ public class RequestThread extends Thread {
       System.err.println("Error escribiendo en archivo");
       e.printStackTrace();
     }
-    
+
     return sb.toString();
-    
+
   }
 
   //elimina un directorio

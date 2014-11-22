@@ -50,7 +50,7 @@ class TallerController extends LMSController {
       Juez::evaluar_envios($curso); #se evaluan todos los envios para ver si generan logros de taller.
     }
 
-    Session::flash('valid', "Su envio ha sido recibido correctamente con id {$envio}");
+  //  Session::flash('valid', "Su envio ha sido recibido correctamente con id {$envio}");
 
 
 
@@ -113,9 +113,7 @@ class TallerController extends LMSController {
         $envio = DB::table('envio')->insertGetId($envio);
          fwrite($socket, $retry ? $retry : $envio); //si va a reintentar debe ll
          fclose($socket);
-      if ($test == 0) {
-        Session::flash('valid', "Su envio ha sido recibido correctamente con id {$envio}");
-      } else {
+      if ($test != 0) {
         Session::flash('valid', "Se ha testeado correctamente su código");
       }
     } else {

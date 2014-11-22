@@ -1,64 +1,68 @@
 //controladores
 angular.module('Controllers', [])
-        .controller('EnvioController', function($scope, $http, $interval, ajax) {
-          $scope.envios = [];
-          $scope.notificaciones = [];
-          $scope.n = 0;
-
-
-          /*
-           $scope.get_envios = function() {
-           interval = $interval(function() {
-           
-           
-           $http.get(base_url + '/envio/json').success(function(data) {
-           $scope.envios = data;
-           });
-           }, 3000);
-           };*/
-
-          $scope.getClass = function(data) {
-            if (data.respuesta == 'accepted')
-              return 'success';
-            else if (data.respuesta == 'wrong answer')
-              return 'warning';
-            else if (data.respuesta == 'compilation error')
-              return 'info';
-            else
-              return '';
+        .controller('EnvioController', function($scope, $interval, ajax) {
+          $scope.submission = null;
+          $scope.watch_submission = function(id) {
+            alert(id);
           };
-
-        }).directive('judgeonline', function($interval){
-          return {
-            restrict : 'EA',
-            template : "<div ><small class='pull-right' style='cursor: pointer; padding-right:5px;' ng-show='ready' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)'>x</small><p><strong>Envio:</strong> [[envio]]</p><p style='margin-top:-12px;'><strong>Ejercicio:</strong> [[ejercicio]]</p>  <p style='margin-top:-5px;'><strong>Estatus:</strong> <span style='font-size:20px;'>[[status]]</span></p> </div>",
-            link : function($scope){
-              var x=0;
-              $scope.ready=false;
-              $scope.envio = 1234;
-              $scope.ejercicio = 'Carta de amor';
-               interval = $interval(function(){
-                 $scope.id=x++;
-                 if(x<4)$scope.status ='En cola' + point(x);
-                 else if(x<7){ 
-                   $scope.status = 'Ejecutando' + point(x);
-                 }
-                 else if(x<10){
-                   $scope.ready = true;
-                   $scope.status = 'Accepted'
-                 }
-               },800);
-               
-               point = function(n){
-                  n=n%4;
-                  if(n==0) return '';
-                  else if(n==1) return '.';
-                  else if(n==2) return '..';
-                  else return '...'
-               }
+        }).directive('judgeonline', function($interval, ajax) {
+  return {
+    restrict: 'EA',
+    template: "<div ><small class='pull-right' ng-click='watch_submission(1)' style='cursor: pointer; padding-right:5px;' ng-show='ready' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)'>x</small><p><strong>Envio:</strong> [[envio]]</p><p style='margin-top:-5px;'><strong>Estatus:</strong> <span style='font-size:20px;'>[[status]]</span></p> </div>",
+    scope: {
+      envio: "&envio"
+    },
+    link: function($scope, $attr, $element) {
+      $scope.envio= $element.envio;
+      $scope.ready = false;
+      $scope.status = 'En cola';
+      interval = $interval(function() {
+        ajax.post(base_url + '/ejercicio/aceptar/0', {envio: $scope.envio}, function(data) {
+          if (data) {
+            if(data.resultado!=''){
+            $scope.status = data.resultado;
+            $scope.ready = true;
             }
           }
-        }).controller('InicioController', function($scope, ajax) {
+        });
+      }, 800);
+
+      $scope.watch_submission = function() {
+        ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function(data) {
+          delay = 3000;
+          window.console.log(data);
+          if (data) {
+            if (data.resultado == 'accepted') {
+              alertify.success('ACEPTADO');
+              alertify.success("Has obtenido " + data.puntos_obtenidos + " puntos", "", delay);
+            } else if (data.resultado == 'wrong answer') {
+              alertify.log('Respuesta Incorrecta', "error", delay);
+            } else if (data.resultado == 'time limit') {
+              alertify.log('Tiempo limite excedido', "error", delay);
+            } else if (data.resultado == 'compilation error') {
+              alertify.log('Error de compilación', "error", delay);
+            }
+          } else {
+            alertify.log('Ha ocurrido un error');
+          }
+
+        });
+      };
+
+      point = function(n) {
+        n = n % 4;
+        if (n == 0)
+          return '';
+        else if (n == 1)
+          return '.';
+        else if (n == 2)
+          return '..';
+        else
+          return '...'
+      }
+    }
+  }
+}).controller('InicioController', function($scope, ajax) {
   $scope.notificaciones = [];
   $scope.comentarios = []; //guarda la lista de comentarios de cada notifcacion
   $scope.comentario = []; //guarda lo que la persona va escribiendo en el textarea
@@ -162,8 +166,8 @@ angular.module('Controllers', [])
       window.console.log(data);
     });
   },
-          $scope.set_monitor = function(id,curso) {
-            id= id[0][0];
+          $scope.set_monitor = function(id, curso) {
+            id = id[0][0];
             ajax.get(URL.set_monitor, {monitor: id, curso: curso}, function(data) {
               if (data == 1) {
                 alertify.alert('El estudiante ha sido asignado como monitor');

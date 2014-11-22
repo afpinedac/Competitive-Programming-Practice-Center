@@ -362,7 +362,7 @@ class CursoController extends LMSController {
 #se mira si un envio a sido evaluado y se dan los respectivos logros de un taller y puntos
             Juez::evaluar_envios($curso->id);
             #mira si hay respuesta a algun ejercicio
-            $this->has_some_veredict($curso->id);
+         //   $this->has_some_veredict($curso->id);
 
 
             return View::make('curso.ejercicio.ejercicio2')
@@ -388,7 +388,7 @@ class CursoController extends LMSController {
           #se mira si un envio a sido evaluado y se dan los respectivos logros de un taller y puntos
           Juez::evaluar_envios($curso->id);
           #mira si hay respuesta a algun ejercicio
-          $this->has_some_veredict($curso->id);
+        //  $this->has_some_veredict($curso->id);
 
 
           return View::make("curso.$tab.$tab")
