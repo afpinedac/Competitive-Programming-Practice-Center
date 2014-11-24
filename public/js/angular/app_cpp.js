@@ -49,17 +49,7 @@ angular.module('Controllers', [])
         });
       };
 
-      point = function(n) {
-        n = n % 4;
-        if (n == 0)
-          return '';
-        else if (n == 1)
-          return '.';
-        else if (n == 2)
-          return '..';
-        else
-          return '...'
-      }
+   
     }
   }
 }).controller('InicioController', function($scope, ajax) {
@@ -73,6 +63,7 @@ angular.module('Controllers', [])
   step_notificaciones = 5;
   $scope.boton_mas = true;
   $scope.loading = false;
+  
 
   ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual}, function(data) {
     $scope.notificaciones = data;
@@ -82,9 +73,8 @@ angular.module('Controllers', [])
     $scope.limit_notificaciones = Math.max($scope.limit_notificaciones - step_notificaciones, min_notificaciones);
   };
   $scope.mas_notificaciones = function() {
-    $scope.loading = true;
     $scope.limit_notificaciones = Math.min($scope.limit_notificaciones + step_notificaciones, $scope.notificaciones.length)
-    $scope.loading = false;
+   
   };
   $scope.get_comentarios = function(notificacion) {
     ajax.post(base_url + '/notificacion/json/comentarios', {notificacion: notificacion}, function(data) {

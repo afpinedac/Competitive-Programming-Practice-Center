@@ -94,15 +94,18 @@
             </div>
                                 <div class="container-fluid" ng-hide='notificaciones.length==limit_notificaciones'>
     <div class="span4 offset4">
-     <center><button class='btn-mini btn-info span12' ng-click='mas_notificaciones()'> Mas notificaciones <i class='icon icon-arrow-down'></i> <i ng-show='loading' class='icon icon-repeat icon-spin'></i></button></center>
+     <center><button class='btn-mini btn-info span12' ng-click='mas_notificaciones()'> Mas notificaciones <i class='icon icon-arrow-down'></i> <i ng-init='loading2=false' ng-show='loading2' class='icon icon-repeat icon-spin'></i></button></center>
     </div>
+                                  
+                                  
+                                  
 </div>    
                                
             <!--    <button ng-click='menos_notificaciones()'> Menos notificaciones</button>-->
             <!-----END ANGULAR----->
 
 
-            {foreach $notificaciones as $notificacion}
+            {*{foreach $notificaciones as $notificacion}
               {continue}
               {if $notificacion->tipo>0 and $notificacion->tipo<5 and (usuario::find($notificacion->propietario)->es_monitor($curso->id) or usuario::find($notificacion->propietario)->es_propietario($curso->id))}
                 {continue}
@@ -144,11 +147,11 @@
 
                       <div class="row-fluid" >
                         <div class="span12" style='margin-top: -10px;'> 
-                          {if $notificacion->tipo==0}  {*Es de tipo publicacion*}
+                          {if $notificacion->tipo==0}  
 
                               <p style='margin-top: 10px ;font-size: 28px; margin-left: 8px; line-height: 30px;'><pre style='font-size: 15px;'>{e($notificacion->publicacion)}</pre></p>
 
-                            {elseif $notificacion->tipo > 0 and $notificacion->tipo<5}  {*Es de tipo logro*}
+                            {elseif $notificacion->tipo > 0 and $notificacion->tipo<5}  
 
                               {assign var=logrox value=logro::get_info_logro($notificacion->codigo)}
                               <h4>He conseguido el logro: <span style='font-size: 30px;'>{$logrox->nombre}</span></h4>
@@ -297,7 +300,7 @@
                     </div>
                   </div>
 
-                  {/foreach}
+                  {/foreach}*}
 
                   </div>
                 </div>
