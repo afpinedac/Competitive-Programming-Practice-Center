@@ -1,6 +1,6 @@
 {capture assign='content'}
 
-  <div class="row-fluid" ng-controller="InicioController" ng-init='usuario_logueado={Auth::user()->id}'>
+  <div class="row-fluid" ng-controller="InicioController" ng-init='InicioController({$curso->id}); usuario_logueado={Auth::user()->id}'>
     <div class="span12">
 
       <div class="span12">
@@ -18,8 +18,10 @@
         <hr>
         <div class="row-fluid" style=''>
           <div class="span12">
-
-
+            
+            
+            <center><i class="icon icon-repeat icon-3x" ng-show="loading_init"></i></center>
+            
 
             <div class="" ng-repeat="notificacion in notificaciones  | limitTo : limit_notificaciones">
               <a id="p[[notificacion.id]]"></a>
@@ -43,10 +45,10 @@
                         [[notificacion.publicacion]]
                       </div>
                       <!---LOGRO---->
-                      <div ng-if='notificacion.tipo!=0' class='well'>
-                        {assign var=logrox value=logro::get_info_logro($notificacion->codigo)}
-                        <h4 >He conseguido el logro: <span style='font-size: 30px;'></span></h4>
-                        <img style='margin-left: 15px' ng-src='{url('img/logros/')}/{$logrox->codigo}.png' class='img-logro-notificacion'>
+                      <div ng-if='notificacion.tipo!=0' class='well' >
+                     {*   {assign var=logrox value=logro::get_info_logro($notificacion->codigo)}*}
+                        <h4>He conseguido el logro: <span style='font-size: 30px;'>[[notificacion.nombre_logro]]</span></h4>
+                        <img style='margin-left: 15px' ng-src='{url('img/logros/')}/[[notificacion.imagen_logro]].png' class='img-logro-notificacion'>
                         <br>
                       </div>
                       <div class="row-fluid" style="margin-top: -20px;">
@@ -57,14 +59,14 @@
                         <!--la publicacion es de otro-->
                         <div class="span12" ng-if='usuario_logueado!=notificacion.propietario'>
                           <a href='' ng-show='me_gusta[notificacion.id]' ng-click="me_gusta([[notificacion.id]])">Me gusta</a>  &nbsp;&nbsp;
-                          <a href='' ng-show='!me_gusta[notificacion.id]' ng-click="me_gusta([[notificacion.id]])">Ya no me gusta</a>  &nbsp;&nbsp;
+                         <!-- <a href='' ng-show='!me_gusta[notificacion.id]' ng-click="me_gusta([[notificacion.id]])">Ya no me gusta</a>  &nbsp;&nbsp;-->
                           <a href=''  ng-click='comments_visible[notificacion.id]=true'>  <i class="icon icon-comment-alt"></i> Comentar</a>
                         </div>
                       </div>    
 
                       <div style="margin-top: -20px; padding: 0px;" class="row-fluid">
                         <i class='icon icon-thumbs-up-alt' style="margin-top: -10px;" ></i>
-                        <small> A <span><a href='#likes' ng-init="numero_likes([[notificacion.id]])"  data-toggle='modal' ng-bind='nlikes[notificacion.id]'></a></span> personas les gusta esto</p></small>
+                        <small> A <span><a href='#likes' ng-init="numero_likes([[notificacion.id]])"   ng-bind='nlikes[notificacion.id]'></a></span> personas les gusta esto</p></small>
                       </div>
 
                       <!--comentarios-->
@@ -94,7 +96,7 @@
             </div>
                                 <div class="container-fluid" ng-hide='notificaciones.length==limit_notificaciones'>
     <div class="span4 offset4">
-     <center><button class='btn-mini btn-info span12' ng-click='mas_notificaciones()'> Mas notificaciones <i class='icon icon-arrow-down'></i> <i ng-init='loading2=false' ng-show='loading2' class='icon icon-repeat icon-spin'></i></button></center>
+     <center><button class='btn-mini btn-info span12' ng-click='mas_notificaciones()'> Mas notificaciones<i ng-init='loading2=false' ng-show='loading2' class='icon icon-repeat icon-spin'></i></button></center>
     </div>
                                   
                                   

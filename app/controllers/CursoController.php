@@ -1020,6 +1020,12 @@ class CursoController extends LMSController {
         }
         return Response::json($data);
         break;
+        
+      case 'info_logros':
+        $curso = curso::find(Input::get('curso'));
+        return Response::json($curso->get_info_logros());
+        break;
+        
       default:
         return Response::json(['error' => 'No existe el tipo de request']);
         break;

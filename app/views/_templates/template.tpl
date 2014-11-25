@@ -38,7 +38,7 @@
     </script>
 
   </head>
-  <body ng-app='CPP'> 
+  <body ng-app='CPP' ng-cloak> 
     {capture assign='layouts'}../_layouts/{$layout|default:'default'}.tpl{/capture}     
     {include file='../mensajes/alertify.tpl'}      
     {include file='../curso/modales/perfil_usuario.tpl'}      

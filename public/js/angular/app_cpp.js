@@ -13,15 +13,15 @@ angular.module('Controllers', [])
       envio: "&envio"
     },
     link: function($scope, $attr, $element) {
-      $scope.envio= $element.envio;
+      $scope.envio = $element.envio;
       $scope.ready = false;
       $scope.status = 'En cola';
       interval = $interval(function() {
         ajax.post(base_url + '/ejercicio/aceptar/0', {envio: $scope.envio}, function(data) {
           if (data) {
-            if(data.resultado!=''){
-            $scope.status = data.resultado;
-            $scope.ready = true;
+            if (data.resultado != '') {
+              $scope.status = data.resultado;
+              $scope.ready = true;
             }
           }
         });
@@ -49,7 +49,7 @@ angular.module('Controllers', [])
         });
       };
 
-   
+
     }
   }
 }).controller('InicioController', function($scope, ajax) {
@@ -58,24 +58,52 @@ angular.module('Controllers', [])
   $scope.comentario = []; //guarda lo que la persona va escribiendo en el textarea
   $scope.comments_visible = []; //muesta si se ha escrito al menos un comentario
   $scope.nlikes = []; //guarda el numero de likes de cada notificaicon
-  min_notificaciones = 5;
+  min_notificaciones = 10;
   $scope.limit_notificaciones = min_notificaciones;
-  step_notificaciones = 5;
+  step_notificaciones = 10;
   $scope.boton_mas = true;
   $scope.loading = false;
-  
-$scope.InicioController = function(){
-  ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual}, function(data) {
-    $scope.notificaciones = data;
-  });
-};
+  $scope.loading_init = false;
+  var  info_logros = [];
+
+  $scope.InicioController = function(curso) {
+    $scope.loading_init = true;
+    curso_actual = curso;
+
+    ajax.post(base_url + '/curso/json/info_logros', {curso: curso_actual}, function(data) {
+      info_logros = data;
+    });
+
+    ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual}, function(data) {
+      $scope.notificaciones = data;
+      $.each($scope.notificaciones, function(idx, notificacion) {
+        
+        if (notificacion.tipo != 0) {
+            for (i = 0; i < info_logros.length; i++) {
+             if(info_logros[i].id == notificacion.id){
+               notificacion['imagen_logro'] = info_logros[i].codigo;
+               notificacion['nombre_logro'] = info_logros[i].nombre;
+               window.console.log('pasó');
+               break;
+             }
+            
+          }
+        
+        }
+      });
+    });
+
+    $scope.loading_init = false;
+  };
+
+
 
   $scope.menos_notificaciones = function() {
     $scope.limit_notificaciones = Math.max($scope.limit_notificaciones - step_notificaciones, min_notificaciones);
   };
   $scope.mas_notificaciones = function() {
     $scope.limit_notificaciones = Math.min($scope.limit_notificaciones + step_notificaciones, $scope.notificaciones.length)
-   
+
   };
   $scope.get_comentarios = function(notificacion) {
     ajax.post(base_url + '/notificacion/json/comentarios', {notificacion: notificacion}, function(data) {
@@ -85,7 +113,7 @@ $scope.InicioController = function(){
     });
   };
   $scope.comentar = function(notif) {
-    notif = notif[0][0]
+    notif = notif[0][0];
     data = {notificacion: notif, comentario: $scope.comentario[notif]};
     ajax.post(base_url + '/notificacion/comentar', data, function(data2) {
       $scope.get_comentarios(notif);

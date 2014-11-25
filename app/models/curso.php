@@ -152,6 +152,25 @@ class Curso extends Eloquent {
                                     ->whereBetween('curso_x_usuario.curso_id', [1, 4])
                                     ->where('notificacion.curso', $this->id)
                                     ->lists('notificacion.id'), -1, -1))
+                    
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+  }
+  public function get_info_logros() {
+    return DB::table('logro')
+                    ->select(DB::raw('lms_notificacion.id, lms_logro.codigo, lms_logro.nombre'))
+                    ->join('curso_x_logro_x_usuario', 'curso_x_logro_x_usuario.logro', '=', 'logro.id')
+                    ->join('notificacion', 'curso_x_logro_x_usuario.id', '=', 'notificacion.codigo')
+                    ->where('notificacion.curso', $this->id)
+                    ->where('curso_x_logro_x_usuario.curso', $this->id)
+                    ->where('notificacion.tipo', '<>', 5) //no traiga los comentarios
+                    ->whereNotIn('notificacion.id', array_add(DB::table('notificacion')
+                                    ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'notificacion.usuario')
+                                    ->whereIn('curso_x_usuario.rol', [1, 2]) //rol de monitor y de estudiante
+                                    ->where('curso_x_usuario.curso_id', $this->id)
+                                    ->whereBetween('curso_x_usuario.curso_id', [1, 4])
+                                    ->where('notificacion.curso', $this->id)
+                                    ->lists('notificacion.id'), -1, -1))
                     ->orderBy('created_at', 'desc')
                     ->get();
   }
