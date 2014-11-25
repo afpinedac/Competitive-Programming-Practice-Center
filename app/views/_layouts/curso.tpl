@@ -108,7 +108,7 @@
               </div>
 
               <div class="span2">
-             {*   {include file='../estudiante/_components/sidebar_estudiante.tpl'}*}
+              {include file='../estudiante/_components/sidebar_estudiante.tpl'}
              
              
              {assign var=envio value=envio::no_visto({Auth::user()->id}, $curso->id)}

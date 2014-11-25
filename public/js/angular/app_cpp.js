@@ -64,10 +64,11 @@ angular.module('Controllers', [])
   $scope.boton_mas = true;
   $scope.loading = false;
   
-
+$scope.InicioController = function(){
   ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual}, function(data) {
     $scope.notificaciones = data;
   });
+};
 
   $scope.menos_notificaciones = function() {
     $scope.limit_notificaciones = Math.max($scope.limit_notificaciones - step_notificaciones, min_notificaciones);
