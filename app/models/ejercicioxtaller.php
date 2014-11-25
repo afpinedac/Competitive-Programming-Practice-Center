@@ -13,6 +13,7 @@ class EjercicioxTaller extends Eloquent {
                         ->where('envio.codigo', $taller)
                         ->where('envio.resultado', 'accepted')
                         ->where('test', 0)
+                        ->where('usuario','<>',1)
                         ->orderBy('envio.id', 'desc')
                         ->get();
     }

@@ -46,6 +46,14 @@ class Usuario extends Eloquent {
         return $data ? $data->fecha_ingreso : "-";
     }
 
+    public function tiene_envio_en_cola($curso){
+      return DB::table('envio')
+              ->where('usuario', $this->id)
+              ->where('curso', $curso)
+              ->where('visto',0)
+              ->count()>0;
+    }
+    
     public function get_numero_publicaciones_compartidas_en_redes_sociales($curso, $rs = 'fb') {
 
         $column = $rs == 'fb' ? 'compartida_facebook' : 'compartida_twitter';

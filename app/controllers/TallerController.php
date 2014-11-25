@@ -50,7 +50,7 @@ class TallerController extends LMSController {
       Juez::evaluar_envios($curso); #se evaluan todos los envios para ver si generan logros de taller.
     }
 
-  //  Session::flash('valid', "Su envio ha sido recibido correctamente con id {$envio}");
+    //  Session::flash('valid', "Su envio ha sido recibido correctamente con id {$envio}");
 
 
 
@@ -96,7 +96,7 @@ class TallerController extends LMSController {
   }
 
   //funcion que le envia un envio al servido $envio si es normal, le pasamos un segundo parametro por si es por segunda vez
-  public function getSendToServer($envio,$test = 0) {
+  public function getSendToServer($envio, $test = 0) {
 
     try {
       #creamos el socket y llamamos al Juez en linea
@@ -109,9 +109,9 @@ class TallerController extends LMSController {
 
     if ($socket) {
       #creamos el envio
-        $envio = DB::table('envio')->insertGetId($envio);
-         fwrite($socket,  $envio); 
-         fclose($socket);
+      $envio = DB::table('envio')->insertGetId($envio);
+      fwrite($socket, $envio);
+      fclose($socket);
       if ($test != 0) {
         Session::flash('valid', "Se ha testeado correctamente su código");
       }
@@ -125,16 +125,27 @@ class TallerController extends LMSController {
   //----------------------------------------------
   //Meta funcion que evalua un ejercicio el cual se escribio el código
   public function postEvaluarEjercicioCodigo() {
-    
-
-    $ejercicio = Crypt::decrypt(Input::get('ejercicio'));
-    $lenguaje = Input::get('lenguaje');
     $curso = Crypt::decrypt(Input::get('curso'));
-    $user_code = Input::get('respuesta');
     $tipo = Input::has('evaluacion') ? 1 : 0;
+    $ejercicio = Crypt::decrypt(Input::get('ejercicio'));
+    $codigo = Input::has('evaluacion') ? Crypt::decrypt(Input::get('evaluacion')) : Crypt::decrypt(Input::get('taller'));
+
+
+    #evalua si el usuario tiene algun ejercicio en cola
+    if (usuario::find(Auth::user()->id)->tiene_envio_en_cola($curso)) {
+      Session::flash('invalid', "Ya tienes un envio en cola...");
+      if ($tipo == 0) { //si es un taller
+        return Redirect::to("curso/ver/{$curso}/ejercicio/{$ejercicio}");
+      } else {  // si es una evaluación
+        return Redirect::to("curso/ver/{$curso}/evaluacion/{$codigo}/{$ejercicio}");
+      }
+    }
+
+    $lenguaje = Input::get('lenguaje');
+    $user_code = Input::get('respuesta');
     $test = Input::has('test') ? 1 : 0;
     $in = Input::get('in');
-    $codigo = Input::has('evaluacion') ? Crypt::decrypt(Input::get('evaluacion')) : Crypt::decrypt(Input::get('taller'));
+    
 
     //obtenemos el codigo de la persona
     if (Input::hasFile('out')) {
@@ -164,22 +175,22 @@ class TallerController extends LMSController {
     );
 
     //le enviamos al servidor el envio (si hay problema lo devolvemos)
-    if(!$this->getSendToServer($envio, $test)){
-      if($tipo == 1){
-         return Redirect::to("curso/ver/{$curso}/evaluacion/{$codigo}/{$ejercicio}");
-      }else{
+    if (!$this->getSendToServer($envio, $test)) {
+      if ($tipo == 1) {
+        return Redirect::to("curso/ver/{$curso}/evaluacion/{$codigo}/{$ejercicio}");
+      } else {
         return Redirect::to("curso/ver/{$curso}/ejercicio/{$ejercicio}");
       }
     };
-    
-    
-    
+
+
+
     if ($tipo == 1) { # si es evaluacion
       return Redirect::to("curso/ver/{$curso}/evaluacion/{$codigo}/{$ejercicio}");
     } else { # si es de un taller
       if ($test == 1) { //esperamos un poco
         sleep(7);
-      } 
+      }
       return Redirect::to("curso/ver/{$curso}/ejercicio/{$ejercicio}");
     }
   }

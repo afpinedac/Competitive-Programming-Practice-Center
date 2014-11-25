@@ -21,7 +21,7 @@
 
           {foreachelse}
             <div class="alert alert-block">
-              <center><p>Esta eváluación no tiene ejercicios</p>
+              <center><p>Esta evaluación no tiene ejercicios</p>
               </center>
             </div>    
           {/foreach}
