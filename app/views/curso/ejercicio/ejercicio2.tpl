@@ -63,7 +63,7 @@
               {else}                  
                 
                 
-               <center> <embed src="{url('/_data_/formulaciones/')}/{LMSController::encoder($ejercicio->id)}.pdf#toolbar=0" width="800" height="500"></center>
+               <center> <embed src="{url('/_data_/formulaciones/')}/{LMSController::encoder($ejercicio->id)}.pdf#toolbar=0" width="780" height="500"></center>
                 {if $ejercicio->tipo_entrada ==0}
                 <p><strong>Descargar</strong> .in: <a target='_blank' href='{url('ejercicio/descargar-in/')}/{LMSController::encoder($ejercicio->id)}'><img src='{url('img/general/txt.jpg')}'></a></p>
                     {/if}
@@ -79,8 +79,6 @@
                           <h3>{if $ejercicio->tipo_entrada == 0} <i class='icon icon-file-text-alt'></i>{else} <i class='icon icon-code'></i> {/if} Respuesta</h3>
                           
                           {if $ejercicio->tipo_entrada == 0}
-                          
-                              
                           
                             {Form::open(['action' => 'TallerController@postEvaluarEjercicio', 'files'=>true])}
                                
@@ -208,37 +206,6 @@
         {*Fin de mostrar si hay un logro*}
         
                            
-                     
-                           
-                           
-                             {if Session::has('veredicto')}
-                                 <script> 
-                                     veredicto = '{Session::get('veredicto')|upper}';
-                                     
-                                     delay = 3000;
-                                    if(veredicto == 'WRONG ANSWER'){
-                                             alertify.alert('RESPUESTA INCORRECTA');
-                                             alertify.log('INCORRECTO!! Revisa tu respuesta',"error",delay);
-                                     }else if(veredicto == 'COMPILATION ERROR'){
-                                     alertify.alert('ERROR DE COMPILACIÓN');
-                                     
-                                            alertify.log('Oppss.. ha ocurrido un problema',"",delay);
-                                     }
-                                     else if(veredicto == 'TIME LIMIT'){
-                                     alertify.alert('TIEMPO LIMITE EXCEDIDO');                                     
-                                            alertify.log('Tu algoritmo se ha demorado mucho...',"",delay);
-                                     }
-                                     
-                                     else if(veredicto == 'ACCEPTED'){
-                                        alertify.alert('ACEPTADO');                                     
-                                       // alertify.log('Oppss.. ha ocurrido un problema',"",delay);
-                                     }else{
-                                      alertify.alert('RESPUESTA DESCONOCIDA');     
-                                     }
-                                     
-                                     </script>
-                         {/if}
-    
         
                          <hr>
               
@@ -247,7 +214,7 @@
  {if $evaluacion==-1 and ejercicio::find($ejercicio->id)->esta_resuelto(Auth::user()->id, 0 , $ejercicio->taller) and $ejercicio->tipo_entrada==1} {*si es un ejercicio de taller y esta resuelto entonces puede ver las soluciones de los demas usuario*}
                
          {if $curso->tiene_soluciones_visibles()}
-         {include file='./soluciones.tpl'}
+             {include file='./soluciones.tpl'}
          {/if}
             {/if}
                              </div>

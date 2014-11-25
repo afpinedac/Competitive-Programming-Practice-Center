@@ -96,7 +96,7 @@ class TallerController extends LMSController {
   }
 
   //funcion que le envia un envio al servido $envio si es normal, le pasamos un segundo parametro por si es por segunda vez
-  public function getSendToServer($envio, $test, $retry = null) {
+  public function getSendToServer($envio,$test = 0) {
 
     try {
       #creamos el socket y llamamos al Juez en linea
@@ -109,23 +109,23 @@ class TallerController extends LMSController {
 
     if ($socket) {
       #creamos el envio
-      if (!$retry)
         $envio = DB::table('envio')->insertGetId($envio);
-         fwrite($socket, $retry ? $retry : $envio); //si va a reintentar debe ll
+         fwrite($socket,  $envio); 
          fclose($socket);
       if ($test != 0) {
         Session::flash('valid', "Se ha testeado correctamente su código");
       }
+      return true;
     } else {
       Session::flash("invalid", "Ha ocurrido un problema con su envio");
-      
+      return false;
     }
   }
 
   //----------------------------------------------
   //Meta funcion que evalua un ejercicio el cual se escribio el código
   public function postEvaluarEjercicioCodigo() {
-    // dd(Input::all());
+    
 
     $ejercicio = Crypt::decrypt(Input::get('ejercicio'));
     $lenguaje = Input::get('lenguaje');
@@ -163,19 +163,23 @@ class TallerController extends LMSController {
         'in' => $in,
     );
 
-    //le enviamos al servidor el envio
+    //le enviamos al servidor el envio (si hay problema lo devolvemos)
     if(!$this->getSendToServer($envio, $test)){
-      return Redirect::to("curso/ver/{$curso}/ejercicio/{$ejercicio}");
+      if($tipo == 1){
+         return Redirect::to("curso/ver/{$curso}/evaluacion/{$codigo}/{$ejercicio}");
+      }else{
+        return Redirect::to("curso/ver/{$curso}/ejercicio/{$ejercicio}");
+      }
     };
-
+    
+    
+    
     if ($tipo == 1) { # si es evaluacion
       return Redirect::to("curso/ver/{$curso}/evaluacion/{$codigo}/{$ejercicio}");
     } else { # si es de un taller
       if ($test == 1) { //esperamos un poco
         sleep(7);
-      } else {
-        //  sleep(2); //espermaos un poquito
-      }
+      } 
       return Redirect::to("curso/ver/{$curso}/ejercicio/{$ejercicio}");
     }
   }
