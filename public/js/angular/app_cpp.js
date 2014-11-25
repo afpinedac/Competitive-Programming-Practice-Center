@@ -155,6 +155,19 @@ angular.module('Controllers', [])
               $scope.nlikes[notificacion] = data2;
             })
           }
+}).controller('EvaluacionController', function($scope,ajax){
+    evaluacion = null;
+   
+   $scope.EvaluacionController = function(eval){
+      evaluacion = eval;
+   };
+   
+   //terminar
+   $scope.get_tabla_de_posiciones = function(){
+     
+   }
+   
+
 }).controller('MonitorearTaller', function($scope, ajax) {
   $scope.estudiantes = [];
   taller = null;
