@@ -154,7 +154,7 @@ class EvaluacionController extends LMSController {
     $evaluacion = evaluacion::find($id);
     $ejercicios = $evaluacion->get_ejercicios();
     $curso = curso::find(modulo::find($evaluacion->modulo)->curso);
-    $estudiantes = $curso->get_estudiantes(false);
+    $estudiantes = $curso->get_estudiantes(true);
 
 
     $data = [];
