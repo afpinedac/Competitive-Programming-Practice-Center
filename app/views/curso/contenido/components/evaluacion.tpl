@@ -53,7 +53,8 @@
                                                 <button class='btn btn-info btn-mini'><i class='icon icon-lock'></i> Finalizada</button>
                                             {if evaluacion::find($evaluacion->id)->get_time_fin() + 30 < time()}    
                                                 <br>                                                
-                                                <a href='{url('curso')}/ver/{$curso->id}/evaluacion/{$evaluacion->id}/resultado' class='btn btn-success btn-mini'><i class='icon icon-pencil'></i> <small>Resultados</small></a>
+                                              {* <a href='{url('curso')}/ver/{$curso->id}/evaluacion/{$evaluacion->id}/resultado' class='btn btn-success btn-mini'><i class='icon icon-pencil'></i> <small>Resultados</small></a>*}
+                                               <a href='{url('evaluacion')}/ranking/{$evaluacion->id}' class='btn btn-success btn-mini'><i class='icon icon-pencil'></i> <small>Resultados</small></a>
                                              {/if}  
                                             {else}
                                                     <button class='btn btn-mini'><i class='icon icon-lock'></i> bloqueado</button>

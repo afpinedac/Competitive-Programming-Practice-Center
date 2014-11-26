@@ -109,8 +109,6 @@ class Puntos extends LMSController {
             }
         }
 
-
-
         #si solo tiene un accepted y este es el ultimo entonces lo tomo en cuenta
         $puntos = 0;
         $puesto_en_resolverlo = $evaluacion->get_posicion_en_ejercicio(Auth::user()->id, $envio->ejercicio);
