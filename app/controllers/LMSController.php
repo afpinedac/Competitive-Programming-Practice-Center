@@ -3,6 +3,7 @@
 class LMSController extends BaseController {
 
     protected static $MAX_PUNTAJE_EJERCICIO = 26;
+    protected static $MAX_PUNTAJE_EJERCICIO_EVALUACION = 55;
     protected $top_ranking = 10;
     public static $MINUTES_TO_OFFLINE = 5;
     public static $SOCKET_HOST = "localhost";

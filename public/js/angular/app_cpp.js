@@ -64,7 +64,7 @@ angular.module('Controllers', [])
   $scope.boton_mas = true;
   $scope.loading = false;
   $scope.loading_init = false;
-  var  info_logros = [];
+  var info_logros = [];
 
   $scope.InicioController = function(curso) {
     $scope.loading_init = true;
@@ -77,18 +77,18 @@ angular.module('Controllers', [])
     ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual}, function(data) {
       $scope.notificaciones = data;
       $.each($scope.notificaciones, function(idx, notificacion) {
-        
+
         if (notificacion.tipo != 0) {
-            for (i = 0; i < info_logros.length; i++) {
-             if(info_logros[i].id == notificacion.id){
-               notificacion['imagen_logro'] = info_logros[i].codigo;
-               notificacion['nombre_logro'] = info_logros[i].nombre;
-               window.console.log('pasó');
-               break;
-             }
-            
+          for (i = 0; i < info_logros.length; i++) {
+            if (info_logros[i].id == notificacion.id) {
+              notificacion['imagen_logro'] = info_logros[i].codigo;
+              notificacion['nombre_logro'] = info_logros[i].nombre;
+              window.console.log('pasó');
+              break;
+            }
+
           }
-        
+
         }
       });
     });
@@ -155,20 +155,31 @@ angular.module('Controllers', [])
               $scope.nlikes[notificacion] = data2;
             })
           }
-}).controller('EvaluacionController', function($scope,ajax){
-    evaluacion = null;
-   
-   $scope.EvaluacionController = function(eval){
-      evaluacion = eval;
-   };
-   
-   //terminar
-   $scope.get_tabla_de_posiciones = function(){
-     
-   }
-   
+}).controller('EvaluacionController', function($scope, ajax) {
+  evaluacion = null;
 
-}).controller('MonitorearTaller', function($scope, ajax) {
+  $scope.EvaluacionController = function(eval) {
+    evaluacion = eval;
+  };
+
+  //terminar
+  $scope.get_tabla_de_posiciones = function() {
+
+  };
+
+
+}).controller('RankingEvaluacion', function($scope, ajax) {
+  $scope.ranking = [];
+  $scope.column = 'puntos_totales';
+  $scope.RankingEvaluacion = function(evaluacion) {
+    
+
+    ajax.get(base_url + '/evaluacion/json/' + evaluacion, {}, function(data) {
+      $scope.ranking = data;
+    });
+  }
+}
+).controller('MonitorearTaller', function($scope, ajax) {
   $scope.estudiantes = [];
   taller = null;
 

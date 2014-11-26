@@ -254,6 +254,8 @@ class CursoController extends LMSController {
             } else if (evaluacion::find($param1)->get_time_fin() <= time() || evaluacion::find($param1)->get_time_ini() >= time()) { #la evaluacion ya paso o no ha comenzado
               return Redirect::to("curso/ver/{$curso->id}/contenido");
             } else if ($param2 == -1) { # si es la evaluacion
+              
+              
               return View::make("curso.$tab.$tab")
                               ->with('curso', $curso)
                               ->with('modulo', $modulo)
@@ -264,9 +266,11 @@ class CursoController extends LMSController {
                               ->with('evaluacion', $param1); //pasamos como parametro la evaluacion
             } else { # si elige un ejercicio de la evaluacion
               if (evaluacion::find($param1)->tiene_ejercicio($param2)) {
+                
+                
                 return View::make('curso.ejercicio.ejercicio2')
                                 ->with('curso', $curso)
-                                ->with('ejercicio', modulo::find(Session::get('modulo.estudiante', $curso->get_primer_modulo()))->get_ejercicio($param2))
+                                ->with('ejercicio', evaluacion::find($param1)->get_ejercicio($param2))
                                 ->with('amigos', $usuario->get_amigos($curso->id))
                                 ->with('logro', $usuario->get_logro_ejercicio($curso->id))
                                 ->with('evaluacion', $param1);

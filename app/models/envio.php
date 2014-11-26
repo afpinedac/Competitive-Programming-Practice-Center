@@ -155,6 +155,17 @@ class Envio extends Eloquent {
 
     return $envio ? $envio : null;
   }
+  
+  public static function get_envios_de_ejercicio_en_actividad($curso, $ejercicio,  $tipo , $codigo){
+    
+    return envio::where('curso', $curso)
+            ->where('ejercicio', $ejercicio)
+            ->where('tipo',$tipo)
+            ->where('codigo',$codigo)
+            ->orderBy('id')
+            ->get();
+    
+  }
 
 }
 

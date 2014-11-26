@@ -5,15 +5,12 @@ class Puntos extends LMSController {
 
     public static function ejercicio_taller($usuario, $curso, $envio) {
 
-
-
         $usuario = usuario::find($usuario);
         $envio = envio::find($envio);
         $taller = taller::find($envio->codigo);
 
-
         $envios = envio::get_envios($curso, $envio->ejercicio, $usuario->id, 0, $envio->codigo, 'asc'); #obtengo los envios de tipo ejercicios de taller, aqui se cambiaría el cero por $envio->tipo por si una evaluacion da puntos
-        // var_dump($envios);
+        
         $accepteds = 0;
         $last = false;
         $n_envios = count($envios);
@@ -84,7 +81,55 @@ class Puntos extends LMSController {
 
         return $puntos;
     }
+    
+    
+    
+    
+   public static function ejercicio_evaluacion($usuario, $curso, $envio) {
 
+        $usuario = usuario::find($usuario);
+        $envio = envio::find($envio);
+        $evaluacion = evaluacion::find($envio->codigo);
+
+        $envios = envio::get_envios($curso, $envio->ejercicio, $usuario->id, 1, $envio->codigo, 'asc'); #obtengo los envios de tipo ejercicios de taller, aqui se cambiaría el cero por $envio->tipo por si una evaluacion da puntos
+        
+ 
+        
+        $accepteds = 0;
+        $last = false;
+        $n_envios = count($envios);
+        for ($i = 0; $i < $n_envios; $i++) {
+            if ($i == $n_envios - 1 && $envios[$i]->resultado == 'accepted') {
+                $last = true;
+            }
+            if ($envios[$i]->resultado == 'accepted') {
+                $accepteds++;
+                if ($accepteds > 1)
+                    break;
+            }
+        }
+
+
+
+        #si solo tiene un accepted y este es el ultimo entonces lo tomo en cuenta
+        $puntos = 0;
+        $puesto_en_resolverlo = $evaluacion->get_posicion_en_ejercicio(Auth::user()->id, $envio->ejercicio);
+        
+        if ($last && $accepteds == 1) {
+            $puntos = max(static::$MAX_PUNTAJE_EJERCICIO_EVALUACION - (5 * $puesto_en_resolverlo) -  $n_envios + 2, 15);
+        }
+        
+        $envio->puntos_obtenidos = $puntos;
+        #se le da plata al usuario
+
+        $envio->save();
+    }
+    
+    #funcion que retorna la posicion en que una persona obtiene un punto
+
+    
+    
+    
 }
 
 ?>

@@ -57,6 +57,9 @@ class Modulo extends Eloquent {
                         ->where('ejercicio_x_taller.ejercicio', $ejercicio)
                         ->first();
     }
+    
+    
+    
     #devuelve la evaluacion perteneciente a una evaluacion
     public function get_evaluacion($evaluacion) {
 

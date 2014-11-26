@@ -90,12 +90,23 @@ class Curso extends Eloquent {
     return date('Y-m-d h:i:s');
   }
 
-  public function get_estudiantes() {
-    return DB::table('usuario')
-                    ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'usuario.id')
-                    ->where('curso_x_usuario.curso_id', $this->id)
-                    ->orderBy('nombres')
-                    ->get();
+  public function get_estudiantes($con_profesor = true) {
+    if ($con_profesor) {
+      return DB::table('usuario')
+                      ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'usuario.id')
+                      ->where('curso_x_usuario.curso_id', $this->id)
+                      ->orderBy('nombres')
+                      ->get();
+    } else {
+      
+        return DB::table('usuario')
+                      ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'usuario.id')
+                      ->where('curso_x_usuario.curso_id', $this->id)
+                      ->where('usuario_id','<>',$this->profesor_id)
+                      ->orderBy('nombres')
+                      ->get();
+      
+    }
   }
 
   public function numero_de_estudiantes() {
@@ -152,10 +163,10 @@ class Curso extends Eloquent {
                                     ->whereBetween('curso_x_usuario.curso_id', [1, 4])
                                     ->where('notificacion.curso', $this->id)
                                     ->lists('notificacion.id'), -1, -1))
-                    
                     ->orderBy('created_at', 'desc')
                     ->get();
   }
+
   public function get_info_logros() {
     return DB::table('logro')
                     ->select(DB::raw('lms_notificacion.id, lms_logro.codigo, lms_logro.nombre'))
@@ -258,7 +269,7 @@ class Curso extends Eloquent {
       $usuario = usuario::find($estudiante->id);
       $arr = [
           'id' => $estudiante->id,
-          'nombre_completo' => ucfirst($estudiante->nombres). " " . ucfirst($estudiante->apellidos),
+          'nombre_completo' => ucfirst($estudiante->nombres) . " " . ucfirst($estudiante->apellidos),
           'porcentaje' => $usuario->get_porcentaje_en_taller($s),
           'ultimo_envio' => $usuario->get_fecha_ultimo_envio_en_taller($s),
           'ejercicios_resueltos' => $usuario->get_numero_ejercicios_resultos_en_taller($s),
@@ -268,24 +279,23 @@ class Curso extends Eloquent {
     }
     return $estud_sort;
   }
-  
-  
+
   public function monitorear_estudiantes() {
     $estudiantes = $this->get_estudiantes();
     $estud_sort = [];
-   foreach ($estudiantes as $estudiante) {
-     $usuario = usuario::find($estudiante->id);
-                $arr = array(
-                    'id' => $estudiante->id,
-                    'nombre_completo' => ucfirst($estudiante->nombres) . " " . ucfirst($estudiante->apellidos),
-                    'ultimo_acceso' => $usuario->get_ultimo_acceso($this->id),
-                    'ejercicios_resueltos' => $usuario->numero_de_ejercicios_resueltos_curso($this->id),
-                    'puntos' => $usuario->get_puntos_en_curso($this->id),
-                    'tiempo_logueado' => $usuario->get_tiempo_logueado($this->id),
-                    'es_monitor' => $usuario->es_monitor($this->id)
-                );
-                $estud_sort[] = $arr;
-            }
+    foreach ($estudiantes as $estudiante) {
+      $usuario = usuario::find($estudiante->id);
+      $arr = array(
+          'id' => $estudiante->id,
+          'nombre_completo' => ucfirst($estudiante->nombres) . " " . ucfirst($estudiante->apellidos),
+          'ultimo_acceso' => $usuario->get_ultimo_acceso($this->id),
+          'ejercicios_resueltos' => $usuario->numero_de_ejercicios_resueltos_curso($this->id),
+          'puntos' => $usuario->get_puntos_en_curso($this->id),
+          'tiempo_logueado' => $usuario->get_tiempo_logueado($this->id),
+          'es_monitor' => $usuario->es_monitor($this->id)
+      );
+      $estud_sort[] = $arr;
+    }
     return $estud_sort;
   }
 
