@@ -11,9 +11,9 @@
         
            <th>Ejercicios resueltos <span class="pull-right"><a href='' ng-click="sortby='ejercicios_resueltos'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='ejercicios_resueltos'; reverse=false;">&DownArrow;</a></span></th>
        
-         <th>Tiempo en la plataforma <span class="pull-right"><a href='' ng-click="sortby='tiempo_logueado'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='tiempo_logueado'; reverse=false;">&DownArrow;</a></span></th>
+         <th>Tiempo en la plataforma (min) <span class="pull-right"><a href='' ng-click="sortby='tiempo_logueado'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='tiempo_logueado'; reverse=false;">&DownArrow;</a></span></th>
           <th>Fecha de última sesión <span class="pull-right"><a href='' ng-click="sortby='ultimo_acceso'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='ultimo_acceso'; reverse=false;">&DownArrow;</a></span></th> 
-        <th>Tiempo en la plataforma <span class="pull-right"><a href='' ng-click="sortby='puntos'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='puntos'; reverse=false;">&DownArrow;</a></span></th>
+        <th>Puntos <span class="pull-right"><a href='' ng-click="sortby='puntos'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='puntos'; reverse=false;">&DownArrow;</a></span></th>
         <th><a href="#">Monitor</a></th>
     </thead>
     <tbody ng-init="sortby='nombre_completo'; reverse=false">
