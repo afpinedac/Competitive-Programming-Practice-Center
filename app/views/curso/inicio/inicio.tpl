@@ -15,15 +15,15 @@
 
         {Form::close()}
 
+        
         <hr>
         <div class="row-fluid" style=''>
           <div class="span12">
             
             
             <center><i class="icon icon-repeat icon-3x" ng-show="loading_init"></i></center>
-            
 
-            <div class="" ng-repeat="notificacion in notificaciones  | limitTo : limit_notificaciones">
+            <div class="" ng-repeat="notificacion in notificaciones  | limitTo : limit_notificaciones | filter: search_notificacion">
               <a id="p[[notificacion.id]]"></a>
               <a id="c[[notificacion.id]]"></a>
 
@@ -41,8 +41,8 @@
                       <p><strong>[[notificacion.nombres]] [[notificacion.apellidos]]</strong></p>
 
                       <!--publicacion normal-->
-                      <div ng-if='notificacion.tipo==0' class='well'>
-                        [[notificacion.publicacion]]
+                      <div ng-if='notificacion.tipo==0' class=''>
+                       <pre> [[notificacion.publicacion]]</pre>
                       </div>
                       <!---LOGRO---->
                       <div ng-if='notificacion.tipo!=0' class='well' >
@@ -51,7 +51,7 @@
                         <img style='margin-left: 15px' ng-src='{url('img/logros/')}/[[notificacion.imagen_logro]].png' class='img-logro-notificacion'>
                         <br>
                       </div>
-                      <div class="row-fluid" style="margin-top: -20px;">
+                      <div class="row-fluid" style="margin-top: -10px;">
                         <!--la publicacion es mia-->
                         <div class="span12" ng-if='usuario_logueado==notificacion.propietario'>
                           <a href=''  onclick="return false;" ng-click='comments_visible[notificacion.id]=true'> <i class="icon icon-comment-alt"></i> Comentar</a>
@@ -64,7 +64,7 @@
                         </div>
                       </div>    
 
-                      <div style="margin-top: -20px; padding: 0px;" class="row-fluid">
+                      <div style="margin-top: -40px; padding: 0px;" class="row-fluid">
                         <i class='icon icon-thumbs-up-alt' style="margin-top: -10px;" ></i>
                         <small> A <span><a href='#likes' ng-init="numero_likes([[notificacion.id]])"   ng-bind='nlikes[notificacion.id]'></a></span> personas les gusta esto</p></small>
                       </div>

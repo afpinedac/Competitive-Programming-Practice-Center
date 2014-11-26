@@ -6,7 +6,8 @@
     <table class="table table-hover table-bordered table-condensed">
       <thead>
         
-         <th>Estudiante <span class="pull-right"><a href='' ng-click="sortby='nombre_completo'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='nombre_completo'; reverse=false;">&DownArrow;</a></span></th>
+         <th><input type="text" placeholder="Estudiante" class="input-mini span12" ng-model="estudiante.nombre_completo">
+           Estudiante <span class="pull-right"><a href='' ng-click="sortby='nombre_completo'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='nombre_completo'; reverse=false;">&DownArrow;</a></span></th>
         
            <th>Ejercicios resueltos <span class="pull-right"><a href='' ng-click="sortby='ejercicios_resueltos'; reverse=true;">&UpArrow;</a><a href="" ng-click="sortby='ejercicios_resueltos'; reverse=false;">&DownArrow;</a></span></th>
        
@@ -18,7 +19,7 @@
     <tbody ng-init="sortby='nombre_completo'; reverse=false">
       
       
-           <tr ng-repeat="estudiante in estudiantes | orderBy:sortby:reverse">
+           <tr ng-repeat="estudiante in estudiantes | orderBy:sortby:reverse | filter:estudiante">
           <td>[[estudiante.nombre_completo]]</td>
           <td>[[estudiante.ejercicios_resueltos]] </td>
           <td>[[estudiante.tiempo_logueado]]</td>
