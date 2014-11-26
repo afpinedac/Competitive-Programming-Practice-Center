@@ -22,7 +22,7 @@
                 <tr ng-repeat="estudiante in ranking.points | orderBy:'puntos_totales':true">
                   <td>[[$index+1]]</td>
                   <td width="20%"><span class="pull-left">[[estudiante.nombre_completo]]</span></td>  
-                  <td ng-repeat='puntos in estudiante.puntos'>[[puntos]]</td>
+                  <td ng-repeat='puntos in estudiante.puntos track by $index'>[[puntos]]</td>
                   <td>[[estudiante.puntos_totales]]</td>
                 </tr>
               </tbody>

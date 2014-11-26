@@ -6,7 +6,6 @@ class TallerController extends LMSController {
 
   public function postEvaluarEjercicio() {
 
-
     #obtenemos los datos
     $ejercicio = Crypt::decrypt(Input::get('ejercicio'));
     $curso = Crypt::decrypt(Input::get('curso'));
@@ -158,8 +157,6 @@ class TallerController extends LMSController {
       //eliminamos el archivo
       unlink(public_path() . '/' . $this->ruta['envio'] . '/' . $file_name);
     }
-
-
 
     $envio = array(
         'usuario' => Auth::user()->id,
