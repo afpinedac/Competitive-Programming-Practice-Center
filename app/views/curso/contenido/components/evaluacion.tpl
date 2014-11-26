@@ -46,7 +46,7 @@
                                         <td>
                                             {if evaluacion::find($evaluacion->id)->get_time_fin() >= time() and time() >= ($evaluacion->fecha_activacion|strtotime)}
                                          
-                                              {if Auth::user()->id == 1 || Auth::user()->id == 5 && Auth::user()->id == 8}
+                                              {if Auth::user()->id == 1 || Auth::user()->id == 5 || Auth::user()->id == 8}
                                               <a href='{url('curso/ver')}/{$curso->id}/evaluacion/{$evaluacion->id}' class='btn btn-mini btn-success'>Activa</a>                                        
                                               {/if}
                                             {else if ($evaluacion->fecha_activacion|strtotime)  + ($evaluacion->duracion)*60 < time()}
