@@ -81,14 +81,12 @@ class Modulo extends Eloquent {
         $unlock = true;
 
         $pre = DB::table('modulo_requisito')->where('modulo', $this->id)->lists('requisito');
-
-
         foreach ($pre as $p) {
             if (modulo::find($p)->minimo_para_desbloquear > modulo::find($p)->get_numero_ejercicios_realizados($this->curso, Auth::user()->id))
                 return false;
         }
 
-        return true  && $this->tiene_ejercicios();
+        return true ;
     }
 
     public function get_numero_ejercicios() {

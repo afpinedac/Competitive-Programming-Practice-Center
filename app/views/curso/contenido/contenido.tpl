@@ -75,9 +75,6 @@
                 {else}  
                     {if modulo::find($modulo->id)->tiene_ejercicios()}
                     <h3 class='text-muted'><i class='icon icon-lock icon-2x'></i> Este módulo esta bloqueado</h3>
-                    
-                    
-                    
                     <p class=''><em>Desbloquea primero los modulos:</em></p>
                     <ul>
                     {foreach $modulo->get_pre_requisitos() as $pre}
