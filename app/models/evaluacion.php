@@ -121,11 +121,12 @@ class Evaluacion extends Eloquent {
 
   public function  puntos_en_ejercicio_para_estudiante($usuario, $ejercicio) {
 
-    return envio::where('tipo', '1')
+    $data = envio::where('tipo', '1')
                     ->where('codigo', $this->id)
                     ->where('usuario', $usuario)
                     ->where('ejercicio', $ejercicio)
                     ->max('puntos_obtenidos');
+    return $data ? $data : 0;
   }
 
 }

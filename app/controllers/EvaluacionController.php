@@ -138,15 +138,15 @@ class EvaluacionController extends LMSController {
   public function getRanking($id) {
     $evaluacion = evaluacion::find($id);
 
-    if ($evaluacion && usuario::find(Auth::user()->id)->es_propietario(modulo::find($evaluacion->modulo)->curso)) {
+    //if ($evaluacion && usuario::find(Auth::user()->id)->es_propietario(modulo::find($evaluacion->modulo)->curso)) {
       
       return View::make('curso.evaluacion.ranking')
               ->with('evaluacion', $evaluacion);
                      
-    } else {
-      Session::flash('invalid', "No tiene permisos para ver este recurso");
-      return Redirect::to("/curso");
-    }
+   // } else {
+   //   Session::flash('invalid', "No tiene permisos para ver este recurso");
+    //  return Redirect::to("/curso");
+    //}
   }
 
   public function getJson($id) {

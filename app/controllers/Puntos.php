@@ -116,7 +116,7 @@ class Puntos extends LMSController {
         $puesto_en_resolverlo = $evaluacion->get_posicion_en_ejercicio(Auth::user()->id, $envio->ejercicio);
         
         if ($last && $accepteds == 1) {
-            $puntos = max(static::$MAX_PUNTAJE_EJERCICIO_EVALUACION - (5 * $puesto_en_resolverlo) -  $n_envios + 2, 15);
+            $puntos = max(static::$MAX_PUNTAJE_EJERCICIO_EVALUACION - (5 * $puesto_en_resolverlo) -  $n_envios + 1, 15);
         }
         
         $envio->puntos_obtenidos = $puntos;

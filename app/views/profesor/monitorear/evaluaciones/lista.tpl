@@ -19,7 +19,7 @@
                
                 
                 {foreach $evaluaciones  as $evaluacion}
-                    <li><a href="{url('curso/monitorear')}/{$curso->id}/evaluaciones/{$evaluacion->id}">{$evaluacion->nombre}</a>: {$evaluacion->descripcion} , (<a href="{url('curso/monitorear')}/{$curso->id}/evaluaciones/{$evaluacion->id}/ejercicios">{evaluacion::find($evaluacion->id)->get_numero_ejercicios()}</a>) ejercicios , con una duración de <strong>{LMSController::formatear_tiempo($evaluacion->duracion)}</strong> , con porcentaje de aprobación de <strong>{$evaluacion->porcentaje_aprobacion}%</strong> </li>    
+                  <li><a target="_blank" href="{url('evaluacion/ranking')}/{$evaluacion->id}">{$evaluacion->nombre}</a>: {$evaluacion->descripcion} , (<a href="{url('curso/monitorear')}/{$curso->id}/evaluaciones/{$evaluacion->id}/ejercicios">{evaluacion::find($evaluacion->id)->get_numero_ejercicios()}</a>) ejercicios , con una duración de <strong>{LMSController::formatear_tiempo($evaluacion->duracion)}</strong> , con porcentaje de aprobación de <strong>{$evaluacion->porcentaje_aprobacion}%</strong> </li>    
                 {/foreach}
 
                 

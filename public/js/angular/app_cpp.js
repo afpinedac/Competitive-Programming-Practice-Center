@@ -30,8 +30,8 @@ angular.module('Controllers', [])
       $scope.watch_submission = function() {
         ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function(data) {
           delay = 3000;
-          window.console.log(data);
-          if (data) {
+          //window.console.log(data);
+          /*if (data) {
             if (data.resultado == 'accepted') {
               alertify.success('ACEPTADO');
               alertify.success("Has obtenido " + data.puntos_obtenidos + " puntos", "", delay);
@@ -44,7 +44,7 @@ angular.module('Controllers', [])
             }
           } else {
             alertify.log('Ha ocurrido un error');
-          }
+          }*/
 
         });
       };

