@@ -15,10 +15,13 @@ angular.module('Controllers', [])
                              <p><strong>Envio:</strong> [[envio]]</p>\n\
                               <p style='margin-top:-5px;'>\n\
                                   <strong>Estatus:</strong>\n\
-                                      <a ng-if='!aceptado' href='[[redirect]]' ng-click='watch_submission()' target='_blank'>\n\
+                                      <a ng-if='!aceptado && !timeOrWrong' href='[[redirect]]' ng-click='watch_submission()' target='_blank'>\n\
                                                 <span style='font-size:20px;'>[[status]]</span>\n\
                                        </a>\n\
                                        <a ng-if='aceptado' href='[[redirect]]' ng-click='watch_submission()' >\n\
+                                                <span style='font-size:20px;'>[[status]]</span>\n\
+                                       </a>\n\
+                                       <a ng-if='timeOrWrong && !aceptado' ng-click='watch_submission()' >\n\
                                                 <span style='font-size:20px;'>[[status]]</span>\n\
                                        </a>\n\
                               </p>\n\
@@ -34,6 +37,7 @@ angular.module('Controllers', [])
       $scope.status = 'En espera...';
       $scope.redirect = '';
       $scope.aceptado = false;
+      $scope.timeOrWrong = false;
       interval = $interval(function() {
         ajax.post(base_url + '/ejercicio/aceptar/0', {envio: $scope.envio}, function(data) {
           if (data) {
@@ -44,8 +48,10 @@ angular.module('Controllers', [])
                 $scope.aceptado = true;
               }else if(data.resultado=='time limit'){
                 $scope.status = 'Tiempo límite excedido';
+                $scope.timeOrWrong = true;
               }else if(data.resultado =='wrong answer'){
                 $scope.status = 'Respuesta Incorrecta';
+                $scope.timeOrWrong = true;
               }else if(data.resultado =='compilation error'){
                 $scope.status = 'Error de compilación';
               }else if(data.resultado =='runtime error'){
@@ -72,7 +78,9 @@ angular.module('Controllers', [])
           } else if (data.resultado == 'compilation error' || data.resultado == 'runtime error') {
              $("judgeonline").hide();
               $scope.redirect = base_url + '/curso/ver/' + data.curso + '/mis-envios/'+ data.id;
-          }
+          }else{
+             $("judgeonline").hide();
+          } 
         });
       };
 
