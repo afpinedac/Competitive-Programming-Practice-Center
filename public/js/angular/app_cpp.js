@@ -32,14 +32,13 @@ angular.module('Controllers', [])
     link: function($scope, $attr, $element) {
       $scope.envio = $element.envio;
       tipo = $element.tipo;
-      window.console.log("El tipo es " + tipo);
       codigo = $element.codigo;
       $scope.ready = false;
       $scope.status = 'En espera...';
       $scope.redirect = '';
       $scope.aceptado = false;
       $scope.timeOrWrong = false;
-      interval = $interval(function() {
+      jinterval = $interval(function() {
         ajax.post(base_url + '/ejercicio/aceptar/0', {envio: $scope.envio}, function(data) {
           if (data) {
             if (data.resultado != null) {
@@ -60,12 +59,12 @@ angular.module('Controllers', [])
               }
               $scope.ready = true;
             }
-            $interval.cancel(interval); //parar la ejecución
+            $interval.cancel(jinterval); //parar la ejecución
           }
         });
       }, 800);
 
-
+      $scope.$on('$destroy', function () { $interval.cancel(jinterval); });
 
       $scope.watch_submission = function() {
         ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function(data) {
