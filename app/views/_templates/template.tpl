@@ -26,6 +26,7 @@
     {HTML::script('libs/bootstrap/js/bootstrap.min.js')}   
     {HTML::script('js/lms.js')}    
     {HTML::script('libs/angularjs/angular.min.js')}
+    {*{HTML::script('libs/angularjs/angular.min.js.map')}*}
     {HTML::script('js/angular/app_cpp.js')}
 
 

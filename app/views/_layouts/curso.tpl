@@ -114,7 +114,7 @@
              {assign var=envio value=envio::no_visto({Auth::user()->id}, $curso->id)}
              
               {if $envio}
-                <judgeonline envio="{$envio->id}"></judgeonline>
+                <judgeonline envio="{$envio->id}" tipo='{$envio->tipo}' codigo='{$envio->codigo}'></judgeonline>
               {/if}  
               </div>
 

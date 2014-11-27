@@ -8,19 +8,49 @@ angular.module('Controllers', [])
         }).directive('judgeonline', function($interval, ajax) {
   return {
     restrict: 'EA',
-    template: "<div ><small class='pull-right' ng-click='watch_submission(1)' style='cursor: pointer; padding-right:5px;' ng-show='ready' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)'>x</small><p><strong>Envio:</strong> [[envio]]</p><p style='margin-top:-5px;'><strong>Estatus:</strong> <span style='font-size:20px;'>[[status]]</span></p> </div>",
+    template: "<div>\n\
+                            <small class='pull-right' ng-click='watch_submission()' style='cursor: pointer; padding-right:5px;' ng-show='ready' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)'>\n\
+                                   x\n\
+                             </small>\n\
+                             <p><strong>Envio:</strong> [[envio]]</p>\n\
+                              <p style='margin-top:-5px;'>\n\
+                                  <strong>Estatus:</strong>\n\
+                                      <a ng-if='!aceptado' href='[[redirect]]' ng-click='watch_submission()' target='_blank'>\n\
+                                                <span style='font-size:20px;'>[[status]]</span>\n\
+                                       </a>\n\
+                                       <a ng-if='aceptado' href='[[redirect]]' ng-click='watch_submission()' >\n\
+                                                <span style='font-size:20px;'>[[status]]</span>\n\
+                                       </a>\n\
+                              </p>\n\
+                 </div>",
     scope: {
       envio: "&envio"
     },
     link: function($scope, $attr, $element) {
       $scope.envio = $element.envio;
+      tipo = $element.tipo;
+      codigo = $element.codigo;
       $scope.ready = false;
-      $scope.status = 'En cola';
+      $scope.status = 'En espera...';
+      $scope.redirect = '';
+      $scope.aceptado = false;
       interval = $interval(function() {
         ajax.post(base_url + '/ejercicio/aceptar/0', {envio: $scope.envio}, function(data) {
           if (data) {
-            if (data.resultado != '') {
+            if (data.resultado != null) {
               $scope.status = data.resultado;
+              if(data.resultado=='accepted'){
+                $scope.status = 'Aceptado';
+                $scope.aceptado = true;
+              }else if(data.resultado=='time limit'){
+                $scope.status = 'Tiempo límite excedido';
+              }else if(data.resultado =='wrong answer'){
+                $scope.status = 'Respuesta Incorrecta';
+              }else if(data.resultado =='compilation error'){
+                $scope.status = 'Error de compilación';
+              }else if(data.resultado =='runtime error'){
+                $scope.status = 'Error de ejecución';
+              }
               $scope.ready = true;
             }
           }
@@ -29,23 +59,14 @@ angular.module('Controllers', [])
 
       $scope.watch_submission = function() {
         ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function(data) {
-          delay = 3000;
-          //window.console.log(data);
-          /*if (data) {
-            if (data.resultado == 'accepted') {
-              alertify.success('ACEPTADO');
-              alertify.success("Has obtenido " + data.puntos_obtenidos + " puntos", "", delay);
-            } else if (data.resultado == 'wrong answer') {
-              alertify.log('Respuesta Incorrecta', "error", delay);
-            } else if (data.resultado == 'time limit') {
-              alertify.log('Tiempo limite excedido', "error", delay);
-            } else if (data.resultado == 'compilation error') {
-              alertify.log('Error de compilación', "error", delay);
-            }
-          } else {
-            alertify.log('Ha ocurrido un error');
-          }*/
-
+          if (data.resultado == 'accepted') {
+            if (tipo == 0)
+             $scope.redirect = base_url + '/curso/ver/' + data.curso + '/contenido';
+            else
+            $scope.redirect = base_url + '/curso/ver/' + data.curso + '/evaluacion/' + data.codigo;
+          } else if (data.resultado == 'compilation error' || data.resultado == 'runtime error') {
+              $scope.redirect = base_url + '/curso/ver/' + data.curso + '/mis-envios/'+ data.id;
+          }
         });
       };
 
@@ -172,7 +193,7 @@ angular.module('Controllers', [])
   $scope.ranking = [];
   $scope.column = 'puntos_totales';
   $scope.RankingEvaluacion = function(evaluacion) {
-    
+
 
     ajax.get(base_url + '/evaluacion/json/' + evaluacion, {}, function(data) {
       $scope.ranking = data;
