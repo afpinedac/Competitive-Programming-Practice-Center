@@ -213,8 +213,6 @@ class CursoController extends LMSController {
 
 
         if ($tab == 'evaluacion') {
-           Juez::evaluar_envios($curso->id);
-
           #param1 = el id de la evaluacion
           #param2 = el id del ejercicio
 
@@ -365,10 +363,7 @@ class CursoController extends LMSController {
           $ejercicio = modulo::find(Session::get('modulo.estudiante', $curso->get_primer_modulo()))->get_ejercicio($param1);
           if ($ejercicio) { #si existe el ejercicio al que quiero acceder   
 #se mira si un envio a sido evaluado y se dan los respectivos logros de un taller y puntos
-            Juez::evaluar_envios($curso->id);
-            #mira si hay respuesta a algun ejercicio
-         //   $this->has_some_veredict($curso->id);
-
+         
 
             return View::make('curso.ejercicio.ejercicio2')
                             ->with('curso', $curso)
@@ -391,7 +386,6 @@ class CursoController extends LMSController {
 
 
           #se mira si un envio a sido evaluado y se dan los respectivos logros de un taller y puntos
-          Juez::evaluar_envios($curso->id);
           #mira si hay respuesta a algun ejercicio
         //  $this->has_some_veredict($curso->id);
 

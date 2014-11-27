@@ -4,14 +4,9 @@ class Juez extends LMSController {
     #funcion que checkea si los envios generan logros
 
     public static function evaluar_envios($curso, $user = null) {
-
-      
-   
       
         $usuario = usuario::find($user == null ? Auth::user()->id : $user);
         $envios = $usuario->get_envios_evaluados_en_curso($curso);
-
-
 
         foreach ($envios as $envio) {
             if ($envio->tipo == 0 && $envio->resultado == 'accepted') { #si es un envio de un taller              

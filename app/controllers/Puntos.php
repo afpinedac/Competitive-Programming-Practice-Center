@@ -49,9 +49,10 @@ class Puntos extends LMSController {
         }
 
 
+        
         $envio->puntos_obtenidos = $puntos;
         #se le da plata al usuario
-        $usuario->sumar_plata($puntos * 2);
+     //   $usuario->sumar_plata($puntos * 2);
 
         $envio->save();
     }

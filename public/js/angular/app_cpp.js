@@ -18,7 +18,7 @@ angular.module('Controllers', [])
                                       <a ng-if='!aceptado && !timeOrWrong' href='[[redirect]]' ng-click='watch_submission()' target='_blank'>\n\
                                                 <span style='font-size:20px;'>[[status]]</span>\n\
                                        </a>\n\
-                                       <a ng-if='aceptado' href='[[redirect]]' ng-click='watch_submission()' >\n\
+                                       <a ng-if='aceptado' href=[[redirect]] ng-click='watch_submission()' >\n\
                                                 <span style='font-size:20px;'>[[status]]</span>\n\
                                        </a>\n\
                                        <a ng-if='timeOrWrong && !aceptado' ng-click='watch_submission()' >\n\
@@ -32,6 +32,7 @@ angular.module('Controllers', [])
     link: function($scope, $attr, $element) {
       $scope.envio = $element.envio;
       tipo = $element.tipo;
+      window.console.log("El tipo es " + tipo);
       codigo = $element.codigo;
       $scope.ready = false;
       $scope.status = 'En espera...';
@@ -43,44 +44,49 @@ angular.module('Controllers', [])
           if (data) {
             if (data.resultado != null) {
               $scope.status = data.resultado;
-              if(data.resultado=='accepted'){
+              if (data.resultado == 'accepted') {
                 $scope.status = 'Aceptado';
                 $scope.aceptado = true;
-              }else if(data.resultado=='time limit'){
+              } else if (data.resultado == 'time limit') {
                 $scope.status = 'Tiempo límite excedido';
                 $scope.timeOrWrong = true;
-              }else if(data.resultado =='wrong answer'){
+              } else if (data.resultado == 'wrong answer') {
                 $scope.status = 'Respuesta Incorrecta';
                 $scope.timeOrWrong = true;
-              }else if(data.resultado =='compilation error'){
+              } else if (data.resultado == 'compilation error') {
                 $scope.status = 'Error de compilación';
-              }else if(data.resultado =='runtime error'){
+              } else if (data.resultado == 'runtime error') {
                 $scope.status = 'Error de ejecución';
               }
               $scope.ready = true;
             }
+            $interval.cancel(interval); //parar la ejecución
           }
         });
       }, 800);
+
+
 
       $scope.watch_submission = function() {
         ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function(data) {
           $scope.loading = true;
           if (data.resultado == 'accepted') {
-                ajax.post(base_url + '/ejercicio/calcular-puntos' , {envio : data.id} , function(response){
-                  alertify.log('Has obtenido '  + response.puntos_obtenidos + ' puntos', 'success' , 3000);
+            
+            ajax.post(base_url + '/ejercicio/calcular-puntos', {envio: data.id}, function(response) {
+              alertify.log('Has obtenido ' + response.puntos_obtenidos + ' puntos', 'success', 3000);
             });
-            $scope.loading = false;
-            if (tipo == 0)
-             $scope.redirect = base_url + '/curso/ver/' + data.curso + '/contenido';
-            else
-            $scope.redirect = base_url + '/curso/ver/' + data.curso + '/evaluacion/' + data.codigo;
-          } else if (data.resultado == 'compilation error' || data.resultado == 'runtime error') {
-             $("judgeonline").remove();
-              $scope.redirect = base_url + '/curso/ver/' + data.curso + '/mis-envios/'+ data.id;
-          }else{
-             $("judgeonline").remove();
-          } 
+            if (tipo == 0) {
+               $scope.redirect = base_url + '/curso/ver/' + data.curso + '/contenido';
+            }
+            else {
+              $scope.redirect = base_url + '/curso/ver/' + data.curso + '/evaluacion/' + data.codigo;
+            }
+          } else if (data.resultado == 'compilation error' || data.resultado == 'runtime error') {  //compilation error or runtime error
+            $("judgeonline").remove();
+            $scope.redirect = base_url + '/curso/ver/' + data.curso + '/mis-envios/' + data.id;
+          } else { //wrong answer or time limit
+            $("judgeonline").remove();
+          }
         });
       };
 

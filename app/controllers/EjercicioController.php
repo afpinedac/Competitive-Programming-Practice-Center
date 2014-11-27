@@ -219,12 +219,11 @@ class EjercicioController extends LMSController {
       return Response::json($envio);
     }
   }
-  
-  public function postCalcularPuntos(){
+
+  public function postCalcularPuntos() {
     $envio = envio::find(Input::get('envio'));
-     Juez::evaluar_envios($envio->curso);
-     return Response::json($envio);
-    
+    Juez::evaluar_envios($envio->curso);
+    return Response::json(envio::find($envio->id));
   }
 
 }
