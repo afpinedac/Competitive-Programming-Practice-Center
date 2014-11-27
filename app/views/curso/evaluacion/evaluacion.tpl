@@ -32,13 +32,7 @@
           {include file='./inc/cuenta_regresiva.tpl'}
         </div>
       </div>
-        {if Input::has('tp')}
-      <div class="row-fluid">
-        <div class="span12">
-          {include file='./inc/tabla_de_posiciones.tpl'}
-        </div>
-      </div>
-        {/if}
+    
         
     </div>
   </div>

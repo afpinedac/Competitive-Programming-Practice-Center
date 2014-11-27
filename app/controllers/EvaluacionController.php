@@ -153,11 +153,12 @@ class EvaluacionController extends LMSController {
     $evaluacion = evaluacion::find($id);
     $ejercicios = $evaluacion->get_ejercicios();
     $curso = curso::find(modulo::find($evaluacion->modulo)->curso);
-    $estudiantes = $curso->get_estudiantes(true);
+    $estudiantes = $curso->get_estudiantes(false);
 
 
     $data = [];
     foreach ($estudiantes as $estudiante) {
+      
 
       $arr = [
           'nombre_completo' => ucfirst($estudiante->nombres) . " " . ucfirst($estudiante->apellidos),

@@ -97,12 +97,13 @@ class Curso extends Eloquent {
                       ->where('curso_x_usuario.curso_id', $this->id)
                       ->orderBy('nombres')
                       ->get();
-    } else {
+    } else {//no muestra el profesor ni los monitores
       
         return DB::table('usuario')
                       ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'usuario.id')
                       ->where('curso_x_usuario.curso_id', $this->id)
                       ->where('usuario_id','<>',$this->profesor_id)
+                      ->where('curso_x_usuario.rol',0)
                       ->orderBy('nombres')
                       ->get();
       
