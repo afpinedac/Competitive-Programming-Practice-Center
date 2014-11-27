@@ -59,12 +59,15 @@ angular.module('Controllers', [])
               }
               $scope.ready = true;
             }
-            $interval.cancel(jinterval); //parar la ejecución
+            stop_interval();
+             //parar la ejecución
           }
         });
-      }, 800);
+      }, 1000);
 
-      $scope.$on('$destroy', function () { $interval.cancel(jinterval); });
+         stop_interval = function(){
+           $interval.cancel(jinterval);
+         };
 
       $scope.watch_submission = function() {
         ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function(data) {
