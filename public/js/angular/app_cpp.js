@@ -76,10 +76,10 @@ angular.module('Controllers', [])
             else
             $scope.redirect = base_url + '/curso/ver/' + data.curso + '/evaluacion/' + data.codigo;
           } else if (data.resultado == 'compilation error' || data.resultado == 'runtime error') {
-             $("judgeonline").hide();
+             $("judgeonline").remove();
               $scope.redirect = base_url + '/curso/ver/' + data.curso + '/mis-envios/'+ data.id;
           }else{
-             $("judgeonline").hide();
+             $("judgeonline").remove();
           } 
         });
       };
