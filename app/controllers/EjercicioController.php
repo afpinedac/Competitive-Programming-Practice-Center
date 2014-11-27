@@ -215,11 +215,16 @@ class EjercicioController extends LMSController {
       if ($ver == 1) {
         $envio->visto = 1;
         $envio->save();
-        return Response::json($envio);
-      } else {
-        return Response::json($envio);
       }
+      return Response::json($envio);
     }
+  }
+  
+  public function postCalcularPuntos(){
+    $envio = envio::find(Input::get('envio'));
+     Juez::evaluar_envios($envio->curso);
+     return Response::json($envio);
+    
   }
 
 }

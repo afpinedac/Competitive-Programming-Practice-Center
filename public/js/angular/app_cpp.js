@@ -59,7 +59,12 @@ angular.module('Controllers', [])
 
       $scope.watch_submission = function() {
         ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function(data) {
+          $scope.loading = true;
           if (data.resultado == 'accepted') {
+                ajax.post(base_url + '/ejercicio/calcular-puntos' , {envio : data.id} , function(response){
+                  alertify.log('Has obtenido '  + response.puntos_obtenidos + ' puntos', 'success' , 3000);
+            });
+            $scope.loading = false;
             if (tipo == 0)
              $scope.redirect = base_url + '/curso/ver/' + data.curso + '/contenido';
             else
