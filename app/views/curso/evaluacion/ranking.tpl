@@ -9,7 +9,7 @@
 
 
           <div class="table-responsive">
-            <table class="table table-condensed table-hover table-bordered">
+            <table class="table table-condensed table-hover table-bordered table-striped">
               <thead>
                 <tr>
                   <td>Posición</td>
@@ -23,7 +23,7 @@
                   <td><strong>[[$index+1]]</strong></td>
                   <td width="20%"><span class="pull-left"><strong >[[estudiante.nombre_completo]]</strong></span></td>  
                   <td ng-repeat='puntos in estudiante.puntos track by $index'><strong style="font-size: 20px;">[[puntos]]</strong></td>
-                  <td><strong style="font-size: 20px;">[[estudiante.puntos_totales]]</strong></td>
+                  <td style="background-color: #ddf"><strong style="font-size: 25px;">[[estudiante.puntos_totales]]</strong></td>
                 </tr>
               </tbody>
             </table>

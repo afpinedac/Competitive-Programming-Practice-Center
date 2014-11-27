@@ -60,25 +60,25 @@ angular.module('Controllers', [])
               $scope.ready = true;
             }
             stop_interval();
-             //parar la ejecución
+            //parar la ejecución
           }
         });
       }, 1000);
 
-         stop_interval = function(){
-           $interval.cancel(jinterval);
-         };
+      stop_interval = function() {
+        $interval.cancel(jinterval);
+      };
 
       $scope.watch_submission = function() {
         ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function(data) {
           $scope.loading = true;
           if (data.resultado == 'accepted') {
-            
+
             ajax.post(base_url + '/ejercicio/calcular-puntos', {envio: data.id}, function(response) {
               alertify.log('Has obtenido ' + response.puntos_obtenidos + ' puntos', 'success', 3000);
             });
             if (tipo == 0) {
-               $scope.redirect = base_url + '/curso/ver/' + data.curso + '/contenido';
+              $scope.redirect = base_url + '/curso/ver/' + data.curso + '/contenido';
             }
             else {
               $scope.redirect = base_url + '/curso/ver/' + data.curso + '/evaluacion/' + data.codigo;
@@ -215,12 +215,10 @@ angular.module('Controllers', [])
   $scope.ranking = [];
   $scope.column = 'puntos_totales';
   $scope.RankingEvaluacion = function(evaluacion) {
-
-
     ajax.get(base_url + '/evaluacion/json/' + evaluacion, {}, function(data) {
       $scope.ranking = data;
     });
-  }
+    }
 }
 ).controller('MonitorearTaller', function($scope, ajax) {
   $scope.estudiantes = [];
