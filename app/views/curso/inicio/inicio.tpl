@@ -26,6 +26,8 @@
             <div class="" ng-repeat="notificacion in notificaciones  | limitTo : limit_notificaciones | filter: search_notificacion">
               <a id="p[[notificacion.id]]"></a>
               <a id="c[[notificacion.id]]"></a>
+              
+            
 
 
               <!-----ANGULAR----------->
@@ -56,6 +58,22 @@
                         <!--la publicacion es mia-->
                         <div class="span12" ng-if='usuario_logueado==notificacion.propietario'>
                           <a href=''  onclick="return false;" ng-click='comments_visible[notificacion.id]=true'> <i class="icon icon-comment-alt"></i> Comentar</a>
+                          &nbsp;&nbsp;
+                          <!--COMPARTIR EN REDES SOCIALES-->   
+                          <!--twitter-->
+                          <!--si esta twitteada-->
+                               <span ng-if='notificacion.compartida_twitter==1'>
+                                  <a href="#" onclick="return false;">
+                                    <span class=''><i class='icon icon-twitter-sign'></i> Ha sido twitteado <i class='icon icon-ok'></i></span>
+                                  </a>
+                                </span>
+                          <!--si no está twitteada-->
+                                <span ng-if='notificacion.compartida_twitter==0'>
+                                  <a ng-href="{url('notificacion/login-twitter')}/[[notificacion.id]]">
+                                    <span class=''><i class='icon icon-twitter-sign'></i> Twittear</span>
+                                  </a>
+                                </span>
+                                <!--FIN REDES SOCIALES-->
                         </div>
                         <!--la publicacion es de otro-->
                         <div class="span12" ng-if='usuario_logueado!=notificacion.propietario'>
