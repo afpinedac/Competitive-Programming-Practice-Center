@@ -100,7 +100,7 @@ angular.module('Controllers', [])
   $scope.comentarios = []; //guarda la lista de comentarios de cada notifcacion
   $scope.comentario = []; //guarda lo que la persona va escribiendo en el textarea
   $scope.comments_visible = []; //muesta si se ha escrito al menos un comentario
-  $scope.nlikes = []; //guarda el numero de likes de cada notificaicon
+  $scope.nlikes = []; //guarda el numero de likes de cada notificación
   min_notificaciones = 10;
   $scope.limit_notificaciones = min_notificaciones;
   step_notificaciones = 10;
@@ -126,20 +126,15 @@ angular.module('Controllers', [])
             if (info_logros[i].id == notificacion.id) {
               notificacion['imagen_logro'] = info_logros[i].codigo;
               notificacion['nombre_logro'] = info_logros[i].nombre;
-              window.console.log('pasó');
+              //window.console.log('pasó');
               break;
             }
-
           }
-
         }
       });
     });
-
     $scope.loading_init = false;
   };
-
-
 
   $scope.menos_notificaciones = function() {
     $scope.limit_notificaciones = Math.max($scope.limit_notificaciones - step_notificaciones, min_notificaciones);
@@ -178,14 +173,18 @@ angular.module('Controllers', [])
             data = {notificacion: notifi, usuario: $scope.usuario_logueado};
             ajax.post(base_url + '/notificacion/me-gusta', data, function(data2) {
               $scope.numero_likes(notificacion);
-              if (data2.tipo == 1)
+              if (data2.tipo == 1){
                 alertify.log("Te ha gustado esta publicación", "success", 4000);
-              else
+              }else{
                 alertify.log("Ya no te gusta esta publicación", "success", 4000);
+              }
             });
 
           },
           $scope.eliminar_notificacion = function(notificacion) {
+            $('#publicacion-' + notificacion + ' + hr').remove(); //quitamos el hr que está al final de cada publicación
+            $('#publicacion-' + notificacion).remove();
+            alertify.log("Se ha eliminado esta publicación", "success", 4000);
 
           },
           $scope.ver_likes = function(notificacion) {
@@ -218,7 +217,7 @@ angular.module('Controllers', [])
     ajax.get(base_url + '/evaluacion/json/' + evaluacion, {}, function(data) {
       $scope.ranking = data;
     });
-    }
+  }
 }
 ).controller('MonitorearTaller', function($scope, ajax) {
   $scope.estudiantes = [];

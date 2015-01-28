@@ -42,6 +42,7 @@
 
                       <!--publicacion normal-->
                       <div ng-if='notificacion.tipo==0' class=''>
+                        <div class="pull-right" style="margin-top: -25px;"><a href="" ng-click="eliminar_notificacion(notificacion.id)">x</a></div>
                        <pre> [[notificacion.publicacion]]</pre>
                       </div>
                       <!---LOGRO---->
