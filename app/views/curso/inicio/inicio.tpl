@@ -42,8 +42,8 @@
 
                       <!--publicacion normal-->
                       <div ng-if='notificacion.tipo==0' class=''>
-                        <div class="pull-right" style="margin-top: -25px;"><a href="" ng-click="eliminar_notificacion(notificacion.id)">x</a></div>
-                       <pre> [[notificacion.publicacion]]</pre>
+                       <div ng-if='usuario_logueado==notificacion.propietario' class="pull-right" style="margin-top: -25px;"><a href="" ng-click="eliminar_notificacion(notificacion.id)">x</a></div>
+                       <pre class='guiones'> [[notificacion.publicacion]]</pre>
                       </div>
                       <!---LOGRO---->
                       <div ng-if='notificacion.tipo!=0' class='well' >

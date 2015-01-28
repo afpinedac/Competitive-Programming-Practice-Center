@@ -273,3 +273,12 @@ background-image: -webkit-gradient(
 	bottom: 1px;
 	left: -5px;
 }
+
+.guiones{
+  -moz-hyphens:auto;
+ -ms-hyphens:auto;
+ -webkit-hyphens:auto;
+ -o-hyphens:auto;
+ hyphens:auto;
+  word-wrap:break-word;
+}
