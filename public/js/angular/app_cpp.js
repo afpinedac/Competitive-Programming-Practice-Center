@@ -156,7 +156,7 @@ angular.module('Controllers', [])
     ajax.post(base_url + '/notificacion/comentar', data, function(data2) {
       $scope.get_comentarios(notif);
       $scope.comentario[notif] = '';
-      alertify.log('HAS COMENTADO ESTO', "success", 4000);
+      alertify.log('Has comentado esto', "success", 4000);
     });
   },
           $scope.eliminar_comentario = function(comentario, notif) {
@@ -165,7 +165,7 @@ angular.module('Controllers', [])
             data = {comentario: comentario};
             ajax.post(base_url + '/notificacion/eliminar-comentario', data, function(data2) {
               $scope.get_comentarios(notif);
-              alertify.log("COMENTARIO ELIMINADO", "success", 4000);
+              alertify.log("Comentario eliminado", "success", 4000);
             });
           },
           $scope.me_gusta = function(notificacion) {
@@ -173,18 +173,29 @@ angular.module('Controllers', [])
             data = {notificacion: notifi, usuario: $scope.usuario_logueado};
             ajax.post(base_url + '/notificacion/me-gusta', data, function(data2) {
               $scope.numero_likes(notificacion);
-              if (data2.tipo == 1){
+              if (data2.tipo == 1) {
                 alertify.log("Te ha gustado esta publicación", "success", 4000);
-              }else{
+              } else {
                 alertify.log("Ya no te gusta esta publicación", "success", 4000);
               }
             });
 
           },
           $scope.eliminar_notificacion = function(notificacion) {
-            $('#publicacion-' + notificacion + ' + hr').remove(); //quitamos el hr que está al final de cada publicación
-            $('#publicacion-' + notificacion).remove();
-            alertify.log("Se ha eliminado esta publicación", "success", 4000);
+
+            ajax.post(base_url + '/notificacion/eliminar-comentario', {comentario: notificacion}, function(data) {
+              if (data == "1") {
+                $('#publicacion-' + notificacion + ' + hr').remove(); //quitamos el hr que está al final de cada publicación
+                $('#publicacion-' + notificacion).remove();
+                alertify.log("Se ha eliminado esta publicación", "success", 4000);
+              } else {
+                alertify.log('Se generó un problema, intentelo más tarde', "error", 4000);
+                // alert();
+              }
+            });
+
+
+
 
           },
           $scope.ver_likes = function(notificacion) {
