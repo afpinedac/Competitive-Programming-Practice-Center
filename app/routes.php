@@ -1,7 +1,7 @@
 <?php
 
-Route::get('/test', function(){
-    return View::make('test');
+Route::get('/vp', function(){
+    echo "we";
 });
 
 Route::get('/au/{id}', function($id){
