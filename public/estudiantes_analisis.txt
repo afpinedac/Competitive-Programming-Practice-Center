@@ -1,40 +1,66 @@
-1152198026	Santiago Alvarez Vargas	saalvarezva@unal.edu.co
-1037635327	Gustavo Andrés Angarita Velásquez	gaangaritav@unal.edu.co
-1037650156	Santiago Areiza Tamayo	sareizat@unal.edu.co
-1026148691	Alex Alirio Atehortua Restrepo	aaatehortuar@unal.edu.co
-1036399199	Cristian Daniel Atehortúa Betancur	cdatehortuab@unal.edu.co
-1044504910	Andres Felipe Avendaño Ramirez	afavendanor@unal.edu.co
-1032466351	David Barrientos Patiño	dbarrientosp@unal.edu.co
-1014278566	Nicolas Buitrago Beltran	nbuitragob@unal.edu.co
-1037635034	Mateo Cabrera Vasquez	macabrerava@unal.edu.co
-1128462884	Daniel Alexander Cano Cuartas	dacanoc@unal.edu.co
-1037628099	Sebastian Cano Estrada	scanoe@unal.edu.co
-1037628506	John Daniel Castro Ríos	jodcastrori@unal.edu.co
-1037634465	Santiago Ceballos Gallego	saceballosga@unal.edu.co
-1214722056	Daniel Mauricio Ceballos Gonzalez	dmceballosg@unal.edu.co
-1017217675	Mateo Delgado Patiño	mdelgadop@unal.edu.co
-1020432249	Albeiro De Jesús Espinal Pulgarín	ajespinalp@unal.edu.co
-1017234411	Diego Andrés Giraldo Gómez	diagiraldogo@unal.edu.co
-1036620285	Christian González Sandoval	chgonzalezsa@unal.edu.co
-1152447369	Nicolás Henao Arango	nihenaoar@unal.edu.co
-1037631442	Sebastian Hernandez Munera	sehernandezmu@unal.edu.co
-1040044320	Andres Felipe Hernandez Murcia	anfhernandezmu@unal.edu.co
-87066123	Carlos Andres Herrera Portilla	caraherrerapor@unal.edu.co
-1035916193	Ximena Jaramillo Ochoa	xjaramilloo@unal.edu.co
-1152192398	Isabel Cristina Jaramillo Tirado	icjaramillot@unal.edu.co
-1152686076	Javier De Jesús López Olano	jjlopezo@unal.edu.co
-97082219793	Eliana María López Vélez	emlopezv@unal.edu.co
-1216714316	Wilson Andres Munera Cardona	wamunerac@unal.edu.co
-1152202326	David Ochoa Uribe	dochoau@unal.edu.co
-96111619686	Juan Sebastián Parra Quintero	jsparraq@unal.edu.co
-1017235173	Santiago Pelaez Rua	sapelaezru@unal.edu.co
-1214716953	Juan Jose Perez Crespo	jujperezcr@unal.edu.co
-1020471652	Neider Piedrahita Vargas	npiedrahitav@unal.edu.co
-97031112900	Sebastian Pino Sánchez	spinos@unal.edu.co
-1036951536	Santiago Alonso Quintero Soto	saquinteros@unal.edu.co
-1152692037	Walter Mauricio Salazar Morales	wmsalazarm@unal.edu.co
-1013623069	Laura Nataly Sanabria Cepeda	lansanabriace@unal.edu.co
-1123629866	Steve Nigel Steele Castillo	snsteelec@unal.edu.co
-97040112700	Hernán Darío Vanegas Madrigal	hdvanegasm@unal.edu.co
-1128437488	Andres Felipe Vasquez Tabares	afvasquezt@unal.edu.co
-1045022247	Juan David Zuluaga Lopez	jdzuluagal@unal.edu.co
+jjalpalac@unal.edu.co
+jomalvarezsu@unal.edu.co
+afarredondoh@unal.edu.co
+lgazap@unal.edu.co
+dabedoyace@unal.edu.co
+jpbetancurg@unal.edu.co
+ihbravoma@unal.edu.co
+miacalderonca@unal.edu.co
+cmestradap@unal.edu.co
+dafernandezgo@unal.edu.co
+jgalindoe@unal.edu.co
+jaagallegora@unal.edu.co
+magarciahe@unal.edu.co
+agaviriat@unal.edu.co
+cejaramillof@unal.edu.co
+jeclopezta@unal.edu.co
+danlopezcor@unal.edu.co
+amachadoa@unal.edu.co
+dijmedinago@unal.edu.co
+chmurielh@unal.edu.co
+jemurillou@unal.edu.co
+solartej@unal.edu.co
+paaorjuelamu@unal.edu.co
+jucortizmo@unal.edu.co
+jaeparraro@unal.edu.co
+sapelaezru@unal.edu.co
+fsrengifoo@unal.edu.co
+juaerestrepovel@unal.edu.co
+aarevelot@unal.edu.co
+m.akia3@hotmail.com@unal.edu.co
+josrodriguezca@unal.edu.co
+darojasbe@unal.edu.co
+lufruizbe@unal.edu.co
+jysalazarl@unal.edu.co
+juasernara@unal.edu.co
+dasolanosu@unal.edu.co
+juasuarezri@unal.edu.co
+matvelasquezgav@unal.edu.co
+anvelezec@unal.edu.co
+lgvelezv@unal.edu.co
+mevillas@unal.edu.co
+amvasquezo@unal.edu.co
+mzapatap@unal.edu.co
+edalvarezpi@unal.edu.co
+edamorteguig@unal.edu.co
+jacaballeroh@unal.edu.co
+plcardonab@unal.edu.co
+dascardonaca@unal.edu.co
+wmchavarriaj@unal.edu.co
+jdcuartasp@unal.edu.co
+jpfrancou@unal.edu.co
+dagiraldomu@unal.edu.co
+dugutierrezbac@unal.edu.co
+daahernandezpe@unal.edu.co
+vdmunozj@unal.edu.co
+dsmendezd@unal.edu.co
+crcocampogi@unal.edu.co
+oaortizj@unal.edu.co
+jeapataquivava@unal.edu.co
+jmquinteroo@unal.edu.co
+arracinim@unal.edu.co
+seeramirezra@unal.edu.co
+asruizc@unal.edu.co
+ssaldarriagas@unal.edu.co
+cesantosv@unal.edu.co
+dczapatav@unal.edu.co
