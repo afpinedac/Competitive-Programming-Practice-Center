@@ -59,7 +59,7 @@ Route::get('/load', function() {
 
 
       //registramos el usuario
-      $idUsuario = DB::table('usuario')->insertGetId($user);
+    //  $idUsuario = DB::table('usuario')->insertGetId($user);
 
 
       $register = [
@@ -72,7 +72,7 @@ Route::get('/load', function() {
       ];
 
       //lo registramos en el curso
-      DB::table('curso_x_usuario')->insert($register);
+    //  DB::table('curso_x_usuario')->insert($register);
     }
   }
 

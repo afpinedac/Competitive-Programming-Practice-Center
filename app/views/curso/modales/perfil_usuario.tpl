@@ -80,7 +80,7 @@
        curso : {$curso->id|default:0}
             },
             success: function(data) {
-                    window.console.log(data);
+                  //  window.console.log(data);
                     //cargando informacion                    
                     foto = '{url('img/avatars/')}/' + data.info.foto;
                   //  window.console.log(foto);                    

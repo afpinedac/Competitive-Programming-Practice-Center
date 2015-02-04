@@ -257,7 +257,7 @@ angular.module('Controllers', [])
   load_data = function() {
     ajax.post(base_url + '/curso/json/monitorear_estudiantes', {curso: curso}, function(data) {
       $scope.estudiantes = data;
-      window.console.log(data);
+     // window.console.log(data);
     });
   },
           $scope.set_monitor = function(id, curso) {
