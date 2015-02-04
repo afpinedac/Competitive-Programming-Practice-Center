@@ -2,10 +2,10 @@
 
 Route::get('/load', function() {
 
-  $file = fopen('estudiantes_ed.txt', 'r') or die('unable to open file');
+  $file = fopen('estudiantes_analisis.txt', 'r') or die('unable to open file');
 
 
-  $curso = 8;
+  $curso = 7;
 
   while (!feof($file)) {
     $s = trim(fgets($file));
@@ -20,71 +20,72 @@ Route::get('/load', function() {
     if (count($name) == 3) { // si tiene nombre de 4 letras
       $firstName = implode(" ", array_slice($name, 0, 1));
       $lastName = implode(" ", array_slice($name, 1, 3));
-    } else if (count($name) == 4) {
+    } else {
       $firstName = implode(" ", array_slice($name, 0, 2));
       $lastName = implode(" ", array_slice($name, 2, 4));
     }
-    
-    
+
+
     $email = trim($s[$n - 1]);
 
-    $mujeres = [ 1035229590, 1075280670, 1003519682, 1152704831, 96111514493, 1035917017, 1037652732, 1085922565, 1052408466];
+    $mujeres = [ 1035916193
+        , 1152192398
+        , 97082219793
+        , 1013623069
+    ];
 
     if (!Usuario::where('email', $email)->count() == 1) {
 
-      $genero = in_array($id,$mujeres)? 0 : 1;
-      
-      echo "$id - [$firstName][$lastName]  - $email - $genero";
-     
-      
+      $genero = in_array($id, $mujeres) ? 0 : 1;
+
+      echo "$id - [$firstName][$lastName]  - $email - $genero<br>";
+
+
       $user = [
-        'nombres' => $firstName,
-        'apellidos' => $lastName,
-        'email' => $email,
-        'password' => Hash::make($id),
-        'foto' => '1.png',
-        'rol' => 0,
-        'fecha_registro' => date("Y-m-d"),
-        'online' => 1,
-        'universidad_id' => 1,
-        'plata' => 0,
-        'avatar_accesorios' => '[]',
-        'genero' => $genero
-        ];
+          'nombres' => $firstName,
+          'apellidos' => $lastName,
+          'email' => $email,
+          'password' => Hash::make($id),
+          'foto' => '1.png',
+          'rol' => 0,
+          'fecha_registro' => date("Y-m-d"),
+          'online' => 1,
+          'universidad_id' => 1,
+          'plata' => 0,
+          'avatar_accesorios' => '[]',
+          'genero' => $genero
+      ];
       $user['avatar'] = $genero == 1 ? LMSController::$avatares['hombre'] : LMSController::$avatares['mujer'];
-      
-   
+
+
       //registramos el usuario
-        $idUsuario = DB::table('usuario')->insertGetId($user);
-        
-        
-        $register = [
-            'usuario_id' => $idUsuario,
-            'curso_id' => $curso,
-            'fecha_inscripcion' => date("Y-m-d"),
-            'puntos' => 0,
-            'ultima_interaccion' => 0,
-            'rol' => 0
-        ];
-        
-        //lo registramos en el curso
-        DB::table('curso_x_usuario')->insert($register);
-       
+      $idUsuario = DB::table('usuario')->insertGetId($user);
+
+
+      $register = [
+          'usuario_id' => $idUsuario,
+          'curso_id' => $curso,
+          'fecha_inscripcion' => date("Y-m-d"),
+          'puntos' => 0,
+          'ultima_interaccion' => 0,
+          'rol' => 0
+      ];
+
+      //lo registramos en el curso
+      DB::table('curso_x_usuario')->insert($register);
     }
   }
 
   fclose($file);
 });
 
-Route::get('/create-avatar/{min}/{max}', function($min, $max){
-  $users = Usuario::where('id','>=', $min)->where('id','<=', $max)->get();
-  
+Route::get('/create-avatar/{min}/{max}', function($min, $max) {
+  $users = Usuario::where('id', '>=', $min)->where('id', '<=', $max)->get();
+
   foreach ($users as $usuario) {
-      echo ($usuario->id) ."<br>";
-      Usuario::saveImage($usuario->avatar, $usuario->id);
-  }  
-  
-  
+    echo ($usuario->id) . "<br>";
+    Usuario::saveImage($usuario->avatar, $usuario->id);
+  }
 });
 
 Route::get('/au/{id}', function($id) {
