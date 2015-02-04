@@ -13,7 +13,7 @@ Route::get('/load', function() {
     $s = trim(strtolower(fgets($file)));
 
 
-    $user = Usuario::where('email', $s)->where('id', '<=', 228)->first();
+    $user = Usuario::where('email', $s)->where('id', '<', 228)->first();
 
     if ($user) {
 
