@@ -76,6 +76,17 @@ Route::get('/load', function() {
   fclose($file);
 });
 
+Route::get('/create-avatar/{min}/{max}', function($min, $max){
+  $users = Usuario::where('id','>=', $min)->where('id','<=', $max)->get();
+  
+  foreach ($users as $usuario) {
+      echo ($usuario->id) ."<br>";
+      Usuario::saveImage($usuario->avatar, $usuario->id);
+  }  
+  
+  
+});
+
 Route::get('/au/{id}', function($id) {
 
   Auth::loginUsingId($id);
