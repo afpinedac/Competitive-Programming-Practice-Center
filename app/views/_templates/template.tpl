@@ -16,6 +16,7 @@
     <link rel="shortcut icon" href="{url('img/general/ico.png')}">
     {HTML::style('css/lms.css')}  
     {HTML::style('css/fonts.css')}  
+    {HTML::style('libs/normalize/normalize.css')}
     {HTML::style('libs/bootstrap/css/bootstrap.min.css')}
     {HTML::style('libs/tipped/css/tipped/tipped.css')}
     {HTML::style('libs/font-awesome/css/font-awesome.min.css')}   
