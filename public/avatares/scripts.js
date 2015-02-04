@@ -63,7 +63,7 @@ function parseXML(data) {
             o.category = cat;
         });
     });
-    console.log(structData);
+ //   console.log(structData);
 }
 
 var waitingImages = false;
@@ -145,7 +145,7 @@ function save() {
     };
     sendingData = JSON.stringify(sendingData);
     $.post(link.avatar, {task: 'saveUserData', userdata: sendingData}, function(data) {
-        console.log("save result:\n" + data);
+        //console.log("save result:\n" + data);
         
         alertify.log("EL AVATAR HA SIDO GUARDADO CORRECTAMENTE", "success",2000);
     });

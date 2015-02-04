@@ -14,9 +14,12 @@ class ForoController extends LMSController {
             'curso' => $curso->id,
             'usuario' => $usuario->id
         );
+        //este es un comentario importante que debo hacer en este archivo
+
+
 
         temaforo::create($tema);
-
+        //se puso relenteo desde que le agregué eso
         $estudiantes = $curso->get_estudiantes();
         foreach ($estudiantes as $estudiante) {
             if ($estudiante->id != $usuario->id) {
@@ -33,10 +36,11 @@ class ForoController extends LMSController {
         }
 
         #se crea la alerta para todos los estudiantes del curso
-
+        #vamos a ver, me parece 
 
 
         Session::flash("valid", "Tema creado correctamente");
+        $ff = "esot es un string";
 
         return Redirect::to("curso/ver/" . $curso->id . "/foro");
     }

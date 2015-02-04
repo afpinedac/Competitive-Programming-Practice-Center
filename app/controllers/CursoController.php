@@ -47,7 +47,6 @@ class CursoController extends LMSController {
     $curso = curso::find($curso);
     if ($curso) {
       $curso->desmatricular(Auth::user()->id);
-
       Session::flash('valid', "El curso {$curso->nombre} se ha desmatriculado");
     }
 
