@@ -3,6 +3,9 @@
   <head>
     <title>{$title|default:"CPP | Centro de Práctica de Programación"}</title>  
     {HTML::script('js/analytics.js')}  
+    
+    <meta name="description" content="CPP Es un sitio ideal para los profesores e Instituciones Educativas que desean contar con una plataforma Virtual de Aprendizaje para la enseñanza y práctica de Programación Competitiva."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     {*font google fonts*}
     <link href='http://fonts.googleapis.com/css?family=Londrina+Sketch' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Londrina+Solid' rel='stylesheet' type='text/css'>
@@ -28,8 +31,6 @@
     {HTML::script('libs/angularjs/angular.min.js')}
     {*{HTML::script('libs/angularjs/angular.min.js.map')}*}
     {HTML::script('js/angular/app_cpp.js')}
-
-
     <script>
       URL = {
         set_pre_requisito: '{url('modulo/establecer-prerequisito')}',
@@ -37,17 +38,15 @@
       }
       base_url = '{url('/')}'
     </script>
-
   </head>
   <body ng-app='CPP' ng-cloak > 
-    
-     
+  <content>
     {capture assign='layouts'}../_layouts/{$layout|default:'default'}.tpl{/capture}     
     {include file='../mensajes/alertify.tpl'}      
     {include file='../curso/modales/perfil_usuario.tpl'}      
     {include file=$layouts}       
-  </body>
-  <br>
+  </content>
+      <br>
   <br>
   <footer class="well well-large"   style='margin-bottom: -5px; height: 80px;'>
     <div class="row-fluid">
@@ -67,6 +66,8 @@
       </div>
     </div>
   </footer>
+  </body>
+
 
 
 

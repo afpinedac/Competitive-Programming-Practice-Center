@@ -1,0 +1,66 @@
+1088592969	John Jairo Alpala Cumbalaza	jjalpalac@unal.edu.co
+97021803344	Jose Manuel Alvarez Suarez	jomalvarezsu@unal.edu.co
+1152214817	Andrés Felipe Arredondo Hernández	afarredondoh@unal.edu.co
+1088590332	Luis Guillermo Aza Paguay	lgazap@unal.edu.co
+1037634832	Daniel Bedoya Celis	dabedoyace@unal.edu.co
+96112313661	Juan Pablo Betancur Giraldo	jpbetancurg@unal.edu.co
+1123630617	Ian Héctor Bravo Manuel	ihbravoma@unal.edu.co
+97032613024	Miguel Angel Calderón Castro	miacalderonca@unal.edu.co
+1040750886	Carlos Mario Estrada Puerta	cmestradap@unal.edu.co
+1152447901	Daniel Fernandez Gonzalez	dafernandezgo@unal.edu.co
+1128275488	Jonathan Galindo Estrada	jgalindoe@unal.edu.co
+1036643764	Jaime Alejandro Gallego Ramirez	jaagallegora@unal.edu.co
+1152210386	Mateo Garcia Henao	magarciahe@unal.edu.co
+1035866153	Andrés Gaviria Taborda	agaviriat@unal.edu.co
+1152214564	Carlos Eduardo Jaramillo Franco	cejaramillof@unal.edu.co
+1123634455	Jean Carlos Lopez Tavera	jeclopezta@unal.edu.co
+96021115905	Daniel López Correa	danlopezcor@unal.edu.co
+1026151106	Angel David Machado Agudelo	amachadoa@unal.edu.co
+1052408466	Diana Judith Medina González	dijmedinago@unal.edu.co
+1152459558	Carlos Hernán Muriel Herrera	chmurielh@unal.edu.co
+97021413228	Jhon Eider Murillo Usuga	jemurillou@unal.edu.co
+1001547232	Sebastian Olarte Jaraba	solartej@unal.edu.co
+1037636178	Pablo Andres Orjuela Muñoz	paaorjuelamu@unal.edu.co
+1039457882	Juan Camilo Ortiz Moreno	jucortizmo@unal.edu.co
+96082304808	Javier Esteban Parra Romero	jaeparraro@unal.edu.co
+1017235173	Santiago Pelaez Rua	sapelaezru@unal.edu.co
+1120569721	Fabian Stewarth Rengifo Ochica	fsrengifoo@unal.edu.co
+1036635001	Juan Esteban Restrepo Velez	juaerestrepovel@unal.edu.co
+1085922565	Angela Andrea Revelo Tobar	aarevelot@unal.edu.co
+96032214263	Jhonatan Steve Reyes Correa	m.akia3@hotmail.com@unal.edu.co
+1036133907	Johan Sebastian Rodriguez Camacho	josrodriguezca@unal.edu.co
+1037652732	Daniela Rojas Betancur	darojasbe@unal.edu.co 
+1035917017	Luisa Fernanda Ruiz Bedoya	lufruizbe@unal.edu.co
+1112779500	Jarry Yesiht Salazar Londoño	jysalazarl@unal.edu.co
+1038415162	Julian Andres Serna Ramirez	juasernara@unal.edu.co
+1037639428	Danny Solano Sucerquia	dasolanosu@unal.edu.co
+1036668719	Julian Andres Suarez Rios	juasuarezri@unal.edu.co
+1020469886	Mateo Velasquez Gaviria	matvelasquezgav@unal.edu.co
+1017206498	Andres Velez Echeverri	anvelezec@unal.edu.co
+96111514493	Laura Guadalupe Velez Vargas	lgvelezv@unal.edu.co
+1152212030	Marlon Esneider Villa Sucerquia	mevillas@unal.edu.co
+1152704831	Ana María Vásquez Orrego	amvasquezo@unal.edu.co
+1017239850	Mauricio Zapata Pereira	mzapatap@unal.edu.co
+96082416584	Edwin Alvarez Pineda	edalvarezpi@unal.edu.co
+1003519682	Erika Dayana Amortegui Garcia	edamorteguig@unal.edu.co
+1017230479	Julian Andres Caballero Hernandez	jacaballeroh@unal.edu.co
+1088275718	Pedro Luis Cardona Buenaventura	plcardonab@unal.edu.co
+1020458212	David Santiago Cardona Carvajal	dascardonaca@unal.edu.co
+1035833003	Wilfer Mauricio Chavarria Jaramillo	wmchavarriaj@unal.edu.co
+1036667991	Juan David Cuartas Piedrahita	jdcuartasp@unal.edu.co
+96100717325	Juan Pablo Franco Usme	jpfrancou@unal.edu.co
+97070409600	Daniel Giraldo Muñoz	dagiraldomu@unal.edu.co
+1116861606	Duberney Gutierrez Bacca	dugutierrezbac@unal.edu.co
+98060459509	Daniel Andres Hernandez Pedraza	daahernandezpe@unal.edu.co
+1037649240	Victor Daniel Muñoz Jaramillo	vdmunozj@unal.edu.co
+1075280670	Diana Samary Méndez Delgado	dsmendezd@unal.edu.co
+1020476088	Cristian Camilo Ocampo Gil	crcocampogi@unal.edu.co
+1017205416	Omar Alonso Ortiz Jimenez	oaortizj@unal.edu.co
+1040752868	Jefferson Andres Pataquiva Vargas	jeapataquivava@unal.edu.co
+1035431907	Jorge Mario Quintero Ocampo	jmquinteroo@unal.edu.co
+97051718228	Angel Ricardo Racini Meza	arracinim@unal.edu.co
+97040815140	Sergio Enrique Ramirez Ramirez	seeramirezra@unal.edu.co
+1035229590	Angy Sorany Ruiz Cortes	asruizc@unal.edu.co
+97040211741	Santiago Saldarriaga Sucerquia	ssaldarriagas@unal.edu.co
+96122808421	Carlos Ernesto Santos Velasco	cesantosv@unal.edu.co
+1017174988	Duban Camilo Zapata Villa	dczapatav@unal.edu.co
