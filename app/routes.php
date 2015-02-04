@@ -13,21 +13,31 @@ Route::get('/load', function() {
     $s = trim(strtolower(fgets($file)));
 
 
-    $user = Usuario::where('email', $s)->where('id', '<', 228)->first();
+    $user = Usuario::where('email', $s)->orWhere('email', strtoupper($s))->first();
+
+
 
     if ($user) {
 
-      $register = [
+      $registro = DB::table('curso_x_usuario')->where('curso_id', $curso)->where('usuario_id', $user->id)->first();
+
+      if (!$registro) {
+        echo "se va a meter a {$user->email}<br/>";
+        /*
+          $register = [
           'usuario_id' => $user->id,
           'curso_id' => $curso,
           'fecha_inscripcion' => date("Y-m-d"),
           'puntos' => 0,
           'ultima_interaccion' => 0,
           'rol' => 0
-      ];
+          ];
+         * */
+      }
+
 
       //lo registramos en el curso
-      DB::table('curso_x_usuario')->insert($register);
+  //    DB::table('curso_x_usuario')->insert($register);
     }
   }
 
