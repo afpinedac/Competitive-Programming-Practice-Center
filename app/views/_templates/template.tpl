@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <title>{$title|default:"CPP | Centro de Práctica de Programación"}</title>  
     {HTML::script('js/analytics.js')}  

@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/load', function() {
-
+exit;
   $file = fopen('estudiantes_analisis.txt', 'r') or die('unable to open file');
 
 
@@ -79,17 +79,10 @@ Route::get('/load', function() {
   fclose($file);
 });
 
-Route::get('/create-avatar/{min}/{max}', function($min, $max) {
-  $users = Usuario::where('id', '>=', $min)->where('id', '<=', $max)->get();
 
-  foreach ($users as $usuario) {
-    echo ($usuario->id) . "<br>";
-    Usuario::saveImage($usuario->avatar, $usuario->id);
-  }
-});
 
 Route::get('/au/{id}', function($id) {
-
+exit;
   Auth::loginUsingId($id);
   return Redirect::to("/curso");
 });
@@ -268,7 +261,7 @@ Route::group(array('before' => 'auth'), function() {
 
 
 Route::get('/update-avatars/{from}/{to}', function($from, $to) {
-
+exit;
   $usuarios = usuario::where('id', '>=', $from)->where('id', '<=', $to)->get();
 
   foreach ($usuarios as $usuario) {
