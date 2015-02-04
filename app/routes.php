@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/load', function() {
-//exit;//
+//exit;//((
   $file = fopen('estudiantes_analisis.txt', 'r') or die('unable to open file');
 
 
