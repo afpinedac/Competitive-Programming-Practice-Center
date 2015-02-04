@@ -7,7 +7,7 @@ Route::get('/load', function() {
 
   //menor a 228
 
-  $curso = 8;
+  $curso = 7;
 
   while (!feof($file)) {
     $s = trim(strtolower(fgets($file)));
@@ -22,7 +22,7 @@ Route::get('/load', function() {
       $registro = DB::table('curso_x_usuario')->where('curso_id', $curso)->where('usuario_id', $user->id)->first();
 
       if (!$registro) {
-       // echo "se va a meter a {$user->email}<br/>";
+       echo "se va a meter a {$user->email}<br/>";
         
           $register = [
           'usuario_id' => $user->id,
@@ -34,7 +34,7 @@ Route::get('/load', function() {
           ];
           
           
-           DB::table('curso_x_usuario')->insert($register);
+        //   DB::table('curso_x_usuario')->insert($register);
          
       }
 
