@@ -4,7 +4,7 @@
     <title>{$title|default:"CPP | Centro de Práctica de Programación"}</title>  
     {HTML::script('js/analytics.js')}  
     
-    <meta name="description" content="CPP Es un sitio ideal para los profesores e Instituciones Educativas que desean contar con una plataforma Virtual de Aprendizaje para la enseñanza y práctica de la Programación Competitiva"/>
+    <meta name="description" content="CPP es un sitio excelente para los profesores e Instituciones Educativas que desean contar con una plataforma Virtual de Aprendizaje para la enseñanza y práctica de la Programación Competitiva"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     {*font google fonts*}
     <link href='http://fonts.googleapis.com/css?family=Londrina+Sketch' rel='stylesheet' type='text/css'>

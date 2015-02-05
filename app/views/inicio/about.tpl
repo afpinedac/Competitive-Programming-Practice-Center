@@ -1,11 +1,6 @@
 {capture assign='content'}
-
-        
     
     {include file='./_components/header_login.tpl'}
-    
-  
-
     
     <div class="row-fluid">
         <div class="span12">
@@ -16,7 +11,7 @@
                     <center><h1><a href="{url('/')}">CPP - Centro de Práctica de Programación</a></h1></center>
                 </div>
             </div>
-            <br>
+            <br/>
             
             <div class="row-fluid">
                 <div class="span12">

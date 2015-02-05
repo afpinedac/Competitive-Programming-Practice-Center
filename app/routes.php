@@ -199,6 +199,10 @@ Route::post('/loguear', function() {
 });
 
 
+Route::group(['before' => 'admin'], function(){
+  Route::controller('admin', 'AdminController');
+});
+
 
 Route::group(array('before' => 'auth'), function() {
 
