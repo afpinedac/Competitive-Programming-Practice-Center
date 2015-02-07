@@ -97,10 +97,7 @@ angular.module('Controllers', [])
   }
 }).controller('InicioController', function($scope, ajax) {
   $scope.notificaciones = [];
-  $scope.comentarios = []; //guarda la lista de comentarios de cada notifcacion
   $scope.comentario = []; //guarda lo que la persona va escribiendo en el textarea
-  $scope.comments_visible = []; //muesta si se ha escrito al menos un comentario
-  $scope.nlikes = []; //guarda el numero de likes de cada notificación
   var min_notificaciones = 10;
   $scope.limit_notificaciones = min_notificaciones;
   var step_notificaciones = 10;

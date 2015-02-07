@@ -98,15 +98,13 @@ class Curso extends Eloquent {
                       ->orderBy('nombres')
                       ->get();
     } else {//no muestra el profesor ni los monitores
-      
-        return DB::table('usuario')
+      return DB::table('usuario')
                       ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'usuario.id')
                       ->where('curso_x_usuario.curso_id', $this->id)
-                      ->where('usuario_id','<>',$this->profesor_id)
-                      ->where('curso_x_usuario.rol',0)
+                      ->where('usuario_id', '<>', $this->profesor_id)
+                      ->where('curso_x_usuario.rol', 0)
                       ->orderBy('nombres')
                       ->get();
-      
     }
   }
 
@@ -151,23 +149,26 @@ class Curso extends Eloquent {
                     ->count();
   }
 
-  public function get_notificaciones($skip=0,$take=100000) {
-    return DB::table('notificacion')
-                    ->select(DB::raw('lms_notificacion.id,lms_notificacion.created_at,lms_notificacion.publicacion,lms_usuario.nombres,lms_usuario.apellidos,lms_usuario.foto,lms_notificacion.codigo,lms_notificacion.tipo,lms_usuario.id as propietario, lms_notificacion.compartida_facebook, lms_notificacion.compartida_twitter'))
-                    ->join('usuario', 'usuario.id', '=', 'notificacion.usuario')
-                    ->where('curso', $this->id)
-                    ->where('tipo', '<>', 5) //no traiga los comentarios
-                    ->whereNotIn('notificacion.id', array_add(DB::table('notificacion')
-                                    ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'notificacion.usuario')
-                                    ->whereIn('curso_x_usuario.rol', [1, 2]) //rol de monitor y de estudiante
-                                    ->where('curso_x_usuario.curso_id', $this->id)
-                                    ->whereBetween('curso_x_usuario.curso_id', [1, 4])
-                                    ->where('notificacion.curso', $this->id)
-                                    ->lists('notificacion.id'), -1, -1))
-                    ->orderBy('id','desc')
-                    ->skip($skip)
-                    ->take($take)
-                    ->get();
+  public function get_notificaciones($skip = 0, $take = 100000) {
+    $result = DB::table('notificacion')
+            ->select(DB::raw('lms_notificacion.id,lms_notificacion.created_at,lms_notificacion.publicacion,lms_usuario.nombres,lms_usuario.apellidos,lms_usuario.foto,lms_notificacion.codigo,lms_notificacion.tipo,lms_usuario.id as propietario, lms_notificacion.compartida_facebook, lms_notificacion.compartida_twitter'))
+            ->join('usuario', 'usuario.id', '=', 'notificacion.usuario')
+            ->where('curso', $this->id)
+            ->where('tipo', '<>', 5) //no traiga los comentarios
+            ->whereNotIn('notificacion.id', array_add(DB::table('notificacion')
+                            ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'notificacion.usuario')
+                            ->whereIn('curso_x_usuario.rol', [1, 2]) //rol de monitor y de estudiante
+                            ->where('curso_x_usuario.curso_id', $this->id)
+                            ->whereBetween('curso_x_usuario.curso_id', [1, 4])
+                            ->where('notificacion.curso', $this->id)
+                            ->lists('notificacion.id'), -1, -1))
+            ->orderBy('id','desc');
+    
+    
+
+
+
+    return $result->orderBy('id','desc')->take(10)->get();
   }
 
   public function get_info_logros() {

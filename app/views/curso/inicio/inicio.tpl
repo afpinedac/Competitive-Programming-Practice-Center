@@ -23,7 +23,7 @@
             
             <center><i class="icon icon-repeat icon-3x" ng-show="loading_init"></i></center>
 
-            <div class="" ng-repeat="notificacion in notificaciones  | limitTo : limit_notificaciones | filter: search_notificacion">
+            <div class="" ng-repeat="notificacion in notificaciones |  orderBy: notificacion.id : true | limitTo : limit_notificaciones | filter: search_notificacion ">
               <a id="p[[notificacion.id]]"></a>
               <a id="c[[notificacion.id]]"></a>
               

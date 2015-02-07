@@ -13,7 +13,7 @@ class Logro extends Eloquent {
     $logro = DB::table('curso_x_logro_x_usuario')
                     ->where('id', $codigo)->first();
 
-    return logro::find($logro->logro);
+    return isset($logro->logro) ? logro::find($logro->logro) : null;
   }
 
 }

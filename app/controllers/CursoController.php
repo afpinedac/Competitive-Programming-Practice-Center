@@ -985,11 +985,7 @@ class CursoController extends LMSController {
       case 'notificaciones': //retorna las notificaciones del curso
         $curso = Input::get('curso');
         $curso = curso::find($curso);
-
-
-
-        $notificaciones = $curso->get_notificaciones(0, 10);
-
+        $notificaciones = $curso->get_notificaciones(0, 4);
         $json = [];
         foreach ($notificaciones as $notificacion) {
 
@@ -1005,7 +1001,7 @@ class CursoController extends LMSController {
               'id' => $notificacion->id,
               'propietario' => $notificacion->usuario,
               'avatar' => $notificacion->avatar,
-              'me_gusta' => $notificacion->gusta(Auth::user()->id)?'Ya no me gusta':'Me gusta'
+              'me_gusta' => $notificacion->gusta(Auth::user()->id) ? 'Ya no me gusta' : 'Me gusta'
           ];
           //cargamos los comentarios de la notificacion
           $comentarios = $notificacion->get_comentarios();
@@ -1023,11 +1019,13 @@ class CursoController extends LMSController {
           //agregamos si es un logro (imagen y descripcion del logro)
           if ($notificacion->tipo >= 1 && $notificacion->tipo <= 4) {
             $logro = logro::get_info_logro($notificacion->codigo);
-            $achievement = [
-                'nombre' => $logro->nombre,
-                'imagen' => $logro->codigo
-            ];
-            $json[$notificacion->id]['logro'] = $achievement;
+            if ($logro) {
+              $achievement = [
+                  'nombre' => $logro->nombre,
+                  'imagen' => $logro->codigo
+              ];
+              $json[$notificacion->id]['logro'] = $achievement;
+            }
           }
 
 
