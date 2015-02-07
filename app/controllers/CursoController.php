@@ -1004,7 +1004,8 @@ class CursoController extends LMSController {
               'publicacion' => $notificacion->publicacion,
               'id' => $notificacion->id,
               'propietario' => $notificacion->usuario,
-              'avatar' => $notificacion->avatar
+              'avatar' => $notificacion->avatar,
+              'me_gusta' => $notificacion->gusta(Auth::user()->id)?'Ya no me gusta':'Me gusta'
           ];
           //cargamos los comentarios de la notificacion
           $comentarios = $notificacion->get_comentarios();

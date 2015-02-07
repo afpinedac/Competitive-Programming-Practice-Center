@@ -155,13 +155,24 @@ angular.module('Controllers', [])
             });
           },
           $scope.me_gusta = function(notificacion) {
-            notifi = notificacion[0][0];
-            data = {notificacion: notifi, usuario: $scope.usuario_logueado};
+            var notifi = notificacion[0][0],
+            data = {notificacion: notifi, usuario: $scope.usuario_logueado},n;
+            
+
+            window.console.log("->" + $("#me-gusta-" + notifi).text());
+            window.console.log("->" + $("#me-gusta-" + notifi).val());
+            window.console.log("->" + $("#me-gusta-" + notifi).html());
+            window.console.log(notifi);
+
             ajax.post(base_url + '/notificacion/me-gusta', data, function(data2) {
-              $scope.numero_likes(notificacion);
-              if (data2.tipo == 1) {
+              n = parseInt($("#me-gusta-" + notifi).text(), 10);
+              if (data2.tipo === '1') {
+                $("#me-gusta-" + notifi).text(n + 1);
+                $("#text-me-gusta-" + notifi).text("Ya no me gusta");
                 alertify.log("Te ha gustado esta publicación", "success", 4000);
               } else {
+                $("#text-me-gusta-" + notifi).text("Me gusta");
+                $("#me-gusta-" + notifi).text(n - 1);
                 alertify.log("Ya no te gusta esta publicación", "success", 4000);
               }
             });

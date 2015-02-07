@@ -78,7 +78,7 @@
                         <!--la publicacion es de otro-->
                         <div class="span12" ng-if='usuario_logueado!=notificacion.propietario'>
                           
-                          <a href=''  ng-click="me_gusta([[notificacion.id]])">Me gusta</a>  &nbsp;&nbsp;
+                          <a id="text-me-gusta-[[notificacion.id]]" href=''  ng-click="me_gusta([[notificacion.id]])">[[notificacion.me_gusta]]</a>  &nbsp;&nbsp;
                          <!-- <a href='' ng-show='!me_gusta[notificacion.id]' ng-click="me_gusta([[notificacion.id]])">Ya no me gusta</a>  &nbsp;&nbsp;-->
                           <a href=''  ng-click='notificacion.tiene_comentarios=true'>  <i class="icon icon-comment-alt"></i> Comentar</a>
                         </div>
@@ -86,7 +86,7 @@
 
                       <div  style="margin-top: -40px; padding: 0px;" class="row-fluid">
                         <i class='icon icon-thumbs-up-alt' style="margin-top: -10px;" ></i>
-                        <small> A <span><a href='#likes'   ng-bind='notificacion.n_likes'></a></span> personas les gusta esto</p></small>
+                        <small> A <span><a href='#likes'  id="me-gusta-[[notificacion.id]]" ng-bind='notificacion.n_likes'></a></span> personas les gusta esto</p></small>
                       </div>
 
                       <!--comentarios-->
