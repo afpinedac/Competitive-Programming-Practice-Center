@@ -87,9 +87,10 @@ class NotificacionController extends LMSController {
         $comentador = usuario::find(Auth::user()->id);
         $info = array(
             'id' => $comentario,
-            'foto' => General::avatar($comentador->id),
+            'comentadorid' => $comentador->id,
             'nombres' => $comentador->nombres,
-            'comentario' => Input::get('comentario')
+            'apellidos' => $comentador->apellidos,
+            'publicacion' => Input::get('comentario')
         );
 
         #creamos la alerta

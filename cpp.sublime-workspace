@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"gri",
+				"gris_claro"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"widh",
+				"width"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"gris",
+				"gris_oscuro"
+			],
+			[
+				"mar",
+				"margin-right"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"top",
+				"margin-top"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"fi",
+				"figure"
+			],
+			[
 				"des",
 				"desmatricular"
 			]
@@ -11,11 +55,35 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/pag1.min.css",
+			"settings":
+			{
+				"buffer_size": 113784,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/index.html",
+			"settings":
+			{
+				"buffer_size": 409,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag1.html",
+			"settings":
+			{
+				"buffer_size": 1495,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 242.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
@@ -80,6 +148,14 @@
 	},
 	"file_history":
 	[
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag2.css",
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag1.css",
+		"/C/Users/AndresPineda/Documents/NetBeansProjects/Spotify/public_html/stylus/estilos.styl",
+		"/C/Users/AndresPineda/Documents/NetBeansProjects/Spotify/public_html/index.html",
+		"/C/Users/AndresPineda/Documents/NetBeansProjects/Spotify/public_html/stylus/fonts.styl",
+		"/C/Users/AndresPineda/Documents/NetBeansProjects/Spotify/public_html/stylus/style.css",
+		"/C/xampp/htdocs/lms2/app/views/inicio/about.tpl",
+		"/C/xampp/htdocs/lms2/app/views/_templates/template.tpl",
 		"/C/xampp/htdocs/lms2/hola.test",
 		"/C/xampp/htdocs/lms2/app/controllers/AuthController.php",
 		"/C/xampp/htdocs/lms2/app/controllers/ForoController.php",
@@ -98,7 +174,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -113,6 +189,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"<strong>",
+			"<td>",
+			">\n",
+			"</li>",
+			"<li>",
+			">\n",
+			"over",
+			"padding",
+			"center",
+			"fonts",
+			"icono",
 			"gris_claro",
 			"margin",
 			"button"
@@ -133,14 +220,106 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/pag1.min.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 113784,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 409,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								409,
+								409
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag1.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								363,
+								363
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 42.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 22.0
 	},
 	"input":
 	{
@@ -180,7 +359,7 @@
 	"project": "cpp.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 40.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -218,7 +397,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 224.0,
+	"side_bar_width": 207.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

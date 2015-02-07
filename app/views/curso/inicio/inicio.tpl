@@ -36,10 +36,10 @@
                 <div class="row-fluid" >
                   <div class="span12">
                     <div class="span1">
-                      [[notificacion.avatar]]
+                      
                       <img ng-src="{url('/avatares/userimages')}/[[notificacion.propietario]].png" class='mini_foto ver-perfil' {*onclick="usuario.ver_perfil({notificacion::find(notificacion.id)->usuario})"*}>
                     </div>
-                    <div class="span11 div-wrap" ng-init='get_comentarios(notificacion.id)'>
+                    <div class="span11 div-wrap" >
                       <p><strong>[[notificacion.nombres]] [[notificacion.apellidos]]</strong></p>
 
                       <!--publicacion normal-->
@@ -50,14 +50,14 @@
                       <!---LOGRO---->
                       <div ng-if='notificacion.tipo!=0' class='well' >
                      {*   {assign var=logrox value=logro::get_info_logro($notificacion->codigo)}*}
-                        <h4>He conseguido el logro: <span style='font-size: 30px;'>[[notificacion.nombre_logro]]</span></h4>
-                        <img style='margin-left: 15px' ng-src='{url('img/logros/')}/[[notificacion.imagen_logro]].png' class='img-logro-notificacion'>
+                        <h4>He conseguido el logro: <span style='font-size: 30px;'>[[notificacion.logro.nombre]]</span></h4>
+                        <img style='margin-left: 15px' ng-src='{url('img/logros/')}/[[notificacion.logro.imagen]].png' class='img-logro-notificacion'>
                         <br>
                       </div>
                       <div class="row-fluid" style="margin-top: -10px;">
                         <!--la publicacion es mia-->
                         <div class="span12" ng-if='usuario_logueado==notificacion.propietario'>
-                          <a href=''  onclick="return false;" ng-click='comments_visible[notificacion.id]=true'> <i class="icon icon-comment-alt"></i> Comentar</a>
+                          <a href=''  onclick="return false;" ng-click='notificacion.tiene_comentarios=true'> <i class="icon icon-comment-alt"></i> Comentar</a>
                           &nbsp;&nbsp;
                           <!--COMPARTIR EN REDES SOCIALES-->   
                           <!--twitter-->
@@ -77,23 +77,24 @@
                         </div>
                         <!--la publicacion es de otro-->
                         <div class="span12" ng-if='usuario_logueado!=notificacion.propietario'>
-                          <a href='' ng-show='me_gusta[notificacion.id]' ng-click="me_gusta([[notificacion.id]])">Me gusta</a>  &nbsp;&nbsp;
+                          
+                          <a href=''  ng-click="me_gusta([[notificacion.id]])">Me gusta</a>  &nbsp;&nbsp;
                          <!-- <a href='' ng-show='!me_gusta[notificacion.id]' ng-click="me_gusta([[notificacion.id]])">Ya no me gusta</a>  &nbsp;&nbsp;-->
-                          <a href=''  ng-click='comments_visible[notificacion.id]=true'>  <i class="icon icon-comment-alt"></i> Comentar</a>
+                          <a href=''  ng-click='notificacion.tiene_comentarios=true'>  <i class="icon icon-comment-alt"></i> Comentar</a>
                         </div>
                       </div>    
 
-                      <div style="margin-top: -40px; padding: 0px;" class="row-fluid">
+                      <div  style="margin-top: -40px; padding: 0px;" class="row-fluid">
                         <i class='icon icon-thumbs-up-alt' style="margin-top: -10px;" ></i>
-                        <small> A <span><a href='#likes' ng-init="numero_likes([[notificacion.id]])"   ng-bind='nlikes[notificacion.id]'></a></span> personas les gusta esto</p></small>
+                        <small> A <span><a href='#likes'   ng-bind='notificacion.n_likes'></a></span> personas les gusta esto</p></small>
                       </div>
 
                       <!--comentarios-->
                       <div>
-                        <div   ng-show='comments_visible[notificacion.id]' class='container-fluid'> 
+                        <div  ng-show='notificacion.tiene_comentarios' class='container-fluid'> 
                           <div class='span6'>
-                            <div  ng-repeat='comment in comentarios[notificacion.id]' >
-                              <div class="bubble span12" style="margin-left: 20px; padding: 0px;">
+                            <div  ng-repeat='comment in notificacion.comentarios' >
+                              <div id="comment-[[notificacion.id]]-[[comment.id]]" class="bubble span12" style="margin-left: 20px; padding: 0px;">
                                 <img ng-src="{url('/avatares/userimages')}/[[comment.comentadorid]].png"  class="img-avatar-comentario pull-left" style="margin-top: 5px; margin-left: 3px;margin-right: 3px;">
                                 <p><strong><small>[[comment.nombres]] [[comment.apellidos]]:</small> </strong><small>[[comment.publicacion]]</small></p>
                                 <span ng-if='comment.comentadorid==usuario_logueado' class='pull-right' style='font-size: 8px; margin-top: -20px; margin-right: 3px;'><small><i class='icon icon-remove' ng-click='eliminar_comentario([[comment.id]],[[notificacion.id]])' ></i></small></span>
@@ -126,203 +127,7 @@
             <!-----END ANGULAR----->
 
 
-            {*{foreach $notificaciones as $notificacion}
-              {continue}
-              {if $notificacion->tipo>0 and $notificacion->tipo<5 and (usuario::find($notificacion->propietario)->es_monitor($curso->id) or usuario::find($notificacion->propietario)->es_propietario($curso->id))}
-                {continue}
-              {/if}
-              {assign var=comentarios value=notificacion::find($notificacion->id)->get_comentarios()}
-
-              <a id="p{$notificacion->id}"></a>
-              <a id="c{$notificacion->id}"></a>
-
-              <div id='publicacion-{$notificacion->id}' style='margin-top: -10px;'>
-
-                <div class="row-fluid" >
-                  <div class="span12">
-                    <div class="span1">
-
-                      <img src="{General::avatar(notificacion::find($notificacion->id)->usuario)}" class='mini_foto ver-perfil' onclick="usuario.ver_perfil({notificacion::find($notificacion->id)->usuario})">
-                    </div>
-
-
-
-                    <div class="span11 div-wrap" {if $notificacion->tipo > 0 and $notificacion->tipo<5}style='background-color:#FAFAF8; border-radius: 4px; padding: 5px; border: 1px solid #ccc' {/if}>
-
-
-                      <div class="row-fluid">
-                        <div class="span12">
-                          <div class="span10">
-                            <p><strong>{$notificacion->nombres|capitalize} {$notificacion->apellidos|capitalize}</strong></p>
-
-                          </div>
-                          <div class="span2">
-                            <small class='pull-right'><i>{$notificacion->created_at|date_format}</i> &nbsp; {if Auth::user()->id ==notificacion::find($notificacion->id)->usuario and  $notificacion->tipo == 0} <i data-post='{$post->id}' onclick="publicacion.eliminar({$notificacion->id})"  class='icon-remove eliminar-post'></i> {/if}</small>
-                          </div>
-
-
-
-
-                        </div>
-                      </div>
-
-                      <div class="row-fluid" >
-                        <div class="span12" style='margin-top: -10px;'> 
-                          {if $notificacion->tipo==0}  
-
-                              <p style='margin-top: 10px ;font-size: 28px; margin-left: 8px; line-height: 30px;'><pre style='font-size: 15px;'>{e($notificacion->publicacion)}</pre></p>
-
-                            {elseif $notificacion->tipo > 0 and $notificacion->tipo<5}  
-
-                              {assign var=logrox value=logro::get_info_logro($notificacion->codigo)}
-                              <h4>He conseguido el logro: <span style='font-size: 30px;'>{$logrox->nombre}</span></h4>
-                              <img style='margin-left: 15px' src='{url('img/logros/')}/{$logrox->codigo}.png' class='img-logro-notificacion'>
-                              <br>
-                            {/if}
-                          </div>
-                        </div> 
-                        {if $notificacion->tipo>0}
-                          <br>
-                        {/if}
-
-                        <div class="row-fluid">
-                          <div class="span12">
-
-                            <p style="margin-top: -10px;">
-                              {if Auth::user()->id != notificacion::find($notificacion->id)->usuario}
-                                <a  href='' onclick="return publicacion.me_gusta({$notificacion->id})"><span id='me-gusta-{$notificacion->id}'>
-
-
-
-                                    {if notificacion::find($notificacion->id)->gusta(Auth::user()->id)}
-                                      <small>Ya no me gusta</small>
-                                    {else}
-                                      <small>Me gusta</small>
-                                    {/if}
-
-
-
-
-                                  </span></a>
-
-
-                                &nbsp;&nbsp;
-
-                                <a href="#" onclick="return publicacion.ver_comentarios({$notificacion->id},{count($comentarios)});"><i class='icon icon-comment-alt'></i> <small>Comentar</small></a>
-
-
-                                &nbsp;&nbsp;&nbsp;
-                              {/if}
-                              {if Auth::user()->id == notificacion::find($notificacion->id)->usuario}
-
-                                {if notificacion::find($notificacion->id)->esta_compartida()}
-                                  <a href='#' onclick="return false;">
-                                    <span class=''><i class='icon icon-facebook-sign'></i> Ha sido compartido <i class='icon icon-ok'></i></span>
-                                  </a>
-
-
-                                {else}
-                                  <a href="{url('notificacion/login-facebook')}/{$notificacion->id}">
-                                    <span class=''><i class='icon icon-facebook-sign'></i> Compartir</span>
-                                  </a>
-
-                                {/if}
-
-
-
-                                &nbsp;&nbsp;
-
-
-
-                                {if notificacion::find($notificacion->id)->esta_compartida('t')}    
-                                  <a href="#" onclick="return false;">
-                                    <span class=''><i class='icon icon-twitter-sign'></i> Ha sido twitteado <i class='icon icon-ok'></i></span>
-                                  </a>
-
-
-                                {else}
-
-                                  <a href="{url('notificacion/login-twitter')}/{$notificacion->id}">
-                                    <span class=''><i class='icon icon-twitter-sign'></i> Twittear</span>
-                                  </a>
-
-                                {/if}
-                                &nbsp;&nbsp;
-
-                                <a href="#" onclick="return publicacion.ver_comentarios({$notificacion->id},{count($comentarios)});"><i class='icon icon-comment-alt'></i> <small>Comentar</small></a>
-
-                              {/if}
-
-                            </p>
-
-                            <p style='margin-top: -10px;'>
-                              <i class='icon icon-thumbs-up-alt'></i>
-                              {assign var=npersonasgusta value=notificacion::find($notificacion->id)->numero_de_me_gusta()}
-                              <small> A <span id='contador-me-gusta-{$notificacion->id}'>{if $npersonasgusta>0}<a href='#likes' onclick="publicacion.likes({$notificacion->id})" data-toggle='modal'>{/if}{$npersonasgusta}{if $npersonasgusta>0}</a>{/if}</span> persona{if $npersonasgusta != 1}s{/if} le gusta esto</p></small>
-
-
-                            <div class="row-fluid">
-                              <div class="span12">
-
-                                <div class="row-fluid">
-                                  <div class="span6" id='comentarios-{$notificacion->id}'>
-
-                                    {foreach $comentarios as $comentario}
-
-                                      {assign var=comentador value=usuario::find($comentario->usuario)}
-
-                                      <div class="bubble span12" style="margin-left: 20px; padding: 0px;" id='div-comentario-{$comentario->id}'>
-                                        <img src='{General::avatar($comentador->id)}' class="img-avatar-comentario pull-left" style="margin-top: 5px; margin-left: 3px;margin-right: 3px;">
-
-
-                                        <p><strong><small>{$comentador->nombres}:</small> </strong><small>{e($comentario->publicacion)}</small></p>
-                                        {if Auth::user()->id == $comentador->id}<span class='pull-right' style='font-size: 8px; margin-top: -20px; margin-right: 3px;'><small><i class='icon icon-remove' onclick="publicacion.eliminar_comentario({$comentario->id})"></i></small></span>{/if}
-                                      </div>  
-
-                                    {/foreach}
-
-
-                                    <div  style="margin-left: 20px; padding: 3px;" id='comentario-{$notificacion->id}' class='{if count($comentarios)==0}hide{/if}'>
-
-                                      <textarea class="span11" rows="1"  placeholder="Tu comentario..." name='comentario' required=""></textarea>
-                                      <button class="btn-mini btn-success" onclick="publicacion.comentar({$notificacion->id})" style="margin-top: -10px; margin-left: 5px;"><i class='icon icon-edit' title='Comentar'></i></button>
-
-                                    </div>
-
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-
-
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-                <hr style="margin-top: 2px;">
-
-
-                {foreachelse}
-
-                  <div class="row-fluid">
-                    <div class="span10 offset1">
-                      <div class="alert alert-info">
-                        <br>
-                        <center><h4>Este curso no tiene ninguna publicación, sé el primero en hacerlo</h4></center>
-                        <br>
-                      </div>    
-
-                    </div>
-                  </div>
-
-                  {/foreach}*}
-
+            
                   </div>
                 </div>
 
@@ -371,7 +176,7 @@
 
           <script>
 
-            publicacion = {
+           var publicacion = {
               me_gusta: function(id) {
 
                 $.ajax({
@@ -430,19 +235,7 @@
 
 
               },
-              ver_comentarios: function(publicacion, cuantos) {
-
-                if (cuantos == 0) {
-                  $("#comentario-" + publicacion).show();
-                }
-
-                $("#comentario-" + publicacion + " textarea").focus();
-
-                return false;
-
-
-
-              },
+            
               comentar: function(publicacion) {
 
                 comentario = $("#comentario-" + publicacion + " textarea").val();

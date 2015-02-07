@@ -252,8 +252,6 @@ class CursoController extends LMSController {
             } else if (evaluacion::find($param1)->get_time_fin() <= time() || evaluacion::find($param1)->get_time_ini() >= time()) { #la evaluacion ya paso o no ha comenzado
               return Redirect::to("curso/ver/{$curso->id}/contenido");
             } else if ($param2 == -1) { # si es la evaluacion
-              
-              
               return View::make("curso.$tab.$tab")
                               ->with('curso', $curso)
                               ->with('modulo', $modulo)
@@ -264,8 +262,8 @@ class CursoController extends LMSController {
                               ->with('evaluacion', $param1); //pasamos como parametro la evaluacion
             } else { # si elige un ejercicio de la evaluacion
               if (evaluacion::find($param1)->tiene_ejercicio($param2)) {
-                
-                
+
+
                 return View::make('curso.ejercicio.ejercicio2')
                                 ->with('curso', $curso)
                                 ->with('ejercicio', evaluacion::find($param1)->get_ejercicio($param2))
@@ -362,8 +360,6 @@ class CursoController extends LMSController {
           $ejercicio = modulo::find(Session::get('modulo.estudiante', $curso->get_primer_modulo()))->get_ejercicio($param1);
           if ($ejercicio) { #si existe el ejercicio al que quiero acceder   
 #se mira si un envio a sido evaluado y se dan los respectivos logros de un taller y puntos
-         
-
             return View::make('curso.ejercicio.ejercicio2')
                             ->with('curso', $curso)
                             ->with('ejercicio', $ejercicio)
@@ -386,7 +382,7 @@ class CursoController extends LMSController {
 
           #se mira si un envio a sido evaluado y se dan los respectivos logros de un taller y puntos
           #mira si hay respuesta a algun ejercicio
-        //  $this->has_some_veredict($curso->id);
+          //  $this->has_some_veredict($curso->id);
 
 
           return View::make("curso.$tab.$tab")
@@ -631,10 +627,9 @@ class CursoController extends LMSController {
 
       #-----------------TALLERES------------------------------
       if ($opcion == "talleres") {
-      
+
         $path[2] = array('nombre' => 'Talleres', 'enlace' => url("curso/monitorear/{$curso->id}/talleres"));
         if ($value1 == null) { #mostrar todos los talleres      
-          
           return View::make('profesor.monitorear.talleres.talleres')
                           ->with('curso', $curso)
                           ->with('modulos', $curso->get_modulos())
@@ -653,7 +648,7 @@ class CursoController extends LMSController {
 
               $path[4] = array('nombre' => 'Ejercicios', "#");
               if ($value2 == null) {
-                
+
                 return View::make('profesor.monitorear.talleres.ejercicios')
                                 ->with('curso', $curso)
                                 ->with('modulos', $curso->get_modulos())
@@ -676,9 +671,8 @@ class CursoController extends LMSController {
                                 ->with('ejercicio', $ejercicio);
               }
             } else if ($method == 'estudiantes') {
-                
+
               if ($value2 == null) { #todos los estudiantes
-                
                 return View::make('profesor.monitorear.talleres.estudiantes')
                                 ->with('curso', $curso)
                                 ->with('modulos', $curso->get_modulos())
@@ -728,11 +722,11 @@ class CursoController extends LMSController {
                             ->with('modulos', $curso->get_modulos())
                             ->with('path', $path)
                             ->with('taller', taller::find($value1));
-                            //->with('estudiantes_inscritos', $estudiantes);
+            //->with('estudiantes_inscritos', $estudiantes);
           }
         }
         #----------------------EVALUACIONES-------------------------------------------------------------
-      } else if ($opcion == "evaluaciones")  {   
+      } else if ($opcion == "evaluaciones") {
 
         if ($value1 == null) { #todas las evaluaciones
           $path[2] = array('nombre' => 'Evaluaciones', 'enlace' => '#');
@@ -968,7 +962,6 @@ class CursoController extends LMSController {
       $profesor = Auth::user()->id;
       if ($curso && $curso->profesor_id == $profesor) {
         echo $curso->asignar_monitor(Input::get('monitor'));
-         
       }
     }
   }
@@ -992,17 +985,65 @@ class CursoController extends LMSController {
       case 'notificaciones': //retorna las notificaciones del curso
         $curso = Input::get('curso');
         $curso = curso::find($curso);
-        return Response::json($curso->get_notificaciones());
-        break;
+
+
+
+        $notificaciones = $curso->get_notificaciones(0, 10);
+
+        $json = [];
+        foreach ($notificaciones as $notificacion) {
+
+          $notificacion = notificacion::find($notificacion->id);
+          //cargamos toda la info de la notificacion
+          $json[$notificacion->id] = [
+              'n_likes' => $notificacion->numero_de_me_gusta(),
+              'compartida_facebook' => $notificacion->compartida_facebook,
+              'compartida_twitter' => $notificacion->compartida_twitter,
+              'tipo' => $notificacion->tipo,
+              'codigo' => $notificacion->codigo,
+              'publicacion' => $notificacion->publicacion,
+              'id' => $notificacion->id,
+              'propietario' => $notificacion->usuario,
+              'avatar' => $notificacion->avatar
+          ];
+          //cargamos los comentarios de la notificacion
+          $comentarios = $notificacion->get_comentarios();
+          $comments = [];
+          foreach ($comentarios as $comentario) {
+            $comments [] = [
+                'publicacion' => $comentario->publicacion,
+                'comentadorid' => $comentario->comentadorid,
+                'nombres' => $comentario->nombres,
+                'apellidos' => $comentario->apellidos,
+                'id' => $comentario->id
+            ];
+          }
+
+          //agregamos si es un logro (imagen y descripcion del logro)
+          if ($notificacion->tipo >= 1 && $notificacion->tipo <= 4) {
+            $logro = logro::get_info_logro($notificacion->codigo);
+            $achievement = [
+                'nombre' => $logro->nombre,
+                'imagen' => $logro->codigo
+            ];
+            $json[$notificacion->id]['logro'] = $achievement;
+          }
+
+
+          $json[$notificacion->id]['comentarios'] = $comments;
+          $json[$notificacion->id]['tiene_comentarios'] = count($comments) > 0;
+        }
+        return Response::json($json);
+      //break;
       case 'monitorear_taller':
-            $taller= Input::get('taller');
-            $curso = curso::find(modulo::find($taller)->curso);
-            return Response::json($curso->monitorear_taller($taller));
-      break;
+        $taller = Input::get('taller');
+        $curso = curso::find(modulo::find($taller)->curso);
+        return Response::json($curso->monitorear_taller($taller));
+        break;
       case 'monitorear_estudiantes':
-            $curso = curso::find(Input::get('curso'));            
-            return Response::json($curso->monitorear_estudiantes());
-      break;
+        $curso = curso::find(Input::get('curso'));
+        return Response::json($curso->monitorear_estudiantes());
+        break;
       case 'envios': //retorna las notificaciones del curso
         $curso = curso::find($curso);
         $envios = $curso->get_cola_envios();
@@ -1018,12 +1059,20 @@ class CursoController extends LMSController {
         }
         return Response::json($data);
         break;
-        
+
       case 'info_logros':
         $curso = curso::find(Input::get('curso'));
         return Response::json($curso->get_info_logros());
         break;
-        
+
+      case 'all': //retorna todas notificaciones del curso 
+
+
+
+
+
+        break;
+
       default:
         return Response::json(['error' => 'No existe el tipo de request']);
         break;

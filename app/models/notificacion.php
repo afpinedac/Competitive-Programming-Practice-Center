@@ -38,7 +38,7 @@ class Notificacion extends Eloquent {
                         ->where('tipo', 5) #tipo de los comentarios
                         ->where('codigo', $this->id)                        
                         ->orderBy('id')
-                        ->select(["usuario.nombres" ,"usuario.apellidos" ,'notificacion.id','notificacion.publicacion','usuario.id as comentadorid','notificacion.publicacion'])
+                        ->select(["usuario.nombres" ,"usuario.apellidos" ,'notificacion.id','usuario.id as comentadorid','notificacion.publicacion'])
                         ->get();
     }
     

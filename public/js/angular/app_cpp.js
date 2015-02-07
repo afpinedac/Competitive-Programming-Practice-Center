@@ -101,37 +101,20 @@ angular.module('Controllers', [])
   $scope.comentario = []; //guarda lo que la persona va escribiendo en el textarea
   $scope.comments_visible = []; //muesta si se ha escrito al menos un comentario
   $scope.nlikes = []; //guarda el numero de likes de cada notificación
-  min_notificaciones = 10;
+  var min_notificaciones = 10;
   $scope.limit_notificaciones = min_notificaciones;
-  step_notificaciones = 10;
+  var step_notificaciones = 10;
   $scope.boton_mas = true;
   $scope.loading = false;
   $scope.loading_init = false;
-  var info_logros = [];
+
 
   $scope.InicioController = function(curso) {
     $scope.loading_init = true;
     curso_actual = curso;
-
-    ajax.post(base_url + '/curso/json/info_logros', {curso: curso_actual}, function(data) {
-      info_logros = data;
-    });
-
     ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual}, function(data) {
+      console.log(data);
       $scope.notificaciones = data;
-      $.each($scope.notificaciones, function(idx, notificacion) {
-
-        if (notificacion.tipo != 0) {
-          for (i = 0; i < info_logros.length; i++) {
-            if (info_logros[i].id == notificacion.id) {
-              notificacion['imagen_logro'] = info_logros[i].codigo;
-              notificacion['nombre_logro'] = info_logros[i].nombre;
-              //window.console.log('pasó');
-              break;
-            }
-          }
-        }
-      });
     });
     $scope.loading_init = false;
   };
@@ -143,28 +126,31 @@ angular.module('Controllers', [])
     $scope.limit_notificaciones = Math.min($scope.limit_notificaciones + step_notificaciones, $scope.notificaciones.length)
 
   };
-  $scope.get_comentarios = function(notificacion) {
-    ajax.post(base_url + '/notificacion/json/comentarios', {notificacion: notificacion}, function(data) {
-      $scope.comentarios[notificacion] = data;
-      $scope.comments_visible[notificacion] = data.length > 0;
 
-    });
-  };
   $scope.comentar = function(notif) {
     notif = notif[0][0];
     data = {notificacion: notif, comentario: $scope.comentario[notif]};
     ajax.post(base_url + '/notificacion/comentar', data, function(data2) {
-      $scope.get_comentarios(notif);
+      $scope.notificaciones[notif].comentarios.push(
+              {
+                nombres: data2.nombres,
+                apellidos: data2.apellidos,
+                publicacion: data2.publicacion,
+                comentadorid: data2.comentadorid,
+              }
+
+      );
       $scope.comentario[notif] = '';
       alertify.log('Has comentado esto', "success", 4000);
     });
+
   },
           $scope.eliminar_comentario = function(comentario, notif) {
             comentario = comentario[0][0];
             notif = notif[0][0];
             data = {comentario: comentario};
+            $("#comment-" + notif + "-" + comentario).remove();
             ajax.post(base_url + '/notificacion/eliminar-comentario', data, function(data2) {
-              $scope.get_comentarios(notif);
               alertify.log("Comentario eliminado", "success", 4000);
             });
           },
@@ -179,10 +165,8 @@ angular.module('Controllers', [])
                 alertify.log("Ya no te gusta esta publicación", "success", 4000);
               }
             });
-
           },
           $scope.eliminar_notificacion = function(notificacion) {
-
             ajax.post(base_url + '/notificacion/eliminar-comentario', {comentario: notificacion}, function(data) {
               if (data == "1") {
                 $('#publicacion-' + notificacion + ' + hr').remove(); //quitamos el hr que está al final de cada publicación
@@ -194,20 +178,9 @@ angular.module('Controllers', [])
               }
             });
 
-
-
-
-          },
-          $scope.ver_likes = function(notificacion) {
-
-          },
-          $scope.numero_likes = function(notificacion) {
-            notificacion = notificacion[0][0];
-            data = {notificacion: notificacion};
-            ajax.post(base_url + '/notificacion/json/nlikes', data, function(data2) {
-              $scope.nlikes[notificacion] = data2;
-            })
           }
+
+
 }).controller('EvaluacionController', function($scope, ajax) {
   evaluacion = null;
 
@@ -257,7 +230,7 @@ angular.module('Controllers', [])
   load_data = function() {
     ajax.post(base_url + '/curso/json/monitorear_estudiantes', {curso: curso}, function(data) {
       $scope.estudiantes = data;
-     // window.console.log(data);
+      // window.console.log(data);
     });
   },
           $scope.set_monitor = function(id, curso) {
