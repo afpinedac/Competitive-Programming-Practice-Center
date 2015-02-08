@@ -991,6 +991,7 @@ class CursoController extends LMSController {
         foreach ($notificaciones as $notificacion) {
 
           $notificacion = notificacion::find($notificacion->id);
+          $usuario = Usuario::find($notificacion->usuario);
           //cargamos toda la info de la notificacion
           $json[$notificacion->id] = [
               'n_likes' => $notificacion->numero_de_me_gusta(),
@@ -1002,7 +1003,9 @@ class CursoController extends LMSController {
               'id' => $notificacion->id,
               'propietario' => $notificacion->usuario,
               'avatar' => $notificacion->avatar,
-              'me_gusta' => $notificacion->gusta(Auth::user()->id) ? 'Ya no me gusta' : 'Me gusta'
+              'me_gusta' => $notificacion->gusta(Auth::user()->id) ? 'Ya no me gusta' : 'Me gusta',
+              'nombres' =>  $usuario->nombres,
+              'apellidos' =>  $usuario->apellidos
           ];
           //cargamos los comentarios de la notificacion
           $comentarios = $notificacion->get_comentarios();
