@@ -23,7 +23,7 @@
             
             <center><i class="icon icon-repeat icon-3x" ng-show="loading_init"></i></center>
 
-            <div class="" ng-repeat="notificacion in notificaciones |  orderBy: notificacion.id : true | limitTo : limit_notificaciones | filter: search_notificacion ">
+            <div class="" ng-repeat="notificacion in notificaciones_arr">
               <a id="p[[notificacion.id]]"></a>
               <a id="c[[notificacion.id]]"></a>
               
@@ -114,9 +114,9 @@
               </div>
               <hr>
             </div>
-                                <div class="container-fluid" ng-hide='notificaciones.length==limit_notificaciones'>
+                                <div class="container-fluid" >
     <div class="span4 offset4">
-     <center><button class='btn-mini btn-info span12' ng-click='mas_notificaciones()'> Mas notificaciones<i ng-init='loading2=false' ng-show='loading2' class='icon icon-repeat icon-spin'></i></button></center>
+     <center><button class='btn-mini btn-info span12' ng-click='cargar_notificaciones()'> Mas notificaciones<i  ng-show="loading2" class='icon icon-repeat icon-spin'></i></button></center>
     </div>
                                   
                                   

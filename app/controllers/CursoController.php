@@ -985,8 +985,9 @@ class CursoController extends LMSController {
       case 'notificaciones': //retorna las notificaciones del curso
         $curso = Input::get('curso');
         $curso = curso::find($curso);
-        $notificaciones = $curso->get_notificaciones(0, 4);
+        $notificaciones = $curso->get_notificaciones(Input::get('skip'));
         $json = [];
+        
         foreach ($notificaciones as $notificacion) {
 
           $notificacion = notificacion::find($notificacion->id);
@@ -1006,6 +1007,7 @@ class CursoController extends LMSController {
           //cargamos los comentarios de la notificacion
           $comentarios = $notificacion->get_comentarios();
           $comments = [];
+          
           foreach ($comentarios as $comentario) {
             $comments [] = [
                 'publicacion' => $comentario->publicacion,

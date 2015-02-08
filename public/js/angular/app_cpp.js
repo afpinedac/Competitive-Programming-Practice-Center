@@ -98,30 +98,38 @@ angular.module('Controllers', [])
 }).controller('InicioController', function($scope, ajax) {
   $scope.notificaciones = [];
   $scope.comentario = []; //guarda lo que la persona va escribiendo en el textarea
-  var min_notificaciones = 10;
-  $scope.limit_notificaciones = min_notificaciones;
   var step_notificaciones = 10;
+  var notificaciones_mostradas = 0;
   $scope.boton_mas = true;
   $scope.loading = false;
   $scope.loading_init = false;
+  $scope.notificaciones_arr = [];
+  $scope.loading2 = false;
+  var curso_actual;
+
 
 
   $scope.InicioController = function(curso) {
     $scope.loading_init = true;
     curso_actual = curso;
-    ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual}, function(data) {
-      console.log(data);
-      $scope.notificaciones = data;
-    });
+    $scope.cargar_notificaciones();
     $scope.loading_init = false;
   };
 
-  $scope.menos_notificaciones = function() {
-    $scope.limit_notificaciones = Math.max($scope.limit_notificaciones - step_notificaciones, min_notificaciones);
-  };
-  $scope.mas_notificaciones = function() {
-    $scope.limit_notificaciones = Math.min($scope.limit_notificaciones + step_notificaciones, $scope.notificaciones.length)
 
+
+  $scope.cargar_notificaciones = function() {
+    $scope.loading2 = true;
+    ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual, skip: notificaciones_mostradas}, function(data) {
+      var array = $.map(data, function(value, index) {
+        return [value];
+      });
+      $scope.notificaciones_arr = $scope.notificaciones_arr.concat(array.reverse());
+      $.extend($scope.notificaciones, data);
+      //window.console.log($scope.notificaciones);
+    });
+    notificaciones_mostradas += step_notificaciones;
+    $scope.loading2 = false;
   };
 
   $scope.comentar = function(notif) {
@@ -134,6 +142,7 @@ angular.module('Controllers', [])
                 apellidos: data2.apellidos,
                 publicacion: data2.publicacion,
                 comentadorid: data2.comentadorid,
+                id: data2.id,
               }
 
       );
@@ -153,13 +162,7 @@ angular.module('Controllers', [])
           },
           $scope.me_gusta = function(notificacion) {
             var notifi = notificacion[0][0],
-            data = {notificacion: notifi, usuario: $scope.usuario_logueado},n;
-            
-
-            window.console.log("->" + $("#me-gusta-" + notifi).text());
-            window.console.log("->" + $("#me-gusta-" + notifi).val());
-            window.console.log("->" + $("#me-gusta-" + notifi).html());
-            window.console.log(notifi);
+                    data = {notificacion: notifi, usuario: $scope.usuario_logueado}, n;
 
             ajax.post(base_url + '/notificacion/me-gusta', data, function(data2) {
               n = parseInt($("#me-gusta-" + notifi).text(), 10);
@@ -284,4 +287,6 @@ var cpp = angular.module('CPP', ['Controllers', 'Classes'], function($interpolat
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
 });
+
+
 

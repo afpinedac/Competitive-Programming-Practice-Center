@@ -149,7 +149,7 @@ class Curso extends Eloquent {
                     ->count();
   }
 
-  public function get_notificaciones($skip = 0, $take = 100000) {
+  public function get_notificaciones($skip = 0, $take = 10) {
     $result = DB::table('notificacion')
             ->select(DB::raw('lms_notificacion.id,lms_notificacion.created_at,lms_notificacion.publicacion,lms_usuario.nombres,lms_usuario.apellidos,lms_usuario.foto,lms_notificacion.codigo,lms_notificacion.tipo,lms_usuario.id as propietario, lms_notificacion.compartida_facebook, lms_notificacion.compartida_twitter'))
             ->join('usuario', 'usuario.id', '=', 'notificacion.usuario')
@@ -159,16 +159,13 @@ class Curso extends Eloquent {
                             ->join('curso_x_usuario', 'curso_x_usuario.usuario_id', '=', 'notificacion.usuario')
                             ->whereIn('curso_x_usuario.rol', [1, 2]) //rol de monitor y de estudiante
                             ->where('curso_x_usuario.curso_id', $this->id)
-                            ->whereBetween('curso_x_usuario.curso_id', [1, 4])
+                            ->whereBetween('notificacion.tipo', [1, 4])
                             ->where('notificacion.curso', $this->id)
                             ->lists('notificacion.id'), -1, -1))
             ->orderBy('id','desc');
-    
-    
 
 
-
-    return $result->orderBy('id','desc')->take(10)->get();
+    return  $result->skip($skip)->take($take)->get();
   }
 
   public function get_info_logros() {
