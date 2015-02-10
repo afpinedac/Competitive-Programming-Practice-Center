@@ -1,5 +1,5 @@
 <?php
-
+#test;
 Route::get('/test', function() {
 
   $curso = 6;
