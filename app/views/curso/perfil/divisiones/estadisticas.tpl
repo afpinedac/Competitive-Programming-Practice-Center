@@ -17,9 +17,8 @@
     {assign var=height value=400}
     {assign var=chart_div value='chart_div'}
     {assign var=veredict value=['Error de compilación' => usuario::find(Auth::user()->id)->get_numero_respuestas_en_curso($curso->id,'compilation error'), 'Aceptado' => usuario::find(Auth::user()->id)->get_numero_respuestas_en_curso($curso->id,'accepted') , 'Respuesta incorrecta' => usuario::find(Auth::user()->id)->get_numero_respuestas_en_curso($curso->id,'wrong answer'),'Tiempo límite' => usuario::find(Auth::user()->id)->get_numero_respuestas_en_curso($curso->id,'time limit')]}
-       
-    {include file='../../../graficas/grafica.tpl'} 
     
+      {include file='../../../graficas/grafica.tpl'} 
    
     {* ------- end prepare data -------*}
     
