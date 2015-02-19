@@ -1,8 +1,5 @@
 <h3><i class='icon icon-bar-chart icon-2x'></i> Estadísticas</h3>
 
-
-
-
 <ul>
     <li><strong>Logros desbloqueados :</strong> <em>{count($logros)}</em></li>    
     <li><strong>Ejercicios de talleres solucionados :</strong> <em>{count(usuario::find(Auth::user()->id)->get_ejercicios_resueltos($curso->id))}</em></li>    
@@ -38,6 +35,8 @@
     <div id='chart_div'></div>   
     <h5><center>Número de envios diariamente</center></h5>
     <div  id="timeline" style="width: 500px; height: 300px;"></div>
+    <br>
+    <br>
 
     
     
