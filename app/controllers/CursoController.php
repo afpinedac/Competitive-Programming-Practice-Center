@@ -373,6 +373,7 @@ class CursoController extends LMSController {
         } else if ($tab == "inicio") {  //    si no es ejercicio  , . inicio
           return View::make("curso.$tab.$tab")
                           ->with('curso', $curso)
+                          ->with('n_notificaciones',$curso->get_numero_notificaciones())
                           ->with('amigos', $usuario->get_amigos($curso->id))
                           //  ->with('logros', $usuario->get_logros_obtenidos(Auth::user()->id, $curso->id))
                           ->with('logro', $usuario->get_logro_redes_sociales($curso->id))
@@ -1005,7 +1006,8 @@ class CursoController extends LMSController {
               'avatar' => $notificacion->avatar,
               'me_gusta' => $notificacion->gusta(Auth::user()->id) ? 'Ya no me gusta' : 'Me gusta',
               'nombres' =>  $usuario->nombres,
-              'apellidos' =>  $usuario->apellidos
+              'apellidos' =>  $usuario->apellidos,
+              'fecha' =>  date("d-M-y H:i",strtotime($notificacion->created_at))
           ];
           //cargamos los comentarios de la notificacion
           $comentarios = $notificacion->get_comentarios();

@@ -56,67 +56,11 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/pag1.min.css",
+			"contents": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n	<meta charset=\"UTF-8\">\n	<title>Document</title>\n</head>\n<body>\n	\n</body>\n</html>",
 			"settings":
 			{
-				"buffer_size": 113784,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/index.html",
-			"settings":
-			{
-				"buffer_size": 400,
+				"buffer_size": 121,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/imagenes.html",
-			"settings":
-			{
-				"buffer_size": 1487,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag1.html",
-			"settings":
-			{
-				"buffer_size": 1532,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag2.html",
-			"settings":
-			{
-				"buffer_size": 3855,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag3.html",
-			"settings":
-			{
-				"buffer_size": 2401,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag5.html",
-			"settings":
-			{
-				"buffer_size": 2440,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/pag2.min.css",
-			"settings":
-			{
-				"buffer_size": 1,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -188,8 +132,15 @@
 	},
 	"file_history":
 	[
-		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/font-awesome/css/font-awesome.min.css",
 		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/pag2.min.css",
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag5.html",
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag3.html",
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag2.html",
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag1.html",
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/pag1.min.css",
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/imagenes.html",
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/index.html",
+		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/font-awesome/css/font-awesome.min.css",
 		"/C/Users/ANDRES~1/AppData/Local/Temp/Rar$DRa0.082/css/foundation.min.css",
 		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag2.css",
 		"/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag1.css",
@@ -266,252 +217,36 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/pag1.min.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 113784,
+						"buffer_size": 121,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1,
-								1
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 400,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								400,
-								400
+								72,
+								80
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/imagenes.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1487,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								524,
-								524
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"open_with_edit": true,
+							"auto_name": "",
 							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag1.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1532,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1422,
-								1426
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"open_with_edit": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 294.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag2.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3855,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								27,
-								27
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"open_with_edit": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag3.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2401,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								2401
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"open_with_edit": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1022.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/opciones/pag5.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2440,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1373,
-								1373
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"open_with_edit": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 294.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/C/Users/AndresPineda/Dropbox/Proyectos/stiven css/css/pag2.min.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -597,7 +332,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 207.0,
+	"side_bar_width": 118.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

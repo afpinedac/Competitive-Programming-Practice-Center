@@ -16,13 +16,13 @@
         {Form::close()}
 
         
-        <hr>
+        <p class='pull-right' style="margin-bottom: 2px;"><strong>Notificaciones mostradas:</strong> [[notificaciones_mostradas]]/{$n_notificaciones}</p>
+        <hr style='clear: both'>
         <div class="row-fluid" style=''>
           <div class="span12">
             
             
             <center><i class="icon icon-repeat icon-3x" ng-show="loading_init"></i></center>
-
             <div class="" ng-repeat="notificacion in notificaciones_arr">
               <a id="p[[notificacion.id]]"></a>
               <a id="c[[notificacion.id]]"></a>
@@ -40,15 +40,17 @@
                       <img ng-src="{url('/avatares/userimages')}/[[notificacion.propietario]].png" class='mini_foto ver-perfil' {*onclick="usuario.ver_perfil({notificacion::find(notificacion.id)->usuario})"*}>
                     </div>
                     <div class="span11 div-wrap" >
-                      <p><strong>[[notificacion.nombres]] [[notificacion.apellidos]]</strong></p>
-
+                      
+                      <p class="pull-left"><strong>[[notificacion.nombres]] [[notificacion.apellidos]]</strong></p>
+                      <p class="pull-right font-size-10"style="margin-top: -5px;">[[notificacion.fecha]]</p>
+                      <p style="clear: both"></p>
                       <!--publicacion normal-->
-                      <div ng-if='notificacion.tipo==0' class=''>
-                       <div ng-if='usuario_logueado==notificacion.propietario' class="pull-right" style="margin-top: -25px;"><a href="" ng-click="eliminar_notificacion(notificacion.id)">x</a></div>
+                      <div ng-if='notificacion.tipo==0' class='' style='margin-top: -10px;'>
+                        <div ng-if='usuario_logueado==notificacion.propietario' class="pull-right" style="margin-top: -25px;"><a href=""  ng-click="eliminar_notificacion(notificacion.id)">x</a></div>
                        <pre class='guiones'> [[notificacion.publicacion]]</pre>
                       </div>
                       <!---LOGRO---->
-                      <div ng-if='notificacion.tipo!=0' class='well' >
+                      <div ng-if='notificacion.tipo!=0' class='well' style='margin-top: -10px;'>
                      {*   {assign var=logrox value=logro::get_info_logro($notificacion->codigo)}*}
                         <h4>He conseguido el logro: <span style='font-size: 30px;'>[[notificacion.logro.nombre]]</span></h4>
                         <img style='margin-left: 15px' ng-src='{url('img/logros/')}/[[notificacion.logro.imagen]].png' class='img-logro-notificacion'>

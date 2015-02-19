@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/lms2/public/js/angular/app_cpp.js</file>
-            <file>file:/C:/xampp/htdocs/lms2/app/models/logro.php</file>
-            <file>file:/C:/xampp/htdocs/lms2/app/views/curso/inicio/inicio.tpl</file>
-            <file>file:/C:/xampp/htdocs/lms2/app/models/curso.php</file>
-            <file>file:/C:/xampp/htdocs/lms2/app/controllers/CursoController.php</file>
-            <file>file:/C:/xampp/htdocs/lms2/app/routes.php</file>
-            <file>file:/C:/xampp/htdocs/lms2/app/models/notificacion.php</file>
-            <file>file:/C:/xampp/htdocs/lms2/app/config/database.php</file>
-            <file>file:/C:/xampp/htdocs/lms2/app/controllers/NotificacionController.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

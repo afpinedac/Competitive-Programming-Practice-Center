@@ -99,7 +99,7 @@ angular.module('Controllers', [])
   $scope.notificaciones = [];
   $scope.comentario = []; //guarda lo que la persona va escribiendo en el textarea
   var step_notificaciones = 10;
-  var notificaciones_mostradas = 0;
+  $scope.notificaciones_mostradas = 0;
   $scope.boton_mas = true;
   $scope.loading = false;
   $scope.loading_init = false;
@@ -120,7 +120,7 @@ angular.module('Controllers', [])
 
   $scope.cargar_notificaciones = function() {
     $scope.loading2 = true;
-    ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual, skip: notificaciones_mostradas}, function(data) {
+    ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual, skip: $scope.notificaciones_mostradas}, function(data) {
       var array = $.map(data, function(value, index) {
         return [value];
       });
@@ -129,7 +129,7 @@ angular.module('Controllers', [])
       $.extend($scope.notificaciones, data);
       //window.console.log($scope.notificaciones);
     });
-    notificaciones_mostradas += step_notificaciones;
+    $scope.notificaciones_mostradas += step_notificaciones;
     $scope.loading2 = false;
   };
 

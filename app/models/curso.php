@@ -134,6 +134,15 @@ class Curso extends Eloquent {
     return cursoxusuario::where('curso_id', $this->id)->count();
   }
 
+  
+  //función que retorna el número de notificaciones en el curso
+  public function get_numero_notificaciones(){
+    return notificacion::where('curso',$this->id)
+            ->where('tipo','<>',5)
+            ->count();
+  }
+  
+  
   public function get_numero_modulos() {
     return DB::table('curso')
                     ->join('modulo', 'curso.id', '=', 'modulo.curso')

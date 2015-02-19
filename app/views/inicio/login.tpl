@@ -1,7 +1,6 @@
 {capture assign='content'}
 
         
-    
     {include file='./_components/header_login.tpl'}
     
   
