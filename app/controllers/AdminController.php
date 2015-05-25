@@ -5,7 +5,7 @@ class AdminController extends LMSController {
   
   
   public function getIndex() {
-    echo "esta es la ventana de administracion";
+    return View::make('admin.admin');
   }
   
   

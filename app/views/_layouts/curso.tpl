@@ -104,7 +104,7 @@
 <script>
 
   alerta = {
-    ver: function(alerta) {
+    ver: function (alerta) {
       $.ajax({
         dataType: "json",
         type: 'post',
@@ -112,7 +112,7 @@
         data: {
           alerta: alerta
         },
-        success: function(data) {
+        success: function (data) {
           $("#icon-alert-" + data.alerta).remove();
           if (data.nalertas > 0) {
             $("#nalertas").text(data.nalertas);
