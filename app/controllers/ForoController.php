@@ -14,10 +14,7 @@ class ForoController extends LMSController {
             'curso' => $curso->id,
             'usuario' => $usuario->id
         );
-        //este es un comentario importante que debo hacer en este archivo
-
-
-
+        //se va a crear el tema de un foro
         temaforo::create($tema);
         //se puso relenteo desde que le agregué eso
         $estudiantes = $curso->get_estudiantes();

@@ -28,7 +28,6 @@ class ContenidoController extends LMSController {
         $material = contenido::find($material);
 
         if ($material) {
-
             $extension = explode('.', $material->archivo);
             $extension = $extension[count($extension) - 1];
             $file_name = $material->nombre . '.' . $extension;

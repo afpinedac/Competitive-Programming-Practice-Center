@@ -8,12 +8,12 @@ class CursoController extends LMSController {
 
     #el curso es publico
     if ($curso->publico == 1) {
-      $registro = array(
+      $registro = [
           'fecha_inscripcion' => date('Y-m-d'),
           'puntos' => 0,
           'usuario_id' => Auth::user()->id,
           'curso_id' => $curso->id,
-      );
+      ];
       Session::flash('valid', "El curso '{$curso->nombre}' se inscribió correctamente");
       cursoxusuario::create($registro);
     }
