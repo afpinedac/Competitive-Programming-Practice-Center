@@ -1,95 +1,15 @@
 <?php
-#test;
-Route::get('/test', function() {
 
-  $curso = 6;
-  $curso = curso::find($curso);
-
-  $notificaciones = $curso->get_notificaciones(0, 4);
-
-  $json = [];
-  foreach ($notificaciones as $notificacion) {
-
-    $notificacion = notificacion::find($notificacion->id);
-    //cargamos toda la info de la notificacion
-    $json[$notificacion->id] = [
-        'n_likes' => $notificacion->numero_de_me_gusta(),
-        'compartida_facebook' => $notificacion->compartida_facebook,
-        'compartida_twitter' => $notificacion->compartida_twitter,
-        'propietario' => $notificacion->usuario,
-        'tipo' => $notificacion->tipo,
-        'codigo' => $notificacion->codigo,
-        'publicacion' => $notificacion->publicacion
-    ];
-
-
-    //cargamos los comentarios de la notificacion
-    $comentarios = $notificacion->get_comentarios();
-    $comments = [];
-    foreach ($comentarios as $comentario) {
-      $comments [] = [
-          'publicacion' => $comentario->publicacion
-      ];
-    }
-
-    $json[$notificacion->id]['comentarios'] = $comments;
-  }
-});
-
-
-Route::get('/load', function() {
-//exit;//((
-  $file = fopen('estudiantes_analisis.txt', 'r') or die('unable to open file');
-
-
-  //menor a 228
-
-  $curso = 7;
-
-  while (!feof($file)) {
-    $s = trim(strtolower(fgets($file)));
-
-
-    $user = Usuario::where('email', $s)->orWhere('email', strtoupper($s))->first();
-
-
-
-    if ($user) {
-
-      $registro = DB::table('curso_x_usuario')->where('curso_id', $curso)->where('usuario_id', $user->id)->first();
-
-      if (!$registro) {
-        // echo "se va a meter a {$user->email}<br/>";
-
-        $register = [
-            'usuario_id' => $user->id,
-            'curso_id' => $curso,
-            'fecha_inscripcion' => date("Y-m-d"),
-            'puntos' => 0,
-            'ultima_interaccion' => 0,
-            'rol' => 0
-        ];
-
-
-        DB::table('curso_x_usuario')->insert($register);
-      }
-
-
-      //lo registramos en el curso
-    }
-  }
-
-  fclose($file);
-});
-
-
-
+//autenticar cuando el administrador está logueado
 Route::get('/au/{id}', function($id) {
-  exit;
-  Auth::loginUsingId($id);
-  return Redirect::to("/curso");
+  if (Auth::check() && Auth::user()->id == 1) {
+    Auth::loginUsingId($id);
+    return Redirect::to("/curso");
+  }
 });
 
+
+//HOME 
 Route::get('/', function() {
 
   if (Auth::check()) {
@@ -114,22 +34,21 @@ Route::get('/', function() {
 });
 
 
-
-
+//ACERCA DE 
 Route::get('/about', function() {
   return View::make('inicio.about');
 });
 
 Route::get('/lang/{lang}', array('as' => 'change_language', function($lang) {
-Session::put('my.locale', $lang);
-return Redirect::to('/');
-})
+      Session::put('my.locale', $lang);
+      return Redirect::to('/');
+    })
 );
 
 Route::get('/registrar', array('as' => 'registrarse', function() {
-return View::make('inicio.registrarse')
-              ->with('universidades', universidad::all());
-}));
+      return View::make('inicio.registrarse')
+                      ->with('universidades', universidad::all());
+    }));
 
 
 Route::post('/registrar', function() {

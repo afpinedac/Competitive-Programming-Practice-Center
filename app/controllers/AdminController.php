@@ -5,12 +5,12 @@ class AdminController extends LMSController {
   
   
   public function getIndex() {
-    return Redirect::to("");
+    echo "esta es la ventana de administracion";
   }
   
   
   //función que restaura la contraseña de una persona
-  public function getRestaurarPassword($email){
+  public function getRestaurarPassword($email){    
     $user = Usuario::where('email', $email)->first();
     if($user){ // si el usuario si se encuentra en la bd
      //cambiamos la pass a 123
@@ -20,10 +20,7 @@ class AdminController extends LMSController {
       echo "La contraseña de { {$user->nombres} {$user->apellidos} } con email { {$user->email} } fue cambiada correctamente a  { 123 }";
     }else{
       echo "no existe un usuario con ese email";
-    }
-    
-    
-  }
-  
+    }      
+  }  
 
 }
