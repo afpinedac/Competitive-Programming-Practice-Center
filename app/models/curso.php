@@ -158,7 +158,7 @@ class Curso extends Eloquent {
                     ->count();
   }
 
-  public function get_notificaciones($skip = 0, $take = 10) {
+  public function get_notificaciones($skip = 0, $take = 20) {
     $result = DB::table('notificacion')
             ->select(DB::raw('lms_notificacion.id,lms_notificacion.created_at,lms_notificacion.publicacion,lms_usuario.nombres,lms_usuario.apellidos,lms_usuario.foto,lms_notificacion.codigo,lms_notificacion.tipo,lms_usuario.id as propietario, lms_notificacion.compartida_facebook, lms_notificacion.compartida_twitter'))
             ->join('usuario', 'usuario.id', '=', 'notificacion.usuario')
