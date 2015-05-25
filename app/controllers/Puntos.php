@@ -47,9 +47,7 @@ class Puntos extends LMSController {
             }
             ################### FIN OPCIONES AVANZADAS ##################
         }
-
-
-        
+       
         $envio->puntos_obtenidos = $puntos;
         #se le da plata al usuario
      //   $usuario->sumar_plata($puntos * 2);
