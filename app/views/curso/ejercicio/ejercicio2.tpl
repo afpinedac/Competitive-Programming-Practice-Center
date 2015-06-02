@@ -3,7 +3,7 @@
 
   <script>
     tester = {
-      toogle: function() {
+      toogle: function () {
         $("#testing").toggle(1000);
       }
     };
@@ -59,9 +59,7 @@
                     <p><strong>Descargar</strong> .in: <a target='_blank' href='{url('ejercicio/descargar-in/')}/{LMSController::encoder($ejercicio->id)}'><img src='{url('img/general/txt.jpg')}'></a></p>
                       {/if}
 
-
-
-                {else}                  
+                {else}             
 
 
                   <center> <embed src="{url('/_data_/formulaciones/')}/{LMSController::encoder($ejercicio->id)}.pdf#toolbar=0" width="780" height="500"></center>
@@ -91,8 +89,6 @@
                     <input type="hidden" name="evaluacion" value='{Crypt::encrypt($evaluacion)}'>
                   {/if}
 
-
-
                   <div class="row-fluid">
                     <div class="span12">
 
@@ -104,13 +100,9 @@
                   </div>
                   <input class='pull-right' type="file" name="out"><span class='pull-right'>o súbela:</span><br>     
 
-                  <button onclick="return lms.confirmar();" class='btn btn-success'> <i class='icon icon-upload'></i> Enviar</button>
+                  <button onclick="return lms.confirmar() && lms.validarEnvio();" class='btn btn-success'> <i class='icon icon-upload'></i> Enviar</button>
                   {Form::close()}
                 {else} {*EL USUARIO TIENE QUE METER TODO EL CÓDIGO*}
-
-
-
-
 
                   {Form::open(['action' => 'TallerController@postEvaluarEjercicioCodigo', 'files'=>true])}
 
@@ -158,9 +150,9 @@
                     </div>
                   </div>
 
-                      {if $evaluacion == -1}
-                  <input class="offset2"  onclick="tester.toogle();" type="checkbox" name="test" {if $test}checked=""{/if} id="checktest"><span style="margin-top: 4px;">Testear con mis casos de prueba</span>
-{/if}
+                  {if $evaluacion == -1}
+                    <input class="offset2"  onclick="tester.toogle();" type="checkbox" name="test" {if $test}checked=""{/if} id="checktest"><span style="margin-top: 4px;">Testear con mis casos de prueba</span>
+                  {/if}
                   <input class='pull-right' type="file" name="out"><span class='pull-right'>o súbelo:</span><br>     
 
 
@@ -178,7 +170,7 @@
 
 
                   <br>
-                  <button onclick="return lms.confirmar();" class='btn btn-success'>Enviar</button>
+                  <button onclick="return lms.confirmar() && lms.validarEnvio();" class='btn btn-success'>Enviar</button>
                   {Form::close()}
 
 
