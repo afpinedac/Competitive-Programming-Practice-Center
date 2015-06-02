@@ -7,12 +7,11 @@
 
     
     <div class="row-fluid">
-        <div class="span12">
-                
+        <div class="span12">               
             
             <div class="row-fluid">
                 <div class="span12">
-                    <center><h1>Enseña / Aprende / Practíca Programación Competitiva 2</h1></center>
+                    <center><h1>Enseña / Aprende / Practíca Programación Competitiva</h1></center>
                     <center style='margin-top: -15px'><h3 >de una manera divertida y social</h3></center>
                 </div>
             </div>
