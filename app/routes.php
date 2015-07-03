@@ -171,10 +171,8 @@ Route::group(array('before' => 'auth'), function() {
   Route::controller('notificacion', 'NotificacionController');
   Route::controller('mensaje', 'MensajeController');
   Route::controller('chat', 'ChatController');
-  Route::controller('foro', 'ForoController');
-  Route::controller('item', 'ItemController');
+  Route::controller('foro', 'ForoController');  
   Route::controller('api', 'ApiController');
-  Route::controller('poli', 'PoliController');
   Route::controller('lms', 'LMSController');
 });
 

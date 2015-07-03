@@ -145,7 +145,7 @@
                         <span class='span12' style='font-size: 13px;'>Copia tu código aquí:</span>
                       </div>
                       <div class="span10">
-                        <textarea rows="10" name='respuesta' class='span11' placeholder='Copia tu {if $ejercicio->tipo_entrada == 0}salida{else}código{/if} aquí'>{if $test}{$test->algoritmo}{/if}</textarea><br>
+                        <textarea id="algoritmo" rows="10" name='respuesta' class='span11' placeholder='Copia tu {if $ejercicio->tipo_entrada == 0}salida{else}código{/if} aquí'>{if $test}{$test->algoritmo}{/if}</textarea><br>
                       </div>
                     </div>
                   </div>

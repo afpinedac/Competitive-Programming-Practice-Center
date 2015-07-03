@@ -10,6 +10,20 @@ $(document).ready(function () {
     },
     validarEnvio: function(){
       return true;
+      
+      var algoritmo = $("#algoritmo").val();
+      
+      //if(algoritmo.co)
+      
+        
+      
+      //var invalidStrings = ['import java.web'];
+      //todo
+      
+      
+      
+      
+      
     }
     
     
