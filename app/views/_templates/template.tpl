@@ -20,19 +20,22 @@
     {HTML::style('libs/bootstrap/css/bootstrap.min.css')}
     {HTML::style('libs/tipped/css/tipped/tipped.css')}
     {HTML::style('libs/font-awesome/css/font-awesome.min.css')}   
+    {HTML::style('libs/alertify/themes/alertify.core.css')} 
+    {HTML::style('libs/alertify/themes/alertify.default.css')} 
+    
+  {HTML::script('js/prod/app.min.js')}
+    {*
     {HTML::script('libs/jquery/jquery-1.9.1.js')}  
     {HTML::script('libs/jquery-ui/jquery-ui-1.9.2.custom.min.js')} 
     {HTML::script('libs/tipped/js/tipped/tipped.js')} 
     {HTML::script('libs/tipped/js/spinners/spinners.min.js')} 
-    {HTML::script('libs/alertify/src/alertify.js')} 
-    {HTML::style('libs/alertify/themes/alertify.core.css')} 
-    {HTML::style('libs/alertify/themes/alertify.default.css')} 
+    {HTML::script('libs/alertify/src/alertify.js')}     
     {HTML::script('libs/bootstrap/js/bootstrap.min.js')}   
     {HTML::script('js/lms.js')}    
     {HTML::script('js/envio.js')}    
     {HTML::script('libs/angularjs/angular.min.js')}
-    {*{HTML::script('libs/angularjs/angular.min.js.map')}*}
-    {HTML::script('js/angular/app_cpp.js')}
+    {HTML::script('js/angular/app_cpp.js')}*}
+    
     <script>
       URL = {
         set_pre_requisito: '{url('modulo/establecer-prerequisito')}',

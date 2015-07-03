@@ -8,15 +8,11 @@ $(document).ready(function () {
     confirmar: function () {
       return confirm('¿Está seguro de realizar esta acción?');
     },
-    validarEnvio: function(){
+    validarEnvio: function () {
       return true;
     }
-    
-    
   }
-
   lms.mensaje.desvanecer();
-
 // tooltips
 
   Tipped.create('.ejercicio', {ajax: true, skin: 'white', hook: {

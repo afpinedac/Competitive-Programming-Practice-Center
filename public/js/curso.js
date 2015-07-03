@@ -1,4 +1,4 @@
-curso = {
+var curso = {
     set_publico: function() {
         var public = $("#is_public").data('public');
         //     window.alert(public);
@@ -56,10 +56,5 @@ curso = {
                     }
                 }
             });
-
-
         }
-       
-
-
-}
+};
