@@ -185,7 +185,6 @@ Route::group(array('before' => 'auth'), function() {
 
 
 
-
 Route::get('/update-avatars/{from}/{to}', function($from, $to) {
   exit;
   $usuarios = usuario::where('id', '>=', $from)->where('id', '<=', $to)->get();
@@ -195,6 +194,8 @@ Route::get('/update-avatars/{from}/{to}', function($from, $to) {
   }
   echo "finished...";
 });
+
+
 
 
 

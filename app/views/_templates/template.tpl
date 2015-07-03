@@ -23,7 +23,9 @@
     {HTML::style('libs/alertify/themes/alertify.core.css')} 
     {HTML::style('libs/alertify/themes/alertify.default.css')} 
     
-  {HTML::script('js/prod/app.min.js')}
+  {HTML::script('js/build/lib.min.js')}
+  {HTML::script('js/build/app.min.js')}
+  
     {*
     {HTML::script('libs/jquery/jquery-1.9.1.js')}  
     {HTML::script('libs/jquery-ui/jquery-ui-1.9.2.custom.min.js')} 

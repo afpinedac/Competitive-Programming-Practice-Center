@@ -125,9 +125,7 @@ angular.module('Controllers', [])
         return [value];
       });
       $scope.notificaciones_arr = $scope.notificaciones_arr.concat(array.reverse());
-      //window.console.log($scope.notificaciones_arr);
       $.extend($scope.notificaciones, data);
-      //window.console.log($scope.notificaciones);
     });
     $scope.notificaciones_mostradas += step_notificaciones;
     $scope.loading2 = false;

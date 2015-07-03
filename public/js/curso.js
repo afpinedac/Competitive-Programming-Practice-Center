@@ -1,7 +1,6 @@
 var curso = {
     set_publico: function() {
-        var public = $("#is_public").data('public');
-        //     window.alert(public);
+        var public = $("#is_public").data('public');        
         if (public == 1) {
             $("#is_public").data('public', 0);
             $("#password_curso").show();
