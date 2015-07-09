@@ -10,7 +10,7 @@
     </div>
     <div class="row-fluid" id='test'>
       <div class="span12">
-        <div class="span10 offset1 contenedor" style='padding-left: 10px; padding-right: 10px;'   >
+        <div class="contenedor" style='padding-left: 10px; padding-right: 10px;'   >
           <div class="row-fluid">
             <div class="span12">
               <div class="span10">

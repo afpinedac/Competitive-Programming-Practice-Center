@@ -48,7 +48,7 @@
                                                                 <button class='btn btn-primary btn-block'><i class='icon icon-google-plus-sign'></i> Loguear con Google</button>
                                                                 <button class='btn btn-primary btn-block'><i class='icon icon-facebook-sign'></i> Loguear con Facebook</button> -->
                                                                
-                                                <a href='{URL::route('registrarse')}' class='btn btn-block btn-success'>Registrarse</a>
+                                                <a href='{URL::to('/registrar')}' class='btn btn-block btn-success'>Registrarse</a>
                                                <!-- <button class='btn btn-success btn-block'>Registrarse</button>-->
                                                                <br>
 							

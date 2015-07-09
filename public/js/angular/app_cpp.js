@@ -1,11 +1,11 @@
 //controladores
 angular.module('Controllers', [])
-        .controller('EnvioController', function($scope, $interval, ajax) {
+        .controller('EnvioController', function ($scope, $interval, ajax) {
           $scope.submission = null;
-          $scope.watch_submission = function(id) {
+          $scope.watch_submission = function (id) {
             alert(id);
           };
-        }).directive('judgeonline', function($interval, ajax) {
+        }).directive('judgeonline', function ($interval, ajax) {
   return {
     restrict: 'EA',
     template: "<div>\n\
@@ -29,7 +29,7 @@ angular.module('Controllers', [])
     scope: {
       envio: "&envio"
     },
-    link: function($scope, $attr, $element) {
+    link: function ($scope, $attr, $element) {
       $scope.envio = $element.envio;
       tipo = $element.tipo;
       codigo = $element.codigo;
@@ -38,8 +38,8 @@ angular.module('Controllers', [])
       $scope.redirect = '';
       $scope.aceptado = false;
       $scope.timeOrWrong = false;
-      jinterval = $interval(function() {
-        ajax.post(base_url + '/ejercicio/aceptar/0', {envio: $scope.envio}, function(data) {
+      jinterval = $interval(function () {
+        ajax.post(base_url + '/ejercicio/aceptar/0', {envio: $scope.envio}, function (data) {
           if (data) {
             if (data.resultado != null) {
               $scope.status = data.resultado;
@@ -65,16 +65,16 @@ angular.module('Controllers', [])
         });
       }, 1000);
 
-      stop_interval = function() {
+      stop_interval = function () {
         $interval.cancel(jinterval);
       };
 
-      $scope.watch_submission = function() {
-        ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function(data) {
+      $scope.watch_submission = function () {
+        ajax.post(base_url + '/ejercicio/aceptar', {envio: $scope.envio}, function (data) {
           $scope.loading = true;
           if (data.resultado == 'accepted') {
 
-            ajax.post(base_url + '/ejercicio/calcular-puntos', {envio: data.id}, function(response) {
+            ajax.post(base_url + '/ejercicio/calcular-puntos', {envio: data.id}, function (response) {
               alertify.log('Has obtenido ' + response.puntos_obtenidos + ' puntos', 'success', 3000);
             });
             if (tipo == 0) {
@@ -95,10 +95,10 @@ angular.module('Controllers', [])
 
     }
   }
-}).controller('InicioController', function($scope, ajax) {
+}).controller('InicioController', function ($scope, ajax) {
   $scope.notificaciones = [];
   $scope.comentario = []; //guarda lo que la persona va escribiendo en el textarea
-  var step_notificaciones = 20;
+  var step_notificaciones = 5;
   $scope.notificaciones_mostradas = 0;
   $scope.boton_mas = true;
   $scope.loading = false;
@@ -108,8 +108,8 @@ angular.module('Controllers', [])
   var curso_actual;
 
 
+  $scope.InicioController = function (curso) {
 
-  $scope.InicioController = function(curso) {
     $scope.loading_init = true;
     curso_actual = curso;
     $scope.cargar_notificaciones();
@@ -118,23 +118,25 @@ angular.module('Controllers', [])
 
 
 
-  $scope.cargar_notificaciones = function() {
+  $scope.cargar_notificaciones = function () {
     $scope.loading2 = true;
-    ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual, skip: $scope.notificaciones_mostradas}, function(data) {
-      var array = $.map(data, function(value, index) {
+    ajax.post(base_url + '/curso/json/notificaciones', {curso: curso_actual, skip: $scope.notificaciones_mostradas}, function (data) {
+      var array = $.map(data, function (value, index) {
         return [value];
       });
       $scope.notificaciones_arr = $scope.notificaciones_arr.concat(array.reverse());
       $.extend($scope.notificaciones, data);
     });
-    $scope.notificaciones_mostradas += step_notificaciones;
     $scope.loading2 = false;
+    $scope.notificaciones_mostradas += step_notificaciones;
+
+
   };
 
-  $scope.comentar = function(notif) {
+  $scope.comentar = function (notif) {
     notif = notif[0][0];
     data = {notificacion: notif, comentario: $scope.comentario[notif]};
-    ajax.post(base_url + '/notificacion/comentar', data, function(data2) {
+    ajax.post(base_url + '/notificacion/comentar', data, function (data2) {
       $scope.notificaciones[notif].comentarios.push(
               {
                 nombres: data2.nombres,
@@ -150,20 +152,20 @@ angular.module('Controllers', [])
     });
 
   },
-          $scope.eliminar_comentario = function(comentario, notif) {
+          $scope.eliminar_comentario = function (comentario, notif) {
             comentario = comentario[0][0];
             notif = notif[0][0];
             data = {comentario: comentario};
             $("#comment-" + notif + "-" + comentario).remove();
-            ajax.post(base_url + '/notificacion/eliminar-comentario', data, function(data2) {
+            ajax.post(base_url + '/notificacion/eliminar-comentario', data, function (data2) {
               alertify.log("Comentario eliminado", "success", 4000);
             });
           },
-          $scope.me_gusta = function(notificacion) {
+          $scope.me_gusta = function (notificacion) {
             var notifi = notificacion[0][0],
                     data = {notificacion: notifi, usuario: $scope.usuario_logueado}, n;
 
-            ajax.post(base_url + '/notificacion/me-gusta', data, function(data2) {
+            ajax.post(base_url + '/notificacion/me-gusta', data, function (data2) {
               n = parseInt($("#me-gusta-" + notifi).text(), 10);
               if (data2.tipo === '1') {
                 $("#me-gusta-" + notifi).text(n + 1);
@@ -176,8 +178,8 @@ angular.module('Controllers', [])
               }
             });
           },
-          $scope.eliminar_notificacion = function(notificacion) {
-            ajax.post(base_url + '/notificacion/eliminar-comentario', {comentario: notificacion}, function(data) {
+          $scope.eliminar_notificacion = function (notificacion) {
+            ajax.post(base_url + '/notificacion/eliminar-comentario', {comentario: notificacion}, function (data) {
               if (data == "1") {
                 $('#publicacion-' + notificacion + ' + hr').remove(); //quitamos el hr que está al final de cada publicación
                 $('#publicacion-' + notificacion).remove();
@@ -191,61 +193,56 @@ angular.module('Controllers', [])
           }
 
 
-}).controller('EvaluacionController', function($scope, ajax) {
+}).controller('EvaluacionController', function ($scope, ajax) {
   evaluacion = null;
 
-  $scope.EvaluacionController = function(eval) {
+  $scope.EvaluacionController = function (eval) {
     evaluacion = eval;
   };
 
-  //terminar
-  $scope.get_tabla_de_posiciones = function() {
-
-  };
 
 
-}).controller('RankingEvaluacion', function($scope, ajax) {
+}).controller('RankingEvaluacion', function ($scope, ajax) {
   $scope.ranking = [];
   $scope.column = 'puntos_totales';
-  $scope.RankingEvaluacion = function(evaluacion) {
-    ajax.get(base_url + '/evaluacion/json/' + evaluacion, {}, function(data) {
+  $scope.RankingEvaluacion = function (evaluacion) {
+    ajax.get(base_url + '/evaluacion/json/' + evaluacion, {}, function (data) {
       $scope.ranking = data;
     });
   }
 }
-).controller('MonitorearTaller', function($scope, ajax) {
+).controller('MonitorearTaller', function ($scope, ajax) {
   $scope.estudiantes = [];
   taller = null;
 
-  $scope.MonitorearTaller = function(id) {
+  $scope.MonitorearTaller = function (id) {
     taller = id;
     load_data();
   }
 
-  load_data = function() {
-    ajax.post(base_url + '/curso/json/monitorear_taller', {taller: taller}, function(data) {
+  load_data = function () {
+    ajax.post(base_url + '/curso/json/monitorear_taller', {taller: taller}, function (data) {
       $scope.estudiantes = data;
       //window.console.log(data);
     })
   }
 
-}).controller('MonitorearEstudiante', function($scope, ajax) {
+}).controller('MonitorearEstudiante', function ($scope, ajax) {
   $scope.estudiantes = [];
   var curso = null;
-  $scope.MonitorearEstudiante = function(cursoid) {
+  $scope.MonitorearEstudiante = function (cursoid) {
     curso = cursoid;
     load_data();
   }
 
-  load_data = function() {
-    ajax.post(base_url + '/curso/json/monitorear_estudiantes', {curso: curso}, function(data) {
+  load_data = function () {
+    ajax.post(base_url + '/curso/json/monitorear_estudiantes', {curso: curso}, function (data) {
       $scope.estudiantes = data;
-      // window.console.log(data);
     });
   },
-          $scope.set_monitor = function(id, curso) {
+          $scope.set_monitor = function (id, curso) {
             id = id[0][0];
-            ajax.get(URL.set_monitor, {monitor: id, curso: curso}, function(data) {
+            ajax.get(URL.set_monitor, {monitor: id, curso: curso}, function (data) {
               if (data == 1) {
                 alertify.alert('El estudiante ha sido asignado como monitor');
               } else {
@@ -260,20 +257,20 @@ angular.module('Controllers', [])
 //todas las clases
 
 angular.module('Classes', [])
-        .service('ajax', function($http) {
-          this.get = function($url, $data, $function) {
+        .service('ajax', function ($http) {
+          this.get = function ($url, $data, $function) {
             this.ajax('get', $url, $data, $function);
           },
-                  this.post = function($url, $data, $function) {
+                  this.post = function ($url, $data, $function) {
                     this.ajax('post', $url, $data, $function);
                   },
-                  this.ajax = function($type, $url, $dataf, $function) {
+                  this.ajax = function ($type, $url, $dataf, $function) {
                     $.ajax({
                       type: $type,
                       url: $url,
                       data: $dataf,
                       async: false,
-                      success: function(data) {
+                      success: function (data) {
                         $function(data);
                       }
                     });
@@ -282,7 +279,7 @@ angular.module('Classes', [])
 
 
 
-var cpp = angular.module('CPP', ['Controllers', 'Classes'], function($interpolateProvider) {
+var cpp = angular.module('CPP', ['Controllers', 'Classes'], function ($interpolateProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
 });

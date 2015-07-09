@@ -434,7 +434,6 @@ class Logros extends LMSController {
                 }
             }
 
-
             if ($evaluaciones_ganadas >= $nmodulos) {
                 $code = static::crear_logro(301, $usuario->id, $curso->id, 3);
                 #se crea la notificacion

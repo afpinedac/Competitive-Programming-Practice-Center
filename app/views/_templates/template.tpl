@@ -14,19 +14,24 @@
     <link href='http://fonts.googleapis.com/css?family=Average+Sans' rel='stylesheet' type='text/css'>
     {*end google fonts*}
     <link rel="shortcut icon" href="{url('img/general/ico.png')}">
-    {HTML::style('css/lms.css')}  
-    {HTML::style('css/fonts.css')}  
+    
+    
+    {HTML::style('build/app.min.css')}
+    {HTML::style('build/lib.min.css')}
+    {*
     {HTML::style('libs/normalize/normalize.css')}
     {HTML::style('libs/bootstrap/css/bootstrap.min.css')}
-    {HTML::style('libs/tipped/css/tipped/tipped.css')}
-    {HTML::style('libs/font-awesome/css/font-awesome.min.css')}   
-    {HTML::style('libs/alertify/themes/alertify.core.css')} 
+    {HTML::style('libs/tipped/css/tipped/tipped.css')}*}
+    {HTML::style('libs/font-awesome/css/font-awesome.min.css')}
+    {*{HTML::style('libs/alertify/themes/alertify.core.css')} 
     {HTML::style('libs/alertify/themes/alertify.default.css')} 
+*}
     
-  {HTML::script('js/build/lib.min.js')}
-  {HTML::script('js/build/app.min.js')}
+  {HTML::script('build/lib.min.js')}
+  {HTML::script('build/app.min.js')}
   
-    {*
+
+{*
     {HTML::script('libs/jquery/jquery-1.9.1.js')}  
     {HTML::script('libs/jquery-ui/jquery-ui-1.9.2.custom.min.js')} 
     {HTML::script('libs/tipped/js/tipped/tipped.js')} 

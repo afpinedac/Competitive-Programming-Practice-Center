@@ -33,7 +33,7 @@
                   <div class="span12">
                     <div class="span1">
 
-                      <img ng-src="{url('/avatares/userimages')}/[[notificacion.propietario]].png" class='mini_foto ver-perfil' {*onclick="usuario.ver_perfil({notificacion::find(notificacion.id)->usuario})"*}>
+                      <img ng-src="{url('/avatares/userimages/small')}/[[notificacion.propietario]].png" class='mini_foto ver-perfil' {*onclick="usuario.ver_perfil({notificacion::find(notificacion.id)->usuario})"*}>
                     </div>
                     <div class="span11 div-wrap" >
 

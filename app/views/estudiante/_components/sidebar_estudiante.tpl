@@ -80,7 +80,7 @@
                                        {/if}
                                </div>
                                <div class="span2">
-                                   <img src='{General::avatar($amigo->id)}' class='foto-amigo-chat' >
+                                   <img src='{General::avatar($amigo->id,'thumbnail')}' class='foto-amigo-chat' >
                                </div>
                                <div class="span9 suspensive-points">
                                    <small>{$amigo->nombres|capitalize} {$amigo->apellidos|capitalize} </small>
