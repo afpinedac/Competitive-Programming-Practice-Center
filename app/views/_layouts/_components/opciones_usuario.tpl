@@ -3,7 +3,7 @@
 <ul class="nav pull-right">
                    {* <li> <a href="curso.php"><i class="icon icon-share-alt"></i> Back</a><li> *}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img id='mini-foto' src='{General::avatar(Auth::user()->id)}'> {Auth::user()->nombres|capitalize} {" "} {Auth::user()->apellidos|capitalize} 
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img id='mini-foto' src='{General::avatar(Auth::user()->id,'small')}'> {Auth::user()->nombres|capitalize} {" "} {Auth::user()->apellidos|capitalize} 
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">

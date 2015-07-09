@@ -16,7 +16,7 @@
         {Form::close()}
 
 
-        <p class='pull-right' style="margin-bottom: 2px;" ng-init="notificaciones_totales = 10"><strong>Notificaciones mostradas:</strong> [[notificaciones_mostradas]]/{$n_notificaciones}</p>
+        <p class='pull-right' style="margin-bottom: 2px;"><strong>Notificaciones mostradas:</strong> [[notificaciones_mostradas]]/{$n_notificaciones}</p>
         <hr style='clear: both'>
         <div class="row-fluid" style=''>
           <div class="span12">            
@@ -32,8 +32,7 @@
                 <div class="row-fluid" >
                   <div class="span12">
                     <div class="span1">
-
-                      <img ng-src="{url('/avatares/userimages/small')}/[[notificacion.propietario]].png" class='mini_foto ver-perfil' {*onclick="usuario.ver_perfil({notificacion::find(notificacion.id)->usuario})"*}>
+                      <img ng-click="ver_perfil(notificacion.propietario)" ng-src="{url('/avatares/userimages/small')}/[[notificacion.propietario]].png" class='mini_foto ver-perfil'>
                     </div>
                     <div class="span11 div-wrap" >
 
@@ -93,7 +92,7 @@
                           <div class='span6'>
                             <div  ng-repeat='comment in notificacion.comentarios' >
                               <div id="comment-[[notificacion.id]]-[[comment.id]]" class="bubble span12" style="margin-left: 20px; padding: 0px;">
-                                <img ng-src="{url('/avatares/userimages')}/[[comment.comentadorid]].png"  class="img-avatar-comentario pull-left" style="margin-top: 5px; margin-left: 3px;margin-right: 3px;">
+                                <img ng-src="{url('/avatares/userimages/thumbnail')}/[[comment.comentadorid]].png"  class="img-avatar-comentario pull-left" style="margin-top: 5px; margin-left: 3px;margin-right: 3px;">
                                 <p><strong><small>[[comment.nombres]] [[comment.apellidos]]:</small> </strong><small>[[comment.publicacion]]</small></p>
                                 <span ng-if='comment.comentadorid==usuario_logueado' class='pull-right' style='font-size: 8px; margin-top: -20px; margin-right: 3px;'><small><i class='icon icon-remove' ng-click='eliminar_comentario([[comment.id]],[[notificacion.id]])' ></i></small></span>
                               </div>  

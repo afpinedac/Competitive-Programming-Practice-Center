@@ -114,8 +114,12 @@ angular.module('Controllers', [])
     curso_actual = curso;
     $scope.cargar_notificaciones();
     $scope.loading_init = false;
+
   };
 
+  $scope.ver_perfil = function (id) {
+    usuario.ver_perfil(id);
+  }
 
 
   $scope.cargar_notificaciones = function () {

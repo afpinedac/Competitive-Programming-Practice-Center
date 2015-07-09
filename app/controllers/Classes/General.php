@@ -21,6 +21,8 @@ class General {
       return URL::to('avatares/userimages/') . "/" . $user . ".png";
     } else if ($size == 'thumbnail') {
       return URL::to('avatares/userimages/thumbnail') . "/" . $user . ".png";
+    } else if ($size === "small"){
+      return URL::to('avatares/userimages/small') . "/" . $user . ".png";
     }
   }
 
