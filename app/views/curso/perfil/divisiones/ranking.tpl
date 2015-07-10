@@ -7,7 +7,7 @@
   <div class="pull-right well" style="margin-top: -20px; padding: 0px;">
     <h5 class="text-info">Programador de la semana <i class="icon icon-trophy"></i></h5>
     <center><h5 style="margin-top: -10px;" class="text-success">{$top_programmer->nombres} {$top_programmer->apellidos}</h5></center>
-    <center><img id='foto-top-programmer' onclick='usuario.ver_perfil({$top_programmer->id})' src='{General::avatar($top_programmer->id)}'></center>
+    <center><img id='foto-top-programmer' onclick='usuario.ver_perfil({$top_programmer->id})' src='{General::avatar($top_programmer->id,'small')}'></center>
   </div>    
   <br>
   <br>
@@ -113,10 +113,15 @@
 
       var row = "<tr class='"
       row += ({Auth::user()->id} == usuario) ? 'success\'>' : '\'>';
-      row += "<td width='10%'><span style='font-size: 20px;'>" + pos + "</span></td><td width='20%'><img class='foto-ranking' onclick='usuario.ver_perfil(" + usuario + ")' src='{url('avatares/userimages/')}/" + usuario + ".png'></td><td><span style='font-size: 20px;'>" + nombres + " " + apellidos + "</span></td><td><span style='font-size: 20px;'>" + puntos + "</span></td></tr>";
+      row += "<td width='10%'><span style='font-size: 20px;'>" + pos + "</span></td>\n\
+                <td width='20%'>\n\
+                      <img class='foto-ranking' onclick='usuario.ver_perfil(" + usuario + ")' src='{url('avatares/userimages/small/')}/" + usuario + ".png'></td>\n\
+                       <td><span style='font-size: 20px;'>" + nombres.capitalize() + " " + apellidos.capitalize() + "</span></td>\n\
+                        <td><span style='font-size: 20px;'>" + puntos + "</span></td>\n\
+                      </tr>";
 
       $("#ranking").append(row);
-    }
+    }    
 
   }
 

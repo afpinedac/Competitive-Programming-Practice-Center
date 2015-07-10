@@ -98,7 +98,7 @@ angular.module('Controllers', [])
 }).controller('InicioController', function ($scope, ajax) {
   $scope.notificaciones = [];
   $scope.comentario = []; //guarda lo que la persona va escribiendo en el textarea
-  var step_notificaciones = 5;
+  var step_notificaciones = 20;
   $scope.notificaciones_mostradas = 0;
   $scope.boton_mas = true;
   $scope.loading = false;

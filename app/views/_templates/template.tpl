@@ -28,6 +28,18 @@
     {HTML::style('libs/alertify/themes/alertify.default.css')} 
 *}
     
+  <script>
+      String.prototype.capitalize = function() {
+          return this.charAt(0).toUpperCase() + this.slice(1);
+      };
+      
+      URL = {
+        set_pre_requisito: '{url('modulo/establecer-prerequisito')}',
+        set_monitor: '{url('curso/asignar-monitor')}',
+      };
+      base_url = '{url('/')}';
+    </script>
+
   {HTML::script('build/lib.min.js')}
   {HTML::script('build/app.min.js')}
   
@@ -44,13 +56,7 @@
     {HTML::script('libs/angularjs/angular.min.js')}
     {HTML::script('js/angular/app_cpp.js')}*}
     
-    <script>
-      URL = {
-        set_pre_requisito: '{url('modulo/establecer-prerequisito')}',
-        set_monitor: '{url('curso/asignar-monitor')}',
-      }
-      base_url = '{url('/')}'
-    </script>
+  
   </head>
   <body ng-app='CPP' ng-cloak > 
   <content>

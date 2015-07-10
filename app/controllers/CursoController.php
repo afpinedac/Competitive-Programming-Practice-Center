@@ -1072,10 +1072,6 @@ class CursoController extends LMSController {
 
       case 'all': //retorna todas notificaciones del curso 
 
-
-
-
-
         break;
 
       default:
