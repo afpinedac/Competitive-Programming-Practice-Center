@@ -5,9 +5,8 @@ class CursoController extends LMSController {
   public function getInscribir($curso) {
 
     $curso = curso::find($curso);
-
     #el curso es publico
-    if ($curso->publico == 1) {
+    if ($curso && $curso->publico == 1) {
       $registro = [
           'fecha_inscripcion' => date('Y-m-d'),
           'puntos' => 0,
@@ -28,12 +27,12 @@ class CursoController extends LMSController {
 
 
     if ($curso && $curso->password == $pass) {
-      $registro = array(
+      $registro = [
           'fecha_inscripcion' => date('Y-m-d'),
           'puntos' => 0,
           'usuario_id' => Auth::user()->id,
           'curso_id' => $curso->id,
-      );
+      ];
       cursoxusuario::create($registro);
       Session::flash('valid', "El curso '{$curso->nombre}' se inscribió correctamente");
     } else {
@@ -49,13 +48,11 @@ class CursoController extends LMSController {
       $curso->desmatricular(Auth::user()->id);
       Session::flash('valid', "El curso {$curso->nombre} se ha desmatriculado");
     }
-
     return Redirect::to('curso/all');
   }
 
   public function getIndex() {
-
-    return Redirect::action('CursoController@getAll');
+    return Redirect::to('curso/all');
   }
 
   # Funcion que hace entrar a un curso y guarda la bitacora del curso 
@@ -94,16 +91,10 @@ class CursoController extends LMSController {
         Session::put('modulo_profesor', $curso->get_primer_modulo());
       }
 
-
-
       Session::put('modulo_profesor', Session::get('modulo_profesor', $curso->get_primer_modulo()));
       Session::put('curso', $curso->id);
 
-
-
       $modulo = modulo::find(Session::get('modulo_profesor'));
-
-
 
       if ($option == null) { #se va a editar un modulo del curso
         return View::make('profesor.editar_curso.editar_modulo')
@@ -182,8 +173,6 @@ class CursoController extends LMSController {
 
     $curso = $values[0];
 
-
-
     if ($this->tiene_curso_inscrito($curso)) {
 
       Session::put('curso.estudiante', $curso); #curso actual
@@ -209,8 +198,6 @@ class CursoController extends LMSController {
 
         $modulo = modulo::find(Session::get('modulo.estudiante', $curso->get_primer_modulo())); //se tiene el valor de la sesion, si este no existe se selecciona el primer modulo del curso
 
-
-
         if ($tab == 'evaluacion') {
           #param1 = el id de la evaluacion
           #param2 = el id del ejercicio
@@ -235,9 +222,6 @@ class CursoController extends LMSController {
                               'usuario' => Auth::user()->id
                   ));
                 }
-
-
-
 
                 return View::make('curso.evaluacion.resultados2')
                                 ->with('evaluacion', $evaluacion)
@@ -278,8 +262,6 @@ class CursoController extends LMSController {
             return Redirect::to("curso/ver/{$curso->id}/contenido");
           }
         } else if ($tab == 'mensajes') {
-
-
 
           if ($param1 == 'leer' || ($param1 == 'nuevo' && $param2 != -1)) {
 
@@ -504,16 +486,14 @@ class CursoController extends LMSController {
   public function postCrear() {
     //var_dump(Auth::user());
     //  dd(Input::all());
-    $curso = array(
+    $curso = [
         'nombre' => Input::get('nombre'),
         'descripcion' => Input::get('descripcion'),
         'publico' => Input::has('publico') ? 0 : 1,
         'password' => Input::get('password', ''),
         'profesor_id' => Auth::user()->id,
         'created_at' => date('Y-m-d H:i:s')
-    );
-
-
+    ];
 
     $curso = DB::table('curso')->insertGetId($curso);
 
@@ -533,34 +513,21 @@ class CursoController extends LMSController {
   #Verifica si el usuario logueado tiene el curso actual inscrito
 
   private function tiene_curso_inscrito($curso) {
-    return usuario::find(Auth::user()->id)->tiene_inscrito($curso);
+    return usuario::find(Auth::user()->id)->tiene_inscrito($curso);    
   }
 
   # Funcion que establece en una variable de sesion el modulo que se va a mostrar  al usuario
 
   public function getModulo($modulo) {
     $modulo = modulo::find($modulo);
-    if ($this->tiene_curso_inscrito($modulo->curso)) {
+    if ($modulo && $this->tiene_curso_inscrito($modulo->curso)) {
       Session::put('modulo.estudiante', $modulo->id);
       return Redirect::to("curso/ver/{$modulo->curso}/contenido");
-    } else {
-      //echo "no lo tiene";
+    } else {      
       return Redirect::to('curso');
     }
   }
 
-  #funcion para hacer pruebas
-
-  public function getTest() {
-    //  session_start();
-    //session_destroy();
-    //return View::make('curso.contenido.components.envios');
-
-    dd(curso::find(1)->get_modulos());
-
-
-    return URL::to('/curso/inicio/');
-  }
 
   public function postEditar() {
 
@@ -976,7 +943,7 @@ class CursoController extends LMSController {
   #retorna a todos los cursos en caso que se intente ingresar a un metodo no valido
 
   public function missingMethod($parameters = array()) {
-    Session::flash("invalid", 'Operación inválida');
+    Session::flash("invalid", 'URL inválida');
     return Redirect::to('curso');
   }
 

@@ -4,106 +4,103 @@
 
 class ForoController extends LMSController {
 
-    public function postCrearTema() {
+  public function postCrearTema() {
 
-        $curso = curso::find(Session::get('curso.estudiante'));
-        $usuario = usuario::find(Auth::user()->id);
-        $tema = array(
-            'nombre' => Input::get('nombre'),
-            'descripcion' => Input::get('descripcion'),
-            'curso' => $curso->id,
-            'usuario' => $usuario->id
+    $curso = curso::find(Session::get('curso.estudiante'));
+    $usuario = usuario::find(Auth::user()->id);
+    $tema = [
+        'nombre' => Input::get('nombre'),
+        'descripcion' => Input::get('descripcion'),
+        'curso' => $curso->id,
+        'usuario' => $usuario->id
+    ];
+    //se va a crear el tema de un foro
+    temaforo::create($tema);
+    //se puso relenteo desde que le agregué eso
+    $estudiantes = $curso->get_estudiantes();
+    foreach ($estudiantes as $estudiante) {
+      if ($estudiante->id != $usuario->id) {
+        alerta::create(
+                array(
+                    'from' => $usuario->id,
+                    'to' => $estudiante->id,
+                    'enlace' => url("curso/ver/{$curso->id}/foro"),
+                    'mensaje' => $usuario->nombres . " ha creado un nuevo tema en el foro",
+                    'curso' => $curso->id,
+                )
         );
-        //se va a crear el tema de un foro
-        temaforo::create($tema);
-        //se puso relenteo desde que le agregué eso
-        $estudiantes = $curso->get_estudiantes();
-        foreach ($estudiantes as $estudiante) {
-            if ($estudiante->id != $usuario->id) {
-                alerta::create(
-                        array(
-                            'from' => $usuario->id,
-                            'to' => $estudiante->id,
-                            'enlace' => url("curso/ver/{$curso->id}/foro"),
-                            'mensaje' => $usuario->nombres . " ha creado un nuevo tema en el foro",
-                            'curso' => $curso->id,
-                        )
-                );
-            }
-        }
-
-        #se crea la alerta para todos los estudiantes del curso
-        #vamos a ver, me parece 
-
-
-        Session::flash("valid", "Tema creado correctamente");
-        $ff = "esot es un string";
-
-        return Redirect::to("curso/ver/" . $curso->id . "/foro");
+      }
     }
 
-    public function getEliminarTema($tema) {
-        $curso = Session::get('curso.estudiante');
-        $tema = temaforo::find($tema);
+    #se crea la alerta para todos los estudiantes del curso
 
-        if ($tema->usuario == Auth::user()->id) { #el usuario es dueño del tema
-            temaforo::destroy($tema->id);
-            Session::flash("valid", "Tema eliminado correctamente");
-        }
+    Session::flash("valid", "Tema creado correctamente");
+    $ff = "esot es un string";
 
+    return Redirect::to("curso/ver/" . $curso->id . "/foro");
+  }
 
-        return Redirect::to("curso/ver/" . $curso . "/foro");
+  public function getEliminarTema($tema) {
+    $curso = Session::get('curso.estudiante');
+    $tema = temaforo::find($tema);
+
+    if ($tema->usuario == Auth::user()->id) { #el usuario es dueño del tema
+      temaforo::destroy($tema->id);
+      Session::flash("valid", "Tema eliminado correctamente");
     }
 
-    public function postResponder($tema) {
 
-   
-        $usuario = usuario::find(Auth::user()->id);
-        $curso = curso::find(Session::get('curso.estudiante'));
-        $tema = temaforo::find($tema);
+    return Redirect::to("curso/ver/" . $curso . "/foro");
+  }
 
-        $respuesta = array(
-            'usuario' => $usuario->id,
-            'tema_foro' => $tema->id,
-            'respuesta' => Input::get('respuesta')
-        );
+  public function postResponder($tema) {
 
-        respuestaforo::create($respuesta);
-        #creamos la alerta de que alguien ha respondido en un tema en que has participado
 
-        $participantes = $tema->get_participantes();
+    $usuario = usuario::find(Auth::user()->id);
+    $curso = curso::find(Session::get('curso.estudiante'));
+    $tema = temaforo::find($tema);
 
-        foreach ($participantes as $participante) {
-            if ($participante->usuario != $usuario->id && $participante->usuario != $tema->usuario) {
+    $respuesta = [
+        'usuario' => $usuario->id,
+        'tema_foro' => $tema->id,
+        'respuesta' => Input::get('respuesta')
+    ];
 
-                #creamos la alerta
-                alerta::crear($participante->usuario, $usuario->id, url("curso/ver/{$curso->id}/foro/{$tema->id}"), 3, $usuario->nombres . " ha respondido en un tema del foro en el que has participado");
-            }
-        }
-        #le enviamos la notificacion al que creo el tema
+    respuestaforo::create($respuesta);
+    #creamos la alerta de que alguien ha respondido en un tema en que has participado
 
-        if ($tema->usuario != $usuario->id)
-            alerta::crear($tema->usuario, $usuario->id, url("curso/ver/{$curso->id}/foro/{$tema->id}"), 4, $usuario->nombres . " ha respondido en un tema que creaste");
+    $participantes = $tema->get_participantes();
 
-        Logros::check250(Auth::user()->id, $curso->id);  // verificamos si comenta 10 veces en el foro
-               
-        Session::flash("valid", "HAS RESPONDIDO EN ESTE TEMA");
+    foreach ($participantes as $participante) {
+      if ($participante->usuario != $usuario->id && $participante->usuario != $tema->usuario) {
 
-        return Redirect::to("curso/ver/{$curso->id}/foro/{$tema->id}");
+        #creamos la alerta
+        alerta::crear($participante->usuario, $usuario->id, url("curso/ver/{$curso->id}/foro/{$tema->id}"), 3, $usuario->nombres . " ha respondido en un tema del foro en el que has participado");
+      }
     }
+    #le enviamos la notificacion al que creo el tema
 
-    public function getEliminarRespuesta($respuesta, $tema) {
+    if ($tema->usuario != $usuario->id)
+      alerta::crear($tema->usuario, $usuario->id, url("curso/ver/{$curso->id}/foro/{$tema->id}"), 4, $usuario->nombres . " ha respondido en un tema que creaste");
 
-        $respuesta = respuestaforo::find($respuesta);
+    Logros::check250(Auth::user()->id, $curso->id);  // verificamos si comenta 10 veces en el foro
 
-        #si existe la respuesta y el usuario logueado es el dueño
-        if ($respuesta && Auth::user()->id == $respuesta->usuario) {
+    Session::flash("valid", "HAS RESPONDIDO EN ESTE TEMA");
 
-            respuestaforo::destroy($respuesta->id);
-            Session::flash('valid', "La respuesta fue eliminada correctamente");
-        }
-        return Redirect::to('curso/ver/' . Session::get('curso.estudiante') . '/foro/' . $tema);
+    return Redirect::to("curso/ver/{$curso->id}/foro/{$tema->id}");
+  }
+
+  public function getEliminarRespuesta($respuesta, $tema) {
+
+    $respuesta = respuestaforo::find($respuesta);
+
+    #si existe la respuesta y el usuario logueado es el dueño
+    if ($respuesta && Auth::user()->id == $respuesta->usuario) {
+      respuestaforo::destroy($respuesta->id);
+      Session::flash('valid', "La respuesta fue eliminada correctamente");
     }
+    return Redirect::to('curso/ver/' . Session::get('curso.estudiante') . '/foro/' . $tema);
+  }
 
 }
 

@@ -27,15 +27,14 @@ class EvaluacionController extends LMSController {
       $ejercicio = ejercicio::find(Input::get('ejercicio'));
       $evaluacion = Input::get('evaluacion');
 
-
       $respuesta = ejercicioxevaluacion::where('ejercicio', $ejercicio->id)->where('evaluacion', $evaluacion)->first()->tipo_entrada == 0 ? 'out' : 'código completo';
 
-      $arr = array(
+      $arr = [
           'id' => $ejercicio->id,
           'nombre' => $ejercicio->nombre,
           'n' => ejercicioxevaluacion::where('evaluacion', $evaluacion)->count(),
           'respuesta' => $respuesta
-      );
+      ];
 
       return Response::json($arr);
     }
@@ -44,8 +43,6 @@ class EvaluacionController extends LMSController {
   public function getEliminar($evaluacion) {
 
     $evaluacion = evaluacion::find($evaluacion);
-
-
 
     if ($evaluacion) {
       #validamos que el profesor pueda eliminar la evaluacion
@@ -90,12 +87,11 @@ class EvaluacionController extends LMSController {
               ->delete();
 
       $ejercicio = ejercicio::find($ejercicio);
-      $arr = array(
+      $arr = [
           'id' => $ejercicio->id,
           'nombre' => $ejercicio->nombre,
           'n' => ejercicioxevaluacion::where('evaluacion', $evaluacion)->count()
-      );
-
+      ];
 
       return Response::json($arr);
     }
@@ -116,15 +112,13 @@ class EvaluacionController extends LMSController {
     $data = Input::except(array('_token'));
     $data['fecha_activacion'] = date('Y-m-d H:i:s', strtotime($data['fecha_activacion']));
 
-    $evaluacion = array(
+    $evaluacion = [
         'nombre' => Input::get('nombre'),
         'descripcion' => Input::get('descripcion'),
         'porcentaje_aprobacion' => Input::get('porcentaje_aprobacion'),
         'fecha_activacion' => date('Y-m-d H:i:s', strtotime($data['fecha_activacion'])),
         'duracion' => Input::get('duracion')
-    );
-
-
+    ];
 
     $eval = Input::get('evaluacion');
     evaluacion::where('id', $eval)->update($evaluacion);
@@ -173,7 +167,6 @@ class EvaluacionController extends LMSController {
         $puntos[] = $puntos_obtenidos;
         $puntos_totales += $puntos_obtenidos;
       }
-
 
       $arr['puntos'] = $puntos;
       $arr['puntos_totales'] = $puntos_totales;

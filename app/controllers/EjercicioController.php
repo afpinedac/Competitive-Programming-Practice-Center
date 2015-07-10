@@ -33,17 +33,11 @@ class EjercicioController extends LMSController {
       @unlink($this->ruta['out'] . '/' . $file_out);
     }
 
-
-
     # si hay la formulacion es un archivo  lo guarda en el servidor
     if ($tipo_formulacion == 1) {
 
       Input::file('archivo_formulacion')->move($this->ruta['formulacion'], LMSController::encoder($ejer) . $this->extension['formulacion']);
     }
-
-
-
-
     # si seleccionó que desea agregarlo a un taller
 
     $revision = Input::has('revision') ? 1 : 0;
@@ -51,14 +45,14 @@ class EjercicioController extends LMSController {
     if (Input::get('taller') != -1) {
       $taller = Input::get('taller');
       DB::table('ejercicio_x_taller')->insert(
-              array(
+              [
                   'ejercicio' => $ejer,
                   'taller' => $taller,
                   'tipo_entrada' => Input::get('tipo_entrada'),
                   'revision' => $revision,
                   'time_limit' => Input::get('time_limit'),
                   'prioridad' => ejercicioxtaller::get_maxima_prioridad($taller) + 1 # se asigna nueva prioridad
-              )
+              ]
       );
     }
 
@@ -135,8 +129,6 @@ class EjercicioController extends LMSController {
     $curso = curso::find($curso);
     $usuario = usuario::find(Auth::user()->id);
 
-
-
     if ($curso && $taller && $ejercicio && $curso->tiene_taller($taller->id) && $usuario->es_propietario($curso->id) && $taller->tiene_ejercicio($ejercicio->id)) {
       //   echo "pasa";
       $tipo = $tipo == "u" ? '<' : '>';
@@ -147,8 +139,6 @@ class EjercicioController extends LMSController {
         ejercicioxtaller::cambiar_prioridad($taller->id, $e, $ejercicio->id);
         Session::flash("valid", "Prioridad cambiada correctamente");
       }
-
-
 
       return Redirect::to("curso/ver/{$curso->id}/editar");
     } else {

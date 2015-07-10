@@ -31,7 +31,7 @@ class RecursoController extends LMSController {
 
         $recurso = recurso::find($id);
 
-        if ($recurso->usuario == Auth::user()->id) {
+        if ($recurso && $recurso->usuario == Auth::user()->id) {
             $this->eliminar_archivo($this->ruta['recurso'] . '/' . $recurso->archivo);
             Session::flash('valid', "Recurso eliminado correctamente");
             $recurso->delete();
@@ -48,7 +48,6 @@ class RecursoController extends LMSController {
             $extension = explode('.', $recurso->archivo);
             $extension = $extension[count($extension) - 1];
             $file_name = $recurso->nombre . '.' . $extension;
-
 
             return Response::download($this->ruta['recurso'] . '/' . $recurso->archivo, $file_name);
         } else {

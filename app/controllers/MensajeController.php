@@ -31,24 +31,24 @@ class MensajeController extends LMSController {
 
   private function enviar_mensaje($de, $para, $asunto, $mensaje, $respuesta_a) {
     mensaje::create(
-            array(
+            [
                 'remitente' => $de,
                 'destinatario' => $para,
                 'asunto' => $asunto,
                 'mensaje' => $mensaje,
                 'curso' => Session::get('curso.estudiante'),
                 'respuesta_a' => $respuesta_a
-    ));
+    ]);
 
     #creamos la alerta
     alerta::create(
-            array(
+            [
                 'from' => $de,
                 'to' => $para,
                 'enlace' => url("curso/ver/" . Session::get('curso.estudiante') . "/mensajes"),
                 'mensaje' => usuario::find($de)->nombres . " te ha enviado un nuevo mensaje",
                 'curso' => Session::get('curso.estudiante')
-            )
+            ]
     );
   }
 
