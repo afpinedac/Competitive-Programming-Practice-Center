@@ -140,10 +140,7 @@ class AppController extends LMSController {
           1 => 'nKIu9yen5nc',
           2 => 'Y1HHBXDL9bg',
           3 => 'a1OhqQVZ-54',
-          4 => 'DHV8_vM-Juk',
-          5 => '1OJf3OV-3BQ',
-          6 => 'FNZjWlVQGS8',
-          7 => 'BxBwqqZBfCc'
+          4 => '1OJf3OV-3BQ'
       );
 
       return View::make('inicio.login')

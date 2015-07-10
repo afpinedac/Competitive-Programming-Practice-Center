@@ -4,7 +4,7 @@
 
   <div class="span12">
     <div class="row-fluid">
-      <div class="span12">
+      <div class="span12" style="height: 62px;">
         {include file='../curso/_components/header_curso.tpl'}
       </div>
     </div>
@@ -14,6 +14,7 @@
           <div class="row-fluid">
             <div class="span12">
               <div class="span10">
+                <br>
                 <ul class="nav nav-tabs">
                   <li  class='{if $tab=="inicio"}{'active'}{/if}'>
                     <a href="{URL::to('curso/ver')}/{$curso->id}/{'inicio'}"><i class='icon icon-home'></i> Publicaciones</a>

@@ -1,6 +1,6 @@
 <div class="navbar">
   <div class="navbar-inner">
-      <a class="brand" href="#"><span style="font-size: 30px;font-family:'Londrina Solid', cursive">{$curso->nombre|upper}</span></a>
+      <a class="brand" href="#"><span id="nombre-curso">{$curso->nombre|upper}</span></a>
 
     
     {include file='../../_layouts/_components/opciones_usuario.tpl'}

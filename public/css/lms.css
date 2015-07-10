@@ -1,11 +1,12 @@
-/* 
-    Document   : lms
-    Created on : 3/09/2013, 02:45:38 PM
-    Author     : AndresPineda
-    Description:
-        Purpose of the stylesheet follows.
-*/
+#logo{
+  font-size: 35px;
+  font-family: 'Londrina Solid', cursive;
+}
 
+#nombre-curso{
+  font-size: 30px;  
+  font-family: 'Londrina Solid', cursive;
+}
 #test{
  background-image: url("http://fc00.deviantart.net/images/i/5/d/c/Binary_Background_1600.png");
   z-index: -5;
@@ -150,8 +151,8 @@ textarea{
 }
 
 .img-logro-notificacion{
-     height: 100px;
-    width:  100px;
+     height: 90px;
+    width:  90px;
 }
 
 .icon-option{

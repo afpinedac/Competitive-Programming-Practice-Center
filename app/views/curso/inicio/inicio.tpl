@@ -10,11 +10,9 @@
             <textarea placeholder="¿Que piensas?" rows='3' name='publicacion'  class='span12' required></textarea>
           </div>
           <input type="hidden" name="curso" value='{Crypt::encrypt($curso->id)}'>
-          <input type='submit' class='btn btn-success pull-right' value='Publicar'>
+          <input type='submit' class='btn btn-success pull-left' value='Publicar'>
         </div>
-
         {Form::close()}
-
 
         <p class='pull-right' style="margin-bottom: 2px;"><strong>Notificaciones mostradas:</strong> [[notificaciones_mostradas]]/{$n_notificaciones}</p>
         <hr style='clear: both'>
@@ -45,9 +43,11 @@
                         <pre class='guiones'> [[notificacion.publicacion]]</pre>
                       </div>
                       <!---LOGRO---->
-                      <div ng-if='notificacion.tipo!=0' class='well' style='margin-top: -10px;'>
+                      <div ng-if='notificacion.tipo!=0' class='well' style='margin-top: -10px; padding: 3px 20px;' >
                         {*   {assign var=logrox value=logro::get_info_logro($notificacion->codigo)}*}
-                        <h4>He conseguido el logro: <span style='font-size: 30px;'>[[notificacion.logro.nombre]]</span></h4>
+                        <h4 style="float: left"><center>He conseguido el logro:</center> <br>
+                          <center><span style='font-size: 30px;'>[[notificacion.logro.nombre]]</span></center>
+                        </h4>
                         <img style='margin-left: 15px' ng-src='{url('img/logros/')}/[[notificacion.logro.imagen]].png' class='img-logro-notificacion'>
                         <br>
                       </div>
@@ -109,17 +109,13 @@
                   </div>
                 </div>
               </div>
-              <hr>
+              <hr style="margin-top:.10px;">
             </div>
             <div class="container-fluid" >
               <div class="span4 offset4">
                 <center><button class='btn-mini btn-info span12' ng-click='cargar_notificaciones()'> Mas notificaciones<i  ng-show="loading2" class='icon icon-repeat icon-spin'></i></button></center>
               </div>
-
-
-
-            </div>    
-
+            </div>  
             <!--    <button ng-click='menos_notificaciones()'> Menos notificaciones</button>-->
             <!-----END ANGULAR----->
 
