@@ -33,7 +33,6 @@ Route::group(array('before' => 'auth'), function() {
   Route::controller('foro', 'ForoController');
   Route::controller('item', 'ItemController');
   Route::controller('api', 'ApiController');
-  Route::controller('poli', 'PoliController');
   Route::controller('lms', 'LMSController');
 });
 
