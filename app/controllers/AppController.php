@@ -132,7 +132,7 @@ class AppController extends LMSController {
     return View::make('inicio.about');
   }
 
-  public function getIndex() {
+  public function getIndex() {    
     if (Auth::check()) {
       return Redirect::to("curso/all");
     } else {

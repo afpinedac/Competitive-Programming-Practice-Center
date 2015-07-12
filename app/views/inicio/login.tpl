@@ -48,14 +48,7 @@
     background-image: url('img/backgrounds/{$back}.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-
   }
-
 </style>
-
-
-
 {/capture}   
-
-
 {include file='_templates/template.tpl' layout=''}

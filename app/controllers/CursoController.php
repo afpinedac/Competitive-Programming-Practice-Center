@@ -574,7 +574,7 @@ class CursoController extends LMSController {
   #funcion que muestra todos los cursos
   public function getAll() {
     return View::make('curso.all.all')
-                    ->with('cursos_inscritos', curso::get_inscritos(Auth::user()->id))
+                  // ->with('cursos_inscritos', curso::get_inscritos(Auth::user()->id))
                     ->with('cursos_disponibles', curso::get_disponibles(Auth::user()->id))
                     ->with('mis_cursos', curso::get_creados(Auth::user()->id));
   }
