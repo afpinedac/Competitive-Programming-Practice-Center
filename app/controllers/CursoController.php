@@ -355,7 +355,7 @@ class CursoController extends LMSController {
         } else if ($tab == "inicio") {  //    si no es ejercicio  , . inicio
           return View::make("curso.$tab.$tab")
                           ->with('curso', $curso)
-                          ->with('n_notificaciones',$curso->get_numero_notificaciones())
+                          ->with('n_notificaciones', $curso->get_numero_notificaciones())
                           ->with('amigos', $usuario->get_amigos($curso->id))
                           //  ->with('logros', $usuario->get_logros_obtenidos(Auth::user()->id, $curso->id))
                           ->with('logro', $usuario->get_logro_redes_sociales($curso->id))
@@ -513,7 +513,7 @@ class CursoController extends LMSController {
   #Verifica si el usuario logueado tiene el curso actual inscrito
 
   private function tiene_curso_inscrito($curso) {
-    return usuario::find(Auth::user()->id)->tiene_inscrito($curso);    
+    return usuario::find(Auth::user()->id)->tiene_inscrito($curso);
   }
 
   # Funcion que establece en una variable de sesion el modulo que se va a mostrar  al usuario
@@ -523,11 +523,10 @@ class CursoController extends LMSController {
     if ($modulo && $this->tiene_curso_inscrito($modulo->curso)) {
       Session::put('modulo.estudiante', $modulo->id);
       return Redirect::to("curso/ver/{$modulo->curso}/contenido");
-    } else {      
+    } else {
       return Redirect::to('curso');
     }
   }
-
 
   public function postEditar() {
 
@@ -572,9 +571,10 @@ class CursoController extends LMSController {
   }
 
   #funcion que muestra todos los cursos
+
   public function getAll() {
     return View::make('curso.all.all')
-                  // ->with('cursos_inscritos', curso::get_inscritos(Auth::user()->id))
+                    ->with('cursos_inscritos', curso::get_inscritos(Auth::user()->id))
                     ->with('cursos_disponibles', curso::get_disponibles(Auth::user()->id))
                     ->with('mis_cursos', curso::get_creados(Auth::user()->id));
   }
@@ -954,7 +954,7 @@ class CursoController extends LMSController {
         $curso = curso::find($curso);
         $notificaciones = $curso->get_notificaciones(Input::get('skip'));
         $json = [];
-        
+
         foreach ($notificaciones as $notificacion) {
 
           $notificacion = notificacion::find($notificacion->id);
@@ -971,14 +971,14 @@ class CursoController extends LMSController {
               'propietario' => $notificacion->usuario,
               'avatar' => $notificacion->avatar,
               'me_gusta' => $notificacion->gusta(Auth::user()->id) ? 'Ya no me gusta' : 'Me gusta',
-              'nombres' =>  $usuario->nombres,
-              'apellidos' =>  $usuario->apellidos,
-              'fecha' =>  date("d-M-y H:i",strtotime($notificacion->created_at))
+              'nombres' => $usuario->nombres,
+              'apellidos' => $usuario->apellidos,
+              'fecha' => date("d-M-y H:i", strtotime($notificacion->created_at))
           ];
           //cargamos los comentarios de la notificacion
           $comentarios = $notificacion->get_comentarios();
           $comments = [];
-          
+
           foreach ($comentarios as $comentario) {
             $comments [] = [
                 'publicacion' => $comentario->publicacion,
