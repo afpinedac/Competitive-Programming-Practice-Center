@@ -12,7 +12,7 @@ return array(
       |
      */
 
-    'debug' => true,
+    'debug' => false,
     /*
       |--------------------------------------------------------------------------
       | Application URL
@@ -108,7 +108,8 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
         'Dark\SmartyView\SmartyViewServiceProvider',
-        "Intervention\Image\ImageServiceProvider"
+        "Intervention\Image\ImageServiceProvider",
+        'Barryvdh\Debugbar\ServiceProvider',
     ),
     /*
       |--------------------------------------------------------------------------
@@ -170,6 +171,7 @@ return array(
         'URL' => 'Illuminate\Support\Facades\URL',
         'Validator' => 'Illuminate\Support\Facades\Validator',
         'View' => 'Illuminate\Support\Facades\View',
-        'Image' => "Intervention\Image\Facades\Image"
+        'Image' => "Intervention\Image\Facades\Image",
+        'Debugbar' => 'Barryvdh\Debugbar\Facade',
     ),
 );
