@@ -7,8 +7,7 @@
     "laravel/framework": "4.2.*",
     "dark/smarty-view": "dev-laravel-4.2",
     "barryvdh/laravel-ide-helper": "1.11",
-    "intervention/image": "2.*",
-    "barryvdh/laravel-debugbar": "~1.8"
+    "intervention/image": "2.*"    
   },
   "autoload": {
     "classmap": [
