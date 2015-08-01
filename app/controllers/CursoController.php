@@ -895,17 +895,25 @@ class CursoController extends LMSController {
   //publica en el muro del curso
 
   public function postPublicar() {
-    $notificacion = array(
-        'curso' => Crypt::decrypt(Input::get('curso')),
-        'usuario' => Auth::user()->id,
-        'publicacion' => Input::get('publicacion'),
-        'tipo' => 0,
-        'codigo' => 0
-    );
 
-    notificacion::create($notificacion);
-    Session::flash("valid", 'Tu publicación ha sido posteada');
-    return Redirect::to("curso/ver/{$notificacion['curso']}/inicio");
+    $validator = Validator::make(Input::all(), $this->rules['publicacion'], $this->rules['mensajes']);
+    
+    $cursoId = Crypt::decrypt(Input::get('curso'));
+
+    if ($validator->passes()) {
+      $notificacion = array(
+          'curso' => $cursoId,
+          'usuario' => Auth::user()->id,
+          'publicacion' => Input::get('publicacion'),
+          'tipo' => 0,
+          'codigo' => 0
+      );
+      notificacion::create($notificacion);
+      Session::flash("invalid", 'Tu publicación ha sido posteada');
+    } else {
+      Session::flash("valid", 'Esta publicación es inválida');
+    }
+    return Redirect::to("curso/ver/{$cursoId}/inicio");
   }
 
   //retorna el ranking de un curso

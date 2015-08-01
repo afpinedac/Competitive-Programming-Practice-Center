@@ -26,6 +26,9 @@ class LMSController extends BaseController {
             'email' => 'email|required',
             'universidad' => 'required'
         ),
+        'publicacion' => [
+            'publicacion' => 'required'
+        ],
         'mensajes' => array(
             'required' => 'El :attribute es obligatorio',
             'min' => 'La longitud del :attribute es mínimo de :min caracteres',
@@ -34,7 +37,7 @@ class LMSController extends BaseController {
             'unique' => 'El :attribute ya se encuentra registrado',
             'email' => 'El :attribute debe ser una dirección válida',
             'confirmed' => 'Las contraseñas no concuerdan',
-        ),
+        )
     );
     protected $prefix = array(
         'entrada' => '_file_in_',

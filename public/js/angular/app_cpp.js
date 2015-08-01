@@ -283,7 +283,7 @@ angular.module('Classes', [])
 
 
 
-var cpp = angular.module('CPP', ['Controllers', 'Classes'], function ($interpolateProvider) {
+var cpp = angular.module('CPP', ['Controllers', 'Classes' , 'ngSanitize'], function ($interpolateProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
 });

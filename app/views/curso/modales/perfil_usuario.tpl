@@ -99,7 +99,7 @@
                     $.each(data.logros,function(idx,value){                          
                        //   window.console.log(value.codigo);
                           //window.console.log('pasa1');
-                          img = "<img class='logro-perfil' title='"+ value.nombre +"' src='" + '{url('img/logros/')}' + "/" + value.codigo + ".png'>";
+                          img = "<img class='logro-perfil' title='"+ value.nombre +"' src='" + '{url('img/logros/small/')}' + "/" + value.codigo + ".png'>";
                           //window.console.log('pasa2');
                         //  window.console.log(img);
                           $("#logros-perfil").append(img);

@@ -40,7 +40,7 @@
                       <!--publicacion normal-->
                       <div ng-if='notificacion.tipo==0' class='' style='margin-top: -10px;'>
                         <div ng-if='usuario_logueado==notificacion.propietario' class="pull-right" style="margin-top: -25px;"><a href=""  ng-click="eliminar_notificacion(notificacion.id)">x</a></div>
-                        <pre class='guiones'> [[notificacion.publicacion]]</pre>
+                        <pre class='guiones' ng-bind-html="notificacion.publicacion |  linky"></pre>
                       </div>
                       <!---LOGRO---->
                       <div ng-if='notificacion.tipo!=0' class='well' style='margin-top: -10px; padding: 3px 20px;' >
@@ -48,7 +48,7 @@
                         <h4 style="float: left"><center>He conseguido el logro:</center> <br>
                           <center><span style='font-size: 30px;'>[[notificacion.logro.nombre]]</span></center>
                         </h4>
-                        <img style='margin-left: 15px' ng-src='{url('img/logros/')}/[[notificacion.logro.imagen]].png' class='img-logro-notificacion'>
+                        <img style='margin-left: 15px' ng-src='{url('img/logros/small')}/[[notificacion.logro.imagen]].png' class='img-logro-notificacion'>
                         <br>
                       </div>
                       <div class="row-fluid" style="margin-top: -10px;">
@@ -194,7 +194,6 @@
       //eliminar una publicacion
       eliminar: function (notificacion) {
 
-
         alertify.confirm('¿Esta seguro de eliminar esta publicación?', function (e) {
           if (e) {
             $.ajax({
@@ -270,10 +269,6 @@
             }
           }
         });
-
-
-
-
       },
       likes: function (notificacion) {
         //   window.alert('pasa');

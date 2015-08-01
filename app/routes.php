@@ -1,5 +1,10 @@
 <?php
 
+Route::get('/test', function(){
+  $sdfsfddf->dfdf();
+});
+
+
 //App Controller
 Route::get('/', ['uses' => 'AppController@getIndex']);
 Route::get('/about', ['uses' => 'AppController@getAbout']);
@@ -34,6 +39,7 @@ Route::group(array('before' => 'auth'), function() {
   Route::controller('item', 'ItemController');
   Route::controller('api', 'ApiController');
   Route::controller('lms', 'LMSController');
+  Route::controller('test', 'TestController');
 });
 
 

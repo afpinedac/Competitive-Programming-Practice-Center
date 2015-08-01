@@ -41,6 +41,7 @@ gulp.task('minify-libs-js', function () {
     './public/libs/alertify/src/alertify.js',
     './public/libs/bootstrap/js/bootstrap.min.js',
     './public/libs/angularjs/angular.min.js',
+    './public/libs/angularjs/libs/sanitize.js',
   ]).pipe(concat('lib.min.js'))
           .pipe(uglify({mangle: false}))
           .pipe(gulp.dest('./public/build'))

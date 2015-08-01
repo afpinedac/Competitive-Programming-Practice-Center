@@ -22,7 +22,7 @@
                     <div class="span2">
 
 
-                      <center> <img class="img-foto-foro" onclick='usuario.ver_perfil({$user->id})' style='cursor: pointer' src='{General::avatar($user->id)}'></center>
+                      <center> <img class="img-foto-foro" onclick='usuario.ver_perfil({$user->id})' style='cursor: pointer' src='{General::avatar($user->id,'small')}'></center>
                       <p class="text-center">{$user->nombres|capitalize}</p>
                       <p class="text-center">{$solucion->created_at|date_format}</p>
 
