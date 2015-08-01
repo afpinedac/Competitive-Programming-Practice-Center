@@ -909,9 +909,9 @@ class CursoController extends LMSController {
           'codigo' => 0
       );
       notificacion::create($notificacion);
-      Session::flash("invalid", 'Tu publicación ha sido posteada');
+      Session::flash("valid", 'Tu publicación ha sido posteada');
     } else {
-      Session::flash("valid", 'Esta publicación es inválida');
+      Session::flash("invalid", 'Esta publicación es inválida');
     }
     return Redirect::to("curso/ver/{$cursoId}/inicio");
   }
