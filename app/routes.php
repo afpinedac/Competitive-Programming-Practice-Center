@@ -39,10 +39,12 @@ Route::group(array('before' => 'auth'), function() {
   Route::controller('item', 'ItemController');
   Route::controller('api', 'ApiController');
   Route::controller('lms', 'LMSController');
-  Route::controller('test', 'TestController');
+
 });
 
-
+Route::group(array('before' => 'developer'), function() {
+  Route::controller('test', 'TestController');
+});
 
 
 

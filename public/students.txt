@@ -1,0 +1,89 @@
+1128482737	Estefania	Acevedo Arroyave	esacevedoar@unal.edu.co 0
+1152216497	Jose Manuel	Alvarez Suarez	jomalvarezsu@unal.edu.co 1
+1020411438	Natalia Cristina	Alzate Osorno	ncalzate@unal.edu.co 0
+1040737742	Santiago	Arango Benjumea	saarangobe@unal.edu.co 1
+98071155609	Juan Sebastián	Arias Velásquez	jusariasve@unal.edu.co 1
+1026142727	John Alexander	Atehortúa Ramirez	jaatehortuar@unal.edu.co 1
+98021365084	Santiago	Cadavid Gutiérrez	scadavidg@unal.edu.co 1
+1017212918	Jeisson Andres	Castaño Aguirre	jeacastanoag@unal.edu.co 1
+97121312941	Alex Santiago	Contreras Hernández	ascontrerash@unal.edu.co 1
+98021501565	Alejandro	Herrera Patiño	alherrerapa@unal.edu.co 1
+1152201148	Sara	Jiménez Vásquez	sjimenezv@unal.edu.co 0
+1036666821	David Stiven	Jurado Chavarria	dsjuradoc@unal.edu.co 1
+97052519644	Juan Camilo	Londoño Mejía	juclondonome@unal.edu.co 1
+97092428285	Juan Sebastian	Lopez Botero	juslopezbo@unal.edu.co 1
+1123634455	Jean Carlos	Lopez Tavera	jeclopezta@unal.edu.co 1
+1017231223	Miguel Ángel	López Martínez	mialopezma@unal.edu.co 1
+1052408466	Diana Judith	Medina González	dijmedinago@unal.edu.co 0
+1036658815	Annie Stefania	Medina Osorio	asmedinao@unal.edu.co 0
+98040363289	Jose David	Mosquera Tobon	jdmosquerat@unal.edu.co 1
+1152459558	Carlos Hernán	Muriel Herrera	chmurielh@unal.edu.co 1
+98042951684	Lucas Esteban	Muñoz Montes	luemunozmo@unal.edu.co 1
+97121706605	Andres	Orrego Perez	aorregop@unal.edu.co 1
+97100104800	David	Ospina Osorio	dospinao@unal.edu.co 1
+1030539098	Carlos Julio	Patarroyo Sanchez	cjpatarroyos@unal.edu.co 1
+1152441733	Juan Sebastian	Patiño Alvarez	jspatinoa@unal.edu.co 1
+1152443765	Juan Pablo	Penagos Oquendo	jppenagoso@unal.edu.co 1
+1017242591	José Daniel	Posada Montoya	jodposadamo@unal.edu.co 1
+1037655745	Juan Pablo	Posada Torres	jpposadat@unal.edu.co 1
+98022569163	Elias Antonio	Pupo Vasconez	eapupov@unal.edu.co 1
+98030464443	Santiago	Quiroz Upegui	squirozu@unal.edu.co 1
+1152195417	Andrea	Restrepo Perez	arestrepop@unal.edu.co 0
+1063302607	Esteban Andres	Rodriguez Melendez	esarodriguezme@unal.edu.co 1
+1037652732	Daniela	Rojas Betancur	darojasbe@unal.edu.co 0
+98021703524	Samuel David	Rojas Valencia	sdrojasv@unal.edu.co 1
+1035229590	Angy Sorany	Ruiz Cortes	asruizc@unal.edu.co 0
+98030851609	Ángel David	Ríos Ochoa	adrioso@unal.edu.co 1
+97092609441	Santiago	Salazar Sepúlveda	sasalazarse@unal.edu.co 1
+15373401	Isaac Levit	Sanchez Marin	ilsanchezm@unal.edu.co 1
+1017235174	Catalina	Severino Giraldo	cseverinog@unal.edu.co 0
+1017214089	Catalina	Toro Echeverri	catoroec@unal.edu.co 0
+97080525544	Daniel	Velez Santamaria	danvelezsan@unal.edu.co 1
+96111514493	Laura Guadalupe	Velez Vargas	lgvelezv@unal.edu.co 0 
+1152704831	Ana María	Vásquez Orrego	amvasquezo@unal.edu.co 0 
+1017235993	Sebastián	Zabala Guzmán	szabalag@unal.edu.co 1
+1017244043	Anderson Felipe	Zapata Hoyos	afzapatah@unal.edu.co 1
+1088592969	John Jairo	Alpala Cumbalaza	jjalpalac@unal.edu.co 1
+1020441598	Lina Andrea	Alvarez Zuleta	laalvarezz@unal.edu.co 0
+1017238520	Oscar David	Arcos Acosta	odarcosa@unal.edu.co 1
+1088590332	Luis Guillermo	Aza Paguay	lgazap@unal.edu.co 1
+13724198	Ricardo	Bautista Solano	rbsolano@unal.edu.co 1
+1017237827	Andrés Felipe	Bedoya Avendaño	anfbedoyaav@unal.edu.co 1
+97102115000	Felipe	Bedoya Castaño	febedoyaca@unal.edu.co 1
+1017221952	Sebastian	Bustamante Varela	sbustamantev@unal.edu.co 1
+1152448813	Edward	Calderon	ecalderon@unal.edu.co 1
+1088275718	Pedro Luis	Cardona Buenaventura	plcardonab@unal.edu.co 1
+98041961066	Freddy Camilo	Castro Peralta	fccastrop@unal.edu.co 1
+1152458096	Alejandro	Chaves Orozco	achaveso@unal.edu.co 1
+1152457089	Sebastian	Durango Fernandez	sdurangof@unal.edu.co 1
+1019004324	Mario Julian	Forero Leal	mjforerol@unal.edu.co 1
+1039468897	Juan Pablo	Gil Alvarez	jpgila@unal.edu.co 1
+98040764208	Santiago	Granada Alvarez	sgranadaa@unal.edu.co 1
+1116861606	Duberney	Gutierrez Bacca	dugutierrezbac@unal.edu.co 1
+1017234259	Andrés Felipe	Gutiérrez Ramírez	anfgutierrezra@unal.edu.co 1
+1152456559	Daniel	Herrera Gomez	daherrerago@unal.edu.co 1
+1037600324	Laura	Isaza Echeverry	lisazae@unal.edu.co 0
+1152460883	Juan Pablo	Isaza Marín	jpisazam@unal.edu.co 1
+97090720647	Víctor Daniel	Jaramillo Gomez	vdjaramillog@unal.edu.co 1
+1152451480	Andres Felipe	Jaramillo Jaramillo	afjaramilloj@unal.edu.co 1
+98103153387	Juan Andres	Jaramillo Jaramillo	juajaramilloja@unal.edu.co 1
+1037642743	Mirai Alejandro	Kaneko	makaneko@unal.edu.co 1
+80205261	Erick Daniel	Landazuri Serna	edlandazuris@unal.edu.co 1
+97080203067	David	Londoño López	dlondonol@unal.edu.co 1
+1017245057	Catalina	Mejía Velásquez	camejiave@unal.edu.co 0
+98102870085	James Alejandro	Mora Rincon	jamorari@unal.edu.co 1
+97060306340	Sebastián	Morales Correa	semoralesco@unal.edu.co 1
+1118122056	Yonathan	Moreno Casteblanco	ycasteblancom@misena.edu.co 1
+1040752868	Jefferson Andres	Pataquiva Vargas	jeapataquivava@unal.edu.co 1
+1035424337	Juan David	Posada Muñeton	judposadamu@unal.edu.co 1
+1040048419	Cristian Daniel De Jesus	Ramirez Higinio	cdramirezh@unal.edu.co 1
+97062006564	David Alejandro	Ramirez Ortiz	davaramirezort@unal.edu.co 1
+1152215835	Carlos Ernesto	Santos Velasco	cesantosv@unal.edu.co 1
+1037639428	Danny	Solano Sucerquia	dasolanosu@unal.edu.co 1
+1036638122	Giovanny	Soto Bermeo	gsotob@unal.edu.co 1
+1036668719	Julian Andres	Suarez Rios	juasuarezri@unal.edu.co 1
+97061205180	Alejandro	Suárez Rodríguez	alsuarezro@unal.edu.co 1
+1123632824	Edwin Jose	Tapia Perez	ejtapiap@unal.edu.co 1
+1214733689	Jhon Alexander	Valenzuela Benavides	javalenzuelab@unal.edu.co 1
+97080513740	Mateo	Zapata Echeverri	mazapataec@unal.edu.co 1
+1017174988	Duban Camilo	Zapata Villa	dczapatav@unal.edu.co 1

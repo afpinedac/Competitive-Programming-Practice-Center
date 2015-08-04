@@ -68,6 +68,11 @@ Route::filter('guest', function() {
         return Redirect::to('/');
 });
 
+Route::filter('developer', function() {
+    if (Auth::check() && Auth::user()->id !=1)
+        return Redirect::to('/');
+});
+
 /*
   |--------------------------------------------------------------------------
   | CSRF Protection Filter
