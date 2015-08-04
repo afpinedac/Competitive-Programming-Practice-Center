@@ -1,10 +1,5 @@
 <?php
 
-Route::get('/test', function(){
-  $sdfsfddf->dfdf();
-});
-
-
 //App Controller
 Route::get('/', ['uses' => 'AppController@getIndex']);
 Route::get('/about', ['uses' => 'AppController@getAbout']);

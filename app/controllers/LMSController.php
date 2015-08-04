@@ -172,8 +172,5 @@ class LMSController extends BaseController {
         $str = base64_decode($hash);
         return substr($str, 1, strlen($str) - 2);
     }
-    
-    
-
 
 }

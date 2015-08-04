@@ -6,15 +6,7 @@
 
 class AppController extends LMSController {
 
-  public function getUpdateAvatars($from, $to) {
-    if (!Auth::check() || (Auth::check() && !Auth::user()->id == 1))
-      exit;
-    $usuarios = usuario::where('id', '>=', $from)->where('id', '<=', $to)->get();
-
-    foreach ($usuarios as $usuario) {
-      usuario::saveImage($usuario->avatar, $usuario->id);
-    }
-  }
+  
 
   
 

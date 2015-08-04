@@ -28,9 +28,20 @@ class TestController extends LMSController {
       }
     }
     if ($from < $max) {
-      return Redirect::to("/create-images/{$from}");
+      return Redirect::to("test/create-images/{$from}");
     }
   }
+  
+  
+  //creamos las imagenes de los estudiantes
+  public function getUpdateAvatars($from, $to) { 
+    $usuarios = usuario::where('id', '>=', $from)->where('id', '<=', $to)->get();
+
+    foreach ($usuarios as $usuario) {
+      usuario::saveImage($usuario->avatar, $usuario->id);
+    }
+  }
+  
 
   public function getLoad() {
 
