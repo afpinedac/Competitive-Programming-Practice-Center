@@ -2,7 +2,7 @@
 
 class TestController extends LMSController {
 
-  public function getResizeAchievements() {   
+  public function getResizeAchievements() {
 
     foreach (scandir(public_path() . '/img/logros') as $logro) {
       try {
@@ -13,7 +13,7 @@ class TestController extends LMSController {
     }
   }
 
-  public function getCreateImages($from = 1) {    
+  public function getCreateImages($from = 1) {
     $c = 0;
     $max = Usuario::max('id');
     while ($c < 40 && $from <= $max) {
@@ -31,24 +31,22 @@ class TestController extends LMSController {
       return Redirect::to("test/create-images/{$from}");
     }
   }
-  
-  
+
   //creamos las imagenes de los estudiantes
-  public function getUpdateAvatars($from, $to) { 
+  public function getUpdateAvatars($from, $to) {
     $usuarios = usuario::where('id', '>=', $from)->where('id', '<=', $to)->get();
 
     foreach ($usuarios as $usuario) {
       usuario::saveImage($usuario->avatar, $usuario->id);
     }
   }
-  
 
   public function getLoad() {
+    exit;
 
 
-
- //   DB::table('usuario')->where('id', '>=', 380)->delete();
-  //  DB::table('curso_x_usuario')->where('curso_id',10)->delete();
+    //   DB::table('usuario')->where('id', '>=', 380)->delete();
+    //  DB::table('curso_x_usuario')->where('curso_id',10)->delete();
 
     $file = fopen(public_path() . '/students.txt', 'r');
 
@@ -129,15 +127,15 @@ class TestController extends LMSController {
         'fecha_registro' => date('Y-m-d')
     ];
     $user2 = [
-                'nombres' => 'Cristian Daniel De Jesus',
-                'apellidos' => 'Ramirez Higinio',
-                'email' => 'cdramirezh@unal.edu.co',
-                'password' => Hash::make(1040048419),
-                'universidad_id' => 1,
-                'genero' => 1,
-                'avatar' => LMSController::$avatares['hombre'],
-                'online' => 0,
-                'fecha_registro' => date('Y-m-d')
+        'nombres' => 'Cristian Daniel De Jesus',
+        'apellidos' => 'Ramirez Higinio',
+        'email' => 'cdramirezh@unal.edu.co',
+        'password' => Hash::make(1040048419),
+        'universidad_id' => 1,
+        'genero' => 1,
+        'avatar' => LMSController::$avatares['hombre'],
+        'online' => 0,
+        'fecha_registro' => date('Y-m-d')
     ];
 
 
@@ -165,6 +163,67 @@ class TestController extends LMSController {
     ]);
 
     echo "registro completo.";
+  }
+
+  public function getAddOthers() {
+
+    $user1 = [
+        'nombres' => "Valentin",
+        'apellidos' => "De La Rosa Rueda",
+        'email' => "vder@unal.edu.co",
+        'password' => Hash::make(1152205481),
+        'universidad_id' => 1,
+        'genero' => 1,
+        'avatar' => LMSController::$avatares['hombre'],
+        'online' => 0,
+        'fecha_registro' => date('Y-m-d')
+    ];
+    $user2 = [
+        'nombres' => 'Ismael',
+        'apellidos' => 'Restrepo Vélez',
+        'email' => 'irestrepov@unal.edu.co',
+        'password' => Hash::make(98050952886),
+        'universidad_id' => 1,
+        'genero' => 1,
+        'avatar' => LMSController::$avatares['hombre'],
+        'online' => 0,
+        'fecha_registro' => date('Y-m-d')
+    ];
+
+
+    $user1id = DB::table('usuario')->insertGetId($user1);
+    $user2id = DB::table('usuario')->insertGetId($user2);
+    $user3id = DB::table('usuario')->insertGetId($user3);
+
+
+    $cursoId = DB::table('curso')->max('id');
+
+    DB::table('curso_x_usuario')
+            ->insert([
+                'usuario_id' => $user1id,
+                'curso_id' => $cursoId,
+                'fecha_inscripcion' => date('Y-m-d H:i:s'),
+                'puntos' => 0,
+                'rol' => 0
+    ]);
+
+    DB::table('curso_x_usuario')
+            ->insert([
+                'usuario_id' => $user2id,
+                'curso_id' => $cursoId,
+                'fecha_inscripcion' => date('Y-m-d H:i:s'),
+                'puntos' => 0,
+                'rol' => 0
+    ]);
+
+
+    echo 'done';
+  }
+
+  public function getChangePassword($userid, $pass) {
+    DB::table('usuario')
+            ->where('id', $userid)
+              ->update(['password' => Hash::make($pass)]);
   }
 
 }
