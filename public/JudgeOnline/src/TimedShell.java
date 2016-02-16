@@ -29,7 +29,7 @@ public class TimedShell extends Thread {
                     break;
                 } else {
                     try {
-                        process.exitValue();  //lanzará una excepción si aún no ha terminado, lo cual hará que vuelva a arrancar.
+                        process.exitValue();  //lanzará una excepción si aún no ha terminado, lo cual hará que siga iterando.
                         this.language.execution_time = (time) / 1000.0;
                         this.language.execution_time = Math.min(this.language.execution_time + 0.001, x-(Math.random()*0.01));
                         break;
